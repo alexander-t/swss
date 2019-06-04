@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     // Configurable from inspector 
     public float angularVelocity;
-    public Text text;
 
     // Ship-specific
     private const float MaxVelocity = 10f;
@@ -57,8 +56,5 @@ public class PlayerController : MonoBehaviour
         direction *= Time.deltaTime;
         transform.Rotate(direction);
         transform.Translate(0, 0, velocity * Time.deltaTime);
-
-        text.text = "Velocity: " + velocity;
     }
-        
 }
