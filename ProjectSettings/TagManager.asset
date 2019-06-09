@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LaserBeam
   - Targettable
+  - Model
   layers:
   - Default
   - TransparentFX
