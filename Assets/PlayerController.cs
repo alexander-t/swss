@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float angularVelocity;
 
     // Ship-specific
-    private const float MaxVelocity = 10f;
+    private const float MaxVelocity = 50f;
     private const float Acceleration = 2f;
 
     private float velocity = 4f;
