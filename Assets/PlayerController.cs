@@ -1,46 +1,44 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    // Configurable from inspector 
-    public float angularVelocity;
-
     // Ship-specific
-    private const float MaxVelocity = 50f;
+    private const float MaxVelocity = 100f;
     private const float Acceleration = 2f;
+    private const float AngularVelocity = 50f;
 
-    private float velocity = 4f;
+    private float velocity = 20f;
 
     void Update()
     {
+
         Vector3 direction = new Vector3();
 
         if (Input.GetKey(KeyCode.W))
         {
-            direction.x = angularVelocity;
+            direction.x = AngularVelocity;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            direction.x -= angularVelocity;
+            direction.x -= AngularVelocity;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            direction.y -= angularVelocity;
-            direction.z += angularVelocity;
+            direction.y -= AngularVelocity;
+            direction.z += AngularVelocity;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            direction.y += angularVelocity;
-            direction.z -= angularVelocity;
+            direction.y += AngularVelocity;
+            direction.z -= AngularVelocity;
         }
         if (Input.GetKey(KeyCode.E))
         {
-            direction.z -= angularVelocity;
+            direction.z -= AngularVelocity;
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            direction.z += angularVelocity;
+            direction.z += AngularVelocity;
         }
 
         // Stupid work-around for Swedish keyboard layout
