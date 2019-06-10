@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3597077117641223035}
   - component: {fileID: 6934712116548929535}
   - component: {fileID: 5506264511538331555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4776967954681660648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Space Bouy
   m_TagString: Targettable
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 7894676514494828966}
   - component: {fileID: 1148428073318713394}
   - component: {fileID: 1230065946047015312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 411434747716464454}
   - component: {fileID: 6597901530853434683}
   - component: {fileID: 1816646988430234864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main vody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 4279183595640494326}
   - component: {fileID: 4304156220352372899}
   - component: {fileID: 404822416352287930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

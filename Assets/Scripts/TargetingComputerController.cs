@@ -2,9 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TargetingComputer : MonoBehaviour
+public class TargetingComputerController : MonoBehaviour
 {
+    [Tooltip("UI element that displays the name of the target.")]
     public Text targetNameText;
+
+    private FollowingTargetCamera followingTargetCamera;
 
     private string lastTargetName;
 
@@ -13,6 +16,7 @@ public class TargetingComputer : MonoBehaviour
 
     void Start()
     {
+        followingTargetCamera = GameObject.Find("Targeting Computer").GetComponent<FollowingTargetCamera>();
         lastTargetName = "";
     }
 
@@ -31,10 +35,12 @@ public class TargetingComputer : MonoBehaviour
                                 if (i < targets.Length - 1)
                                 {
                                     lastTargetName = targets[i + 1].name;
+                                    followingTargetCamera.target = targets[i + 1];
                                 }
                                 else
                                 {
                                     lastTargetName = targets[0].name;
+                                    followingTargetCamera.target = targets[0];
                                 }
                                 break;
                             }
