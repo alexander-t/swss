@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3197631300122940171}
   - component: {fileID: 5980154881925809072}
   - component: {fileID: 3040903302175862348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: X-wing
   m_TagString: Targettable
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5232572603560551858}
   - component: {fileID: 6823105354132381175}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Audio Source - Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,6 +215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Particle System: engine ru'
       objectReference: {fileID: 0}
+    - target: {fileID: 4477028195018258072, guid: 91bdb3230232f514a8581c2152e00b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6555452695570796469, guid: 91bdb3230232f514a8581c2152e00b22,
         type: 3}
       propertyPath: m_RootOrder
@@ -259,6 +264,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Particle System: engine lu'
       objectReference: {fileID: 0}
+    - target: {fileID: 4477028195018258072, guid: 91bdb3230232f514a8581c2152e00b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6555452695570796469, guid: 91bdb3230232f514a8581c2152e00b22,
         type: 3}
       propertyPath: m_RootOrder
@@ -302,6 +312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Particle System: engine ll'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477028195018258072, guid: 91bdb3230232f514a8581c2152e00b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6555452695570796469, guid: 91bdb3230232f514a8581c2152e00b22,
         type: 3}
@@ -372,6 +387,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2658853820282943212, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5720846438664774722, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587706132860497347, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6353107248351409789, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7012003719314857770, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193370286468373378, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2653123774252341873, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2027540751229031343, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6fa65fc70287c7141847627ee763cfef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -427,6 +487,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5549468583678231521, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3685257523610973690, guid: 6fa65fc70287c7141847627ee763cfef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa65fc70287c7141847627ee763cfef, type: 3}
 --- !u!4 &7573630117365321148 stripped
@@ -446,6 +516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Particle System: engine rl'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477028195018258072, guid: 91bdb3230232f514a8581c2152e00b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6555452695570796469, guid: 91bdb3230232f514a8581c2152e00b22,
         type: 3}
