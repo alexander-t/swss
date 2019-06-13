@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4776967954681660648}
   m_Layer: 8
   m_Name: Space Bouy
-  m_TagString: Targettable
+  m_TagString: Buoy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -4,7 +4,7 @@ public class Beam : MonoBehaviour
 {
     public Vector3 target;
 
-    private const float Velocity = 300f;
+    private const float Velocity = 500f;
     public static float MaxRange = 250f;
 
     private Vector3 startPosition;
