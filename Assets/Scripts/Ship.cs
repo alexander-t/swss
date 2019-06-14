@@ -1,34 +1,60 @@
-﻿using UnityEngine;
+﻿using Targeting;
+using UnityEngine;
 
-public class Destructable : MonoBehaviour
+public class Ship : MonoBehaviour, Targettable
 {
-    public int hp;
-    public ParticleSystem explosionPrefab;
-    public AudioSource explosionAudioSource;
+    #pragma warning disable 0649
+    [SerializeField]
+    private ShipData shipData;
+    #pragma warning restore 0649
 
+    // Bookkeeping 
     private GameObject mission;
     private GameObject targetingComputer;
-
     private bool isDestroyed = false;
 
-    private void Start()
+    // Targettable
+    private int hullPoints;
+    private int shieldPoints;
+
+    #region Properties
+    public string Name
     {
+        get => name;
+    }
+
+    public int HullPoints
+    {
+        get => hullPoints;
+    }
+
+    public int ShieldPoints
+    {
+        get => shieldPoints;
+    }
+    #endregion
+
+    void Start() {
+        hullPoints = shipData.HullPoints;
+        shieldPoints = shipData.ShieldPoints;
         mission = GameObject.Find("Mission");
         targetingComputer = GameObject.Find("Targeting Computer");
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "LaserBeam" && !isDestroyed)
         {
             Destroy(other.gameObject);
 
-            hp -= 10;
-            if (hp <= 0)
+            hullPoints -= 10;
+            //Debug.Log(hullPoints);
+            targetingComputer.BroadcastMessage("OnEnemyHit");
+            if (hullPoints <= 0)
             {
                 isDestroyed = true;
 
-                Explode();
+                gameObject.BroadcastMessage("Explode");
                 DestroyModel();
 
                 mission.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
@@ -36,18 +62,14 @@ public class Destructable : MonoBehaviour
 
                 // Destroy the outer object with a certain delay, because it holds the explosion audio source
                 Destroy(gameObject, 5);
-                
+
             }
         }
     }
 
-    private void Explode() {
-        ParticleSystem explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        explosionAudioSource.Play();
-        Destroy(explosion, explosion.main.duration);
-    }
 
-    private void DestroyModel() {
+    private void DestroyModel()
+    {
         GameObject model = transform.Find("Model").gameObject;
         if (model != null)
         {

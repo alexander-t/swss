@@ -1,24 +1,20 @@
 ﻿namespace Targeting
 {
-    public abstract class Targettable
+    public interface Targettable
     {
-        protected string name;
-        protected int hullPoints;
-
-        public Targettable(string name, int hullPoints)
+        string Name
         {
-            this.name = name;
-            this.hullPoints = hullPoints;
+            get;
         }
 
-        public string Name
+        int HullPoints
         {
-            get { return name; }
+            get;
         }
 
-        public int HullPoints
+        int ShieldPoints
         {
-            get { return hullPoints; }
+            get;
         }
     }
 }

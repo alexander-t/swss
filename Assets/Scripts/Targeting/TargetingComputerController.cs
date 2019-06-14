@@ -8,6 +8,12 @@ namespace Targeting
         [Tooltip("UI element that displays the name of the target.")]
         public Text targetNameText;
 
+        [Tooltip("UI element that displays the target's hull points")]
+        public Text targetHullText;
+
+        [Tooltip("UI element that displays the target's shield points")]
+        public Text targetShieldText;
+        
         private TargetingComputer targetingComputer;
         private FollowingTargetCamera followingTargetCamera;
         private const float Cooldown = 0.1f;
@@ -40,6 +46,11 @@ namespace Targeting
         #endregion
 
         #region Events
+        public void OnEnemyHit()
+        {
+            UpdateDisplay();
+        }
+
         public void OnEnemyDestroyed(string name) {
             targetingComputer.RemoveTargetByName(name);
             UpdateDisplay();
@@ -49,8 +60,11 @@ namespace Targeting
         #region Class methods
         private void UpdateDisplay()
         {
-            followingTargetCamera.target = GameObject.Find(targetingComputer.GetCurrentTarget().Name);
-            targetNameText.text = targetingComputer.GetCurrentTarget().Name;
+            var currentTarget = targetingComputer.GetCurrentTarget();
+            followingTargetCamera.target = GameObject.Find(currentTarget.Name);
+            targetNameText.text = currentTarget.Name;
+            targetHullText.text = currentTarget.HullPoints + "";
+            targetShieldText.text = currentTarget.ShieldPoints + "";
         }
         #endregion
 

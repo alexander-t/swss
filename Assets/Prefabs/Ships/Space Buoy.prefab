@@ -101,8 +101,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4776967954681660648}
+  - component: {fileID: 7107567851735321615}
   m_Layer: 8
-  m_Name: Space Bouy
+  m_Name: Space Buoy
   m_TagString: Buoy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,6 +127,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7107567851735321615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416956779378454274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc15505e4e9184ca4a97eaeea765ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipData: {fileID: 11400000, guid: bde4367dcda462e4eba15a99c95105ab, type: 2}
 --- !u!1 &4882289495559137939
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 4882289495559137939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.8715668, y: -0.3701911, z: 0.66822004}
-  m_LocalScale: {x: 0.1, y: 2, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 2, z: 0.05}
   m_Children: []
   m_Father: {fileID: 4776967954681660648}
   m_RootOrder: 1
@@ -231,7 +245,7 @@ GameObject:
   - component: {fileID: 6597901530853434683}
   - component: {fileID: 1816646988430234864}
   m_Layer: 8
-  m_Name: Main vody
+  m_Name: Main body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,7 +12,7 @@ public class Misson : MonoBehaviour
     {
         Cursor.visible = false;
         foreach (var buoyGO in GameObject.FindGameObjectsWithTag("Buoy")) {
-            TargetingComputer.Instance.AddTarget(new Buoy(buoyGO.name));
+            TargetingComputer.Instance.AddTarget(buoyGO.GetComponent<Ship>());
         }
         
         SpawnXWing();
@@ -22,7 +22,7 @@ public class Misson : MonoBehaviour
         var xWingPrefab = enemyShips[0];
         GameObject xWing = Instantiate(xWingPrefab, SpawnPoint, Quaternion.identity);
         xWing.name = "Rookie " + rookieIndex++;
-        TargetingComputer.Instance.AddTarget(new XWing(xWing.name));
+        TargetingComputer.Instance.AddTarget(xWing.GetComponent<Ship>());
     }
 
     #region Events
