@@ -43,12 +43,18 @@ public class Ship : MonoBehaviour, Targettable
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "LaserBeam" && !isDestroyed)
+        if (other.tag == Constants.LaserBeam && !isDestroyed)
         {
             Destroy(other.gameObject);
 
-            hullPoints -= 10;
-            //Debug.Log(hullPoints);
+            if (shieldPoints > 0) {
+                BroadcastMessage("OnShieldImpact");
+                shieldPoints -= 10;
+            } else
+            {
+                hullPoints -= 10;
+            }
+
             targetingComputer.BroadcastMessage("OnEnemyHit");
             if (hullPoints <= 0)
             {
