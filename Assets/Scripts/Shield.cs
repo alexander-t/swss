@@ -20,7 +20,7 @@ public class Shield : MonoBehaviour
     void Start()
     {
         material = GetComponent<Renderer>().material;
-        impactLight = GameObject.Find("Impact Light");
+        impactLight = GameObject.Find(Constants.Shield_ImpactLight);
         impactLight.SetActive(false);
 
         color = material.color;
