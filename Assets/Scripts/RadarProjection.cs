@@ -9,7 +9,7 @@ public class RadarProjection : MonoBehaviour
     [Tooltip("Object that will be picked up by the radar camera. ")]
     public GameObject radarSignatureObject;
 
-    private const float DistanceToRadar = 20;
+    private const float DistanceToRadar = 10;
 
     private GameObject player;
     private Vector3 direction;
