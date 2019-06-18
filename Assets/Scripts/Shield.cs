@@ -53,14 +53,17 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        lastHitPosition = other.transform.position;
-        Vector3 impactLightDirection = (lastHitPosition - transform.position);
-        impactLightDirection.Normalize();
+        if (other.CompareTag(Constants.LaserBeam))
+        {
+            lastHitPosition = other.transform.position;
+            Vector3 impactLightDirection = (lastHitPosition - transform.position);
+            impactLightDirection.Normalize();
 
-        // Where does a ray hit the shield?
-        Debug.DrawLine(transform.position, lastHitPosition + impactLightDirection * ImpactLightOffset, Color.red, 1f);
-        impactLight.transform.position = lastHitPosition + impactLightDirection * ImpactLightOffset;
-        impactLight.transform.LookAt(transform.position);
+            // Where does a ray hit the shield?
+            Debug.DrawLine(transform.position, lastHitPosition + impactLightDirection * ImpactLightOffset, Color.red, 1f);
+            impactLight.transform.position = lastHitPosition + impactLightDirection * ImpactLightOffset;
+            impactLight.transform.LookAt(transform.position);
+        }
     }
 
     void OnShieldImpact()

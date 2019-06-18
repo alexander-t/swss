@@ -9,6 +9,6 @@ public class AsteroidRandomizer : MonoBehaviour
     void Start()
     {
         asteroidBody.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
-        asteroidBody.transform.localScale *= Random.Range(0.3f, 2);
+        asteroidBody.transform.localScale *= Random.Range(0.1f, 5f);
     }
 }
