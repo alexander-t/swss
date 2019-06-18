@@ -20,7 +20,8 @@ public class Cockpit : MonoBehaviour
         GUI.DrawTexture(new Rect(crosshairX, crosshairY, crosshairImage.width, crosshairImage.height), crosshairImage);
     }
 
-    void OnVelocityChange(float velocity) {
-        textVelocity.text = (int)velocity + "";
+    void OnVelocityChange(float[] velocities)
+    {
+        textVelocity.text = (int)velocities[0] + "";
     }
 }

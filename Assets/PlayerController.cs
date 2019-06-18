@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
 
     private float velocity = 20f;
 
-    void Start() {
-        BroadcastMessage("OnVelocityChange", velocity);
+    void Start()
+    {
+        BroadcastMessage("OnVelocityChange", new float[] { velocity, MaxVelocity });
     }
 
     void Update()
@@ -48,13 +49,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
         {
             velocity += Acceleration * Time.deltaTime;
-            BroadcastMessage("OnVelocityChange", velocity);
+            BroadcastMessage("OnVelocityChange", new float[] { velocity, MaxVelocity });
         }
         else if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
         {
             velocity -= Acceleration * Time.deltaTime;
-            BroadcastMessage("OnVelocityChange", velocity);
+            BroadcastMessage("OnVelocityChange", new float[] { velocity, MaxVelocity });
         }
+        else if (Input.GetKey(KeyCode.Backspace))
+        {
+            velocity = 0;
+            BroadcastMessage("OnVelocityChange", new float[] { velocity, MaxVelocity });
+        }
+
         velocity = Mathf.Clamp(velocity, 0, MaxVelocity);
         direction *= Time.deltaTime;
         transform.Rotate(direction);
