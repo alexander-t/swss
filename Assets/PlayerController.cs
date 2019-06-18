@@ -4,14 +4,17 @@ public class PlayerController : MonoBehaviour
 {
     // Ship-specific
     private const float MaxVelocity = 100f;
-    private const float Acceleration = 2f;
+    private const float Acceleration = 10f;
     private const float AngularVelocity = 50f;
 
     private float velocity = 20f;
 
+    void Start() {
+        BroadcastMessage("OnVelocityChange", velocity);
+    }
+
     void Update()
     {
-
         Vector3 direction = new Vector3();
 
         if (Input.GetKey(KeyCode.W))
@@ -45,10 +48,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
         {
             velocity += Acceleration * Time.deltaTime;
+            BroadcastMessage("OnVelocityChange", velocity);
         }
         else if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
         {
             velocity -= Acceleration * Time.deltaTime;
+            BroadcastMessage("OnVelocityChange", velocity);
         }
         velocity = Mathf.Clamp(velocity, 0, MaxVelocity);
         direction *= Time.deltaTime;

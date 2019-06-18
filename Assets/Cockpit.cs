@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Cockpit : MonoBehaviour
 {
     public Texture2D crosshairImage;
+    public Text textVelocity;
 
     private float crosshairX;
     private float crosshairY;
@@ -13,8 +15,12 @@ public class Cockpit : MonoBehaviour
         crosshairY = (Screen.height / 2) - (crosshairImage.height / 2);
     }
 
-    private void OnGUI()
+    void OnGUI()
     {
         GUI.DrawTexture(new Rect(crosshairX, crosshairY, crosshairImage.width, crosshairImage.height), crosshairImage);
+    }
+
+    void OnVelocityChange(float velocity) {
+        textVelocity.text = (int)velocity + "";
     }
 }
