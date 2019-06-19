@@ -22,7 +22,7 @@ namespace Flying
         // Movement
         private const float Acceleration = 20;
         private Vector3 direction = Vector3.zero;
-        private float velocity;
+        private float velocity = 20;
         private float maxVelocity;
         private float angularVelocity;
 
@@ -66,7 +66,6 @@ namespace Flying
 
             hullPoints = shipData.HullPoints;
             shieldPoints = shipData.ShieldPoints;
-            velocity = 20;
             maxVelocity = shipData.MaxVelocity;
             angularVelocity = shipData.AngularVelocity;
         }
