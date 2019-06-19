@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hullPoints: 20
   shieldPoints: 0
+  maxVelocity: 0
+  angularVelocity: 0

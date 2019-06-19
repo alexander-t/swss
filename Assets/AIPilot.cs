@@ -1,29 +1,46 @@
 ﻿using UnityEngine;
 
-public class AIPilot : MonoBehaviour
+namespace Flying
 {
-    private const float WaypointProximityTolerance = 3;
-    private const float Velocity = 100 * 0.3f; // MGLT
-
-    private Vector3 currentWaypoint;
-    private int waypointIndex = 0;
-    private Vector3[] waypoints = { new Vector3(-100, 0, 100), new Vector3(-100, 0, -100), new Vector3(100, 0, -100), new Vector3(100, 0, 100)};
-
-    void Start()
+    public class AIPilot : MonoBehaviour
     {
-        currentWaypoint = waypoints[waypointIndex];
-        transform.LookAt(currentWaypoint);
-    }
+        private const float WaypointProximityTolerance = 3;
 
-    void Update()
-    {
-        if (Vector3.Distance(transform.position, currentWaypoint) <= WaypointProximityTolerance) {
-            waypointIndex = waypointIndex + 1 < waypoints.Length ? waypointIndex + 1 : 0;
+        public float velocity;
+        public Vector3[] waypoints;
 
-            // Yes, choppy :)
-            currentWaypoint = waypoints[waypointIndex];
-            transform.LookAt(currentWaypoint);
-        } 
-        transform.Translate(0, 0, Velocity * Time.deltaTime);
+        private Ship ship;
+
+        private Vector3 currentWaypoint;
+        private int waypointIndex = 0;
+
+        void Start()
+        {
+            ship = GetComponent<Ship>();
+
+            if (waypoints.Length > 0)
+            {
+                currentWaypoint = waypoints[waypointIndex];
+                transform.LookAt(currentWaypoint);
+            }
+        }
+
+        void Update()
+        {
+            if (waypoints.Length > 0)
+            {
+                if (Vector3.Distance(transform.position, currentWaypoint) <= WaypointProximityTolerance)
+                {
+                    waypointIndex = waypointIndex + 1 < waypoints.Length ? waypointIndex + 1 : 0;
+
+                    // Yes, choppy :)
+                    currentWaypoint = waypoints[waypointIndex];
+                    transform.LookAt(currentWaypoint);
+                }
+            }
+
+            transform.Rotate(ship.Direction * Time.deltaTime);
+            transform.Translate(0, 0, velocity * Time.deltaTime);
+        }
     }
 }
