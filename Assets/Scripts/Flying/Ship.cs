@@ -5,10 +5,7 @@ namespace Flying
 {
     public class Ship : MonoBehaviour, Targettable
     {
-#pragma warning disable 0649
-        [SerializeField]
-        private ShipData shipData;
-#pragma warning restore 0649
+        public ShipData shipData;
 
         // Bookkeeping 
         private GameObject mission;
@@ -58,9 +55,7 @@ namespace Flying
         }
 
         #endregion
-
-        void Start()
-        {
+        void Awake() {
             mission = GameObject.Find("Mission");
             targetingComputer = GameObject.Find("Targeting Computer");
 

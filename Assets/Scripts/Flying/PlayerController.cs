@@ -13,7 +13,6 @@ namespace Flying
 
         void Start()
         {
-            Debug.Log(ship.Velocity);
             BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxVelocity });
         }
 
