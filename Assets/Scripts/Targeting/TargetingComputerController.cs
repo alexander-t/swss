@@ -19,7 +19,7 @@ namespace Targeting
         private const float Cooldown = 0.1f;
         private float nextAcquisitionTime;
 
-        private new Camera camera;
+        private Camera mainCamera;
         private GameObject currentTarget;
         private Rect targetBoundingBox = Rect.zero;
 
@@ -27,12 +27,16 @@ namespace Targeting
         void Awake()
         {
             targetingComputer = TargetingComputer.Instance;
-            camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+            mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+            followingTargetCamera = GameObject.Find("Targeting Computer").GetComponent<FollowingTargetCamera>();
         }
 
         void Start()
         {
-            followingTargetCamera = GameObject.Find("Targeting Computer").GetComponent<FollowingTargetCamera>();
+            var targetable = targetingComputer.GetCurrentTarget();
+            currentTarget = GameObject.Find(targetable.Name);
+            currentTarget.SendMessage("OnTargetted", true);
+
             UpdateDisplay();        
         }
 
@@ -65,10 +69,10 @@ namespace Targeting
         #region Class methods
         private void UpdateDisplay()
         {
-            var targetable = targetingComputer.GetCurrentTarget();
             if (currentTarget != null) {
                 currentTarget.SendMessage("OnTargetted", false);
             }
+            var targetable = targetingComputer.GetCurrentTarget();
             currentTarget = GameObject.Find(targetable.Name);
             currentTarget.SendMessage("OnTargetted", true);
             followingTargetCamera.target = currentTarget;
@@ -99,11 +103,11 @@ namespace Targeting
             Corners3[7] = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
 
             // Find furthest screen positions of the corners
-            Vector2 Min = camera.WorldToScreenPoint(Corners3[0]);
+            Vector2 Min = mainCamera.WorldToScreenPoint(Corners3[0]);
             Vector2 Max = Min;
             for (int i = 1; i < Corners3.Length; i++)
             {
-                Vector2 ScreenPos = camera.WorldToScreenPoint(Corners3[i]);
+                Vector2 ScreenPos = mainCamera.WorldToScreenPoint(Corners3[i]);
                 Min.x = Mathf.Min(Min.x, ScreenPos.x);
                 Min.y = Mathf.Min(Min.y, ScreenPos.y);
                 Max.x = Mathf.Max(Max.x, ScreenPos.x);
@@ -118,7 +122,7 @@ namespace Targeting
         }
 
         private bool IsTargetVisible(GameObject target) {
-            Vector3 sp = camera.WorldToViewportPoint(target.transform.position);
+            Vector3 sp = mainCamera.WorldToViewportPoint(target.transform.position);
             return sp.z > 0 && sp.x > 0 && sp.x < 1 && sp.y > 0 && sp.y < 1;
         }
     }
