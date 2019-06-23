@@ -27,7 +27,7 @@ namespace Targeting
         {
             if (targets.Count == 0)
             {
-                return new NullTarget();
+                return null;
             }
             return targets.ElementAt(currentTargetIndex);
         }

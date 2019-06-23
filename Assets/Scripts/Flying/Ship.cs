@@ -49,13 +49,19 @@ namespace Flying
             get => velocity;
         }
 
+        public ShipFraction ShipFraction
+        {
+            get => shipData.ShipFraction;
+        }
+
         public Vector3 Direction
         {
             get => direction;
         }
 
         #endregion
-        void Awake() {
+        void Awake()
+        {
             mission = GameObject.Find("Mission");
             targetingComputer = GameObject.Find("Targeting Computer");
 
@@ -135,11 +141,13 @@ namespace Flying
             direction.z += angularVelocity;
         }
 
-        public void Halt() {
+        public void Halt()
+        {
             velocity = 0;
         }
 
-        public void AccelerateByDelta(float deltaTime) {
+        public void AccelerateByDelta(float deltaTime)
+        {
             velocity = Mathf.Clamp(velocity + Acceleration * deltaTime, 0, MaxVelocity);
         }
 

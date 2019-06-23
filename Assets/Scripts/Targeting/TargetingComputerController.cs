@@ -83,6 +83,13 @@ namespace Targeting
 
             followingTargetCamera.target = currentTarget;
             targetNameText.text = targetable.Name;
+            if (targetable.ShipFraction == ShipFraction.Alliance)
+            {
+                targetNameText.color = Color.green;
+            }
+            else {
+                targetNameText.color = Color.white;
+            }
             targetHullText.text = targetable.HullPoints + "";
             targetShieldText.text = targetable.ShieldPoints + "";
                         

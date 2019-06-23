@@ -16,5 +16,9 @@
         {
             get;
         }
+
+        ShipFraction ShipFraction {
+            get;
+        }
     }
 }

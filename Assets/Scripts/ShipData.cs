@@ -15,6 +15,9 @@ public class ShipData : ScriptableObject
 
     [SerializeField]
     private int angularVelocity;
+
+    [SerializeField]
+    private ShipFraction shipFraction;
 #pragma warning restore 0649
 
     public int HullPoints
@@ -35,5 +38,9 @@ public class ShipData : ScriptableObject
     public float AngularVelocity
     {
         get => angularVelocity;
+    }
+
+    public ShipFraction ShipFraction {
+        get => shipFraction;
     }
 }
