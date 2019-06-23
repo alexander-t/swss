@@ -16,3 +16,4 @@ MonoBehaviour:
   shieldPoints: 0
   maxVelocity: 0
   angularVelocity: 0
+  shipFraction: 2
