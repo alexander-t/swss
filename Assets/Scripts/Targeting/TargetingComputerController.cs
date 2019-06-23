@@ -47,7 +47,6 @@ namespace Targeting
                 }
                 nextAcquisitionTime = Time.time + Cooldown;
             }
-            targetBoundingBox = CalcualateTargetBoundingBox(currentTarget);
         }
         #endregion
 
@@ -67,7 +66,11 @@ namespace Targeting
         private void UpdateDisplay()
         {
             var targetable = targetingComputer.GetCurrentTarget();
+            if (currentTarget != null) {
+                currentTarget.SendMessage("OnTargetted", false);
+            }
             currentTarget = GameObject.Find(targetable.Name);
+            currentTarget.SendMessage("OnTargetted", true);
             followingTargetCamera.target = currentTarget;
             targetNameText.text = targetable.Name;
             targetHullText.text = targetable.HullPoints + "";
@@ -117,12 +120,6 @@ namespace Targeting
         private bool IsTargetVisible(GameObject target) {
             Vector3 sp = camera.WorldToViewportPoint(target.transform.position);
             return sp.z > 0 && sp.x > 0 && sp.x < 1 && sp.y > 0 && sp.y < 1;
-        }
-
-        private void OnGUI()
-        {
-            Debug.Log(GUI.depth);
-            GUI.Box(targetBoundingBox, "");
         }
     }
 }
