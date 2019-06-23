@@ -19,7 +19,6 @@ namespace Targeting
         [Tooltip("UI element that displays the distance to the target")]
         public Text targetDistanceText;
 
-
         private TargetingComputer targetingComputer;
         private FollowingTargetCamera followingTargetCamera;
 
@@ -29,17 +28,15 @@ namespace Targeting
 
         private GameObject currentTarget;
         private float currentTargetDistance = 0;
-        private Rect currentTargetBoundingBox = Rect.zero;
 
         // Not used now
         private Camera mainCamera;
-        
+
         #region Unity lifecycle
         void Awake()
         {
             targetingComputer = TargetingComputer.Instance;
-            mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            followingTargetCamera = GameObject.Find("Targeting Computer").GetComponent<FollowingTargetCamera>();
+            followingTargetCamera = GetComponent<FollowingTargetCamera>();
         }
 
         void Start()
@@ -59,7 +56,6 @@ namespace Targeting
                     nextAcquisitionTime = Time.time + Cooldown;
                 }
             }
-            //UpdateDistance();
         }
         #endregion
 
@@ -97,13 +93,17 @@ namespace Targeting
             while (true)
             {
                 currentTargetDistance = Vector3.Distance(transform.position, currentTarget.transform.position);
-                targetDistanceText.text = String.Format("{0:0.0}", currentTargetDistance);
+                targetDistanceText.text = string.Format("{0:0.0}", currentTargetDistance);
                 yield return new WaitForSeconds(0.1f);
             }
         }
 
         #endregion
 
+        #region Possibly to be discarded
+        // This would go in Awake
+        // mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        
         // The contents of this method are borrowed from here: https://answers.unity.com/questions/726412/2d-target-reticle-for-3d-object.html
         private Rect CalcualateTargetBoundingBox(GameObject target) {
             if (!IsTargetVisible(target)) {
@@ -146,5 +146,6 @@ namespace Targeting
             Vector3 sp = mainCamera.WorldToViewportPoint(target.transform.position);
             return sp.z > 0 && sp.x > 0 && sp.x < 1 && sp.y > 0 && sp.y < 1;
         }
+        #endregion
     }
 }
