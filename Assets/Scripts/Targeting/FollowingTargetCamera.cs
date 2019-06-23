@@ -13,7 +13,7 @@ namespace Targeting
         [Space(10)]
         public Camera trackingCamera;
 
-        private readonly Vector3 Offset = new Vector3(20, 10, 20);
+        private readonly Vector3 Offset = new Vector3(20, 10, 10);
 
         void LateUpdate()
         {
