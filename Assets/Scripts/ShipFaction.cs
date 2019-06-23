@@ -1,0 +1,1 @@
+﻿public enum ShipFaction { Empire, Alliance, Neutral }

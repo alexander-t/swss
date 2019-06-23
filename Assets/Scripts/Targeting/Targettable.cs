@@ -17,7 +17,7 @@
             get;
         }
 
-        ShipFraction ShipFraction {
+        ShipFaction ShipFaction {
             get;
         }
     }

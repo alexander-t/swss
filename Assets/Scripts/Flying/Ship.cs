@@ -49,9 +49,9 @@ namespace Flying
             get => velocity;
         }
 
-        public ShipFraction ShipFraction
+        public ShipFaction ShipFaction
         {
-            get => shipData.ShipFraction;
+            get => shipData.ShipFaction;
         }
 
         public Vector3 Direction
