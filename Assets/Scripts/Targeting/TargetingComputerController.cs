@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Targeting
@@ -13,16 +15,25 @@ namespace Targeting
 
         [Tooltip("UI element that displays the target's shield points")]
         public Text targetShieldText;
-        
+
+        [Tooltip("UI element that displays the distance to the target")]
+        public Text targetDistanceText;
+
+
         private TargetingComputer targetingComputer;
         private FollowingTargetCamera followingTargetCamera;
+
+        // Target cycling
         private const float Cooldown = 0.1f;
         private float nextAcquisitionTime;
 
-        private Camera mainCamera;
         private GameObject currentTarget;
-        private Rect targetBoundingBox = Rect.zero;
+        private float currentTargetDistance = 0;
+        private Rect currentTargetBoundingBox = Rect.zero;
 
+        // Not used now
+        private Camera mainCamera;
+        
         #region Unity lifecycle
         void Awake()
         {
@@ -33,11 +44,8 @@ namespace Targeting
 
         void Start()
         {
-            var targetable = targetingComputer.GetCurrentTarget();
-            currentTarget = GameObject.Find(targetable.Name);
-            currentTarget.SendMessage("OnTargetted", true);
-
-            UpdateDisplay();        
+            UpdateDisplay();
+            StartCoroutine("UpdateDistance");
         }
 
         void Update()
@@ -48,9 +56,10 @@ namespace Targeting
                 {
                     targetingComputer.NextTarget();
                     UpdateDisplay();
+                    nextAcquisitionTime = Time.time + Cooldown;
                 }
-                nextAcquisitionTime = Time.time + Cooldown;
             }
+            //UpdateDistance();
         }
         #endregion
 
@@ -75,12 +84,24 @@ namespace Targeting
             var targetable = targetingComputer.GetCurrentTarget();
             currentTarget = GameObject.Find(targetable.Name);
             currentTarget.SendMessage("OnTargetted", true);
+
             followingTargetCamera.target = currentTarget;
             targetNameText.text = targetable.Name;
             targetHullText.text = targetable.HullPoints + "";
             targetShieldText.text = targetable.ShieldPoints + "";
                         
         }
+
+        // Coroutine to keep non-flickering update pace and to avoid over execution
+        private IEnumerator UpdateDistance() {
+            while (true)
+            {
+                currentTargetDistance = Vector3.Distance(transform.position, currentTarget.transform.position);
+                targetDistanceText.text = String.Format("{0:0.0}", currentTargetDistance);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
         #endregion
 
         // The contents of this method are borrowed from here: https://answers.unity.com/questions/726412/2d-target-reticle-for-3d-object.html
