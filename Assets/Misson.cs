@@ -27,9 +27,12 @@ public class Misson : MonoBehaviour
         GameObject xWing = Instantiate(xWingPrefab, SpawnPoint, Quaternion.identity);
         xWing.name = "Rookie " + rookieIndex++;
         AIPilot aiPilot = xWing.GetComponent<AIPilot>();
-        aiPilot.waypoints = new Vector3[] { new Vector3(-100, 0, 100), new Vector3(-100, 0, -100), new Vector3(100, 0, -100), new Vector3(100, 0, 100) };
-        aiPilot.velocity = 30;
-
+        aiPilot.waypoints = new Transform[] {
+            GameObject.Find("Buoys/A-122").GetComponent<Transform>(),
+            GameObject.Find("Buoys/B-54").GetComponent<Transform>(),
+            GameObject.Find("Buoys/B-55").GetComponent<Transform>(),
+            GameObject.Find("Buoys/A-121").GetComponent<Transform>()
+        };
         TargetingComputer.Instance.AddTarget(xWing.GetComponent<Ship>());
     }
 
