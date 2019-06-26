@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class BoundingBox : MonoBehaviour
 {
     [Tooltip("Prefab that contains a Line Renderer component setup so that it will produce a nice bounding box")]

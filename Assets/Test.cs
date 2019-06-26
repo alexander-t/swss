@@ -1,26 +1,49 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿
+using UnityEngine;
 using Flying;
+using System.Collections.Generic;
+using System;
 
 [RequireComponent(typeof(Ship))]
 public class Test : MonoBehaviour
 {
     public Transform target;
-    public Text text;
-    public Text text2;
 
     private Ship ship;
-    private Vector3 turnStartDirection;
+    private PathFinding pathFinding;
+
 
     void Awake()
     {
         ship = GetComponent<Ship>();
     }
 
+    void Start()
+    {
+        pathFinding = new PathFinding(transform);
+    }
+
     void Update()
     {
-        Turn();
-        Move();
+        Direction availableDirections = pathFinding.FirstPassRaycast();
+
+        if (availableDirections == Direction.None)
+        {
+            Debug.Log("STUCK!");
+        }
+        else
+        {
+            Vector3 turningDirection = pathFinding.DetermineTurningDirection(availableDirections);
+            if (turningDirection != Vector3.zero)
+            {
+                transform.Rotate(turningDirection);
+            }
+            else
+            {
+                Turn();
+            }
+            Move();
+        }
     }
 
     void Turn()

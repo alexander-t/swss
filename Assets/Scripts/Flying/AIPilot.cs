@@ -5,7 +5,7 @@ namespace Flying
     [RequireComponent(typeof(Ship))]
     public class AIPilot : MonoBehaviour
     {
-        private const float WaypointProximityTolerance = 10;
+        private const float WaypointProximityTolerance = 25;
 
         public Transform[] waypoints;
 
@@ -13,6 +13,8 @@ namespace Flying
 
         private Vector3 currentWaypoint;
         private int waypointIndex = 0;
+
+        private PathFinding pathFinding;
 
         void Awake()
         {
@@ -26,15 +28,36 @@ namespace Flying
                 currentWaypoint = waypoints[waypointIndex].position;
                 transform.LookAt(currentWaypoint);
             }
+
+            pathFinding = new PathFinding(transform);
         }
 
         void Update()
         {
             DetermineCurrentWayPoint();
-            TurnTowards(currentWaypoint);
-            MoveTowards(currentWaypoint);
+
+            Direction availableDirections = pathFinding.FirstPassRaycast();
+
+            if (availableDirections == Direction.None)
+            {
+                Debug.Log("STUCK!");
+            }
+            else
+            {
+                Vector3 turningDirection = pathFinding.DetermineTurningDirection(availableDirections);
+                if (turningDirection != Vector3.zero)
+                {
+                    transform.Rotate(turningDirection);
+                }
+                else
+                {
+                    TurnTowards(currentWaypoint);
+                }
+                MoveTowards(currentWaypoint);
+            }
         }
 
+        
         private void DetermineCurrentWayPoint() {
             if (waypoints.Length > 0)
             {
