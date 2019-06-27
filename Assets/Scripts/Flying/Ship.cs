@@ -20,13 +20,16 @@ namespace Flying
         private const float Acceleration = 20;
         private Vector3 direction = Vector3.zero;
         private float velocity = 20;
-        private float maxVelocity;
-        private float angularVelocity;
 
         #region Properties
         public string Name
         {
             get => name;
+        }
+
+        public ShipFaction ShipFaction
+        {
+            get => shipData.ShipFaction;
         }
 
         public int HullPoints
@@ -41,17 +44,17 @@ namespace Flying
 
         public float MaxVelocity
         {
-            get => maxVelocity;
+            get => shipData.MaxVelocity;
+        }
+
+        public float AngularVelocity
+        {
+            get => shipData.AngularVelocity;
         }
 
         public float Velocity
         {
             get => velocity;
-        }
-
-        public ShipFaction ShipFaction
-        {
-            get => shipData.ShipFaction;
         }
 
         public Vector3 Direction
@@ -67,8 +70,6 @@ namespace Flying
 
             hullPoints = shipData.HullPoints;
             shieldPoints = shipData.ShieldPoints;
-            maxVelocity = shipData.MaxVelocity;
-            angularVelocity = shipData.AngularVelocity;
         }
 
         void OnTriggerEnter(Collider other)
@@ -111,34 +112,34 @@ namespace Flying
 
         public void PitchDown()
         {
-            direction.x = angularVelocity;
+            direction.x = AngularVelocity;
         }
 
         public void PitchUp()
         {
-            direction.x -= angularVelocity;
+            direction.x -= AngularVelocity;
         }
 
         public void TurnLeft()
         {
-            direction.y -= angularVelocity;
-            direction.z += angularVelocity;
+            direction.y -= AngularVelocity;
+            direction.z += AngularVelocity;
         }
 
         public void TurnRight()
         {
-            direction.y += angularVelocity;
-            direction.z -= angularVelocity;
+            direction.y += AngularVelocity;
+            direction.z -= AngularVelocity;
         }
 
         public void RollRight()
         {
-            direction.z -= angularVelocity;
+            direction.z -= AngularVelocity;
         }
 
         public void RollLeft()
         {
-            direction.z += angularVelocity;
+            direction.z += AngularVelocity;
         }
 
         public void Halt()

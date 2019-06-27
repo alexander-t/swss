@@ -47,7 +47,7 @@ namespace Flying
                 Vector3 turningDirection = pathFinding.DetermineTurningDirection(availableDirections);
                 if (turningDirection != Vector3.zero)
                 {
-                    transform.Rotate(turningDirection);
+                    transform.Rotate(turningDirection * ship.AngularVelocity * Time.deltaTime);
                 }
                 else
                 {
