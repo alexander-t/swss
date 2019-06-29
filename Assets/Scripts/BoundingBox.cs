@@ -25,7 +25,8 @@ public class BoundingBox : MonoBehaviour
         
     void Update()
     {
-        lineRenderer.transform.LookAt(playerTransform);
+        //lineRenderer.transform.LookAt(playerTransform);
+        lineRenderer.transform.rotation = playerTransform.rotation;
 
         // Scale the width a little so that too distant targets don't get flickering thin lines.
         lineRenderer.widthMultiplier = Mathf.Lerp(0.025f, 0.25f, Vector3.Distance(playerTransform.position, transform.position) / 100);
