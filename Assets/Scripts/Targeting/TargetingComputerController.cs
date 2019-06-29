@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flying;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace Targeting
         private FollowingTargetCamera followingTargetCamera;
 
         // Target cycling
-        private const float Cooldown = 0.1f;
+        private const float Cooldown = 0.2f;
         private float nextAcquisitionTime;
 
         private GameObject currentTarget;
@@ -41,8 +42,8 @@ namespace Targeting
 
         void Start()
         {
-            UpdateDisplay();
             StartCoroutine("UpdateDistance");
+            UpdateDisplay();
         }
 
         void Update()
@@ -60,6 +61,16 @@ namespace Targeting
         #endregion
 
         #region Events
+        public void OnNewTarget(Ship ship)
+        {
+            // Discard the player, which is also a ship and it's being registered upon scene startup
+            if (!Constants.Player.Equals(ship.name))
+            {
+                TargetingComputer.Instance.AddTarget(ship);
+                UpdateDisplay();
+            }
+        }
+
         public void OnEnemyHit()
         {
             UpdateDisplay();

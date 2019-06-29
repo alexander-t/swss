@@ -74,6 +74,7 @@ namespace Flying
         void Start() {
             hullPoints = maxHullPoints = shipData.HullPoints;
             shieldPoints = maxShieldPoints = shipData.ShieldPoints;
+            targetingComputer.BroadcastMessage("OnNewTarget", this);
         }
 
         void OnTriggerEnter(Collider other)
