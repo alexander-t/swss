@@ -85,11 +85,11 @@ namespace Targeting
         private void UpdateDisplay()
         {
             if (currentTarget != null) {
-                currentTarget.SendMessage("OnTargetted", false);
+                currentTarget.BroadcastMessage("OnTargetted", false);
             }
             var targetable = targetingComputer.GetCurrentTarget();
             currentTarget = GameObject.Find(targetable.Name);
-            currentTarget.SendMessage("OnTargetted", true);
+            currentTarget.BroadcastMessage("OnTargetted", true);
 
             followingTargetCamera.target = currentTarget;
             targetNameText.text = targetable.Name;
