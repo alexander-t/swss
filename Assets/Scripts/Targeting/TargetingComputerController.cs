@@ -41,8 +41,8 @@ namespace Targeting
 
         void Start()
         {
-            StartCoroutine("UpdateDistance");
             UpdateDisplay();
+            StartCoroutine("UpdateDistance");
         }
 
         void Update()
