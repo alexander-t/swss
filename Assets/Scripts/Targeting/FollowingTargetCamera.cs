@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Flying;
+using UnityEngine;
 
 namespace Targeting
 {
@@ -14,12 +15,27 @@ namespace Targeting
         [Space(10)]
         public Camera trackingCamera;
 
-        // TODO: Needs to be recalculated depending on the ship size!
-        private readonly Vector3 Offset = new Vector3(20, 10, 10);
+        private readonly Vector3 ViewingDistanceSmall = new Vector3(5, 5, 5);
+        private readonly Vector3 ViewingDistanceStandard = new Vector3(13, 13, 13);
+        private readonly Vector3 ViewingDistanceCapital = new Vector3(90, 90, 90);
 
         void LateUpdate()
         {
-            trackingCamera.transform.position = target.transform.position + Offset;
+            Ship ship = target.GetComponent<Ship>();
+            Vector3 offset = ViewingDistanceStandard;
+            switch (ship.shipData.Size)
+            {
+                case ShipSize.Small:
+                    offset = ViewingDistanceSmall;
+                    break;
+                case ShipSize.Standard:
+                    offset = ViewingDistanceStandard;
+                    break;
+                case ShipSize.Capital:
+                    offset = ViewingDistanceCapital;
+                    break;
+            }
+            trackingCamera.transform.position = target.transform.position + offset;
             trackingCamera.transform.LookAt(target.transform.position, player.transform.up);
         }
     }

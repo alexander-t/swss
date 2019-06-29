@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3184030638366002017}
   - component: {fileID: 3569972664732441274}
   - component: {fileID: 5855611657913799690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5522449217265654799}
   - component: {fileID: 2520861929907623261}
   - component: {fileID: 2951400688911451849}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HullPlates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 5443830513337062276}
   - component: {fileID: 3059151914304769081}
   - component: {fileID: 7809248971933347558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserUpperSection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2128690639188437761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserUpperAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 2708529680934245823}
   - component: {fileID: 8681369648940827114}
   - component: {fileID: 1994129659918110084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperLowerEnginesInnerSides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 7283768662163954141}
   - component: {fileID: 2766127458250880809}
   - component: {fileID: 5692555093752631452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 804229035868813482}
   - component: {fileID: 6268184496212553943}
   - component: {fileID: 1017511041575540501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CentralSectionExtra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 4414830870659427808}
   - component: {fileID: 6623772531999282120}
   - component: {fileID: 1416692070793600980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 9095806822466235008}
   - component: {fileID: 8665990764928598180}
   - component: {fileID: 8814562060461882553}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LowerWingsHullPlates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 922559544304407349}
   - component: {fileID: 8207910183705397107}
   - component: {fileID: 1326942021218238743}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MidSection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,7 +738,7 @@ GameObject:
   - component: {fileID: 2211566602038015510}
   - component: {fileID: 7804319474874191583}
   - component: {fileID: 6381154931701357467}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LowerSensorArray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 5826029030723270697}
   - component: {fileID: 2489662654609050402}
   - component: {fileID: 5793803192517878559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserLowerSection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 8929477701853191960}
   - component: {fileID: 6364276685111698673}
   - component: {fileID: 4413287130505095429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Greebles5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 5626626780879438966}
   - component: {fileID: 3095158763717161297}
   - component: {fileID: 783029929623485051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BackTube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 6843680642419038455}
   - component: {fileID: 3048829426754333609}
   - component: {fileID: 1630747598885004805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperLowerEnginesHullPlates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 7712141826312249328}
   - component: {fileID: 2666918659594283441}
   - component: {fileID: 68922843404734054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,7 +1204,7 @@ GameObject:
   - component: {fileID: 235221732219543019}
   - component: {fileID: 3849637072439628380}
   - component: {fileID: 8630865180733271952}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Greebles1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1280,7 +1280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2640165474348332366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserLowerAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1312,7 @@ GameObject:
   - component: {fileID: 6412615860339077906}
   - component: {fileID: 1418512646487787860}
   - component: {fileID: 2095622742154773448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperSensorArrayArms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1389,7 +1389,7 @@ GameObject:
   - component: {fileID: 5899595380217506361}
   - component: {fileID: 4006035184965807967}
   - component: {fileID: 7910980781442424970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperLowerEngines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1468,7 @@ GameObject:
   - component: {fileID: 7286754601831188748}
   - component: {fileID: 5034738963678364764}
   - component: {fileID: 2260410883731803873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MidEnginesHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1545,7 +1545,7 @@ GameObject:
   - component: {fileID: 2311061424361643280}
   - component: {fileID: 5968365578878917183}
   - component: {fileID: 6847982444798853930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperSensorArray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,7 +1622,7 @@ GameObject:
   - component: {fileID: 336571888573203033}
   - component: {fileID: 6488558010132243665}
   - component: {fileID: 3318653556040600622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Greebles2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1701,7 +1701,7 @@ GameObject:
   - component: {fileID: 4055468231054542040}
   - component: {fileID: 5538003399318432930}
   - component: {fileID: 2043131372038617909}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Greebles3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1779,7 +1779,7 @@ GameObject:
   - component: {fileID: 1087167652566971019}
   - component: {fileID: 6471694093922642694}
   - component: {fileID: 6371070472338148684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserUpperBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1858,7 @@ GameObject:
   - component: {fileID: 3203798051023529775}
   - component: {fileID: 833363344364858163}
   - component: {fileID: 1967133702313740751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1935,6 +1935,7 @@ GameObject:
   - component: {fileID: 9132667521072775058}
   - component: {fileID: 2432841598090528743}
   - component: {fileID: 6151791199165186535}
+  - component: {fileID: 8078047741033817534}
   m_Layer: 0
   m_Name: CR90
   m_TagString: Untagged
@@ -1955,6 +1956,7 @@ Transform:
   m_Children:
   - {fileID: 2746362790807295198}
   - {fileID: 1186951477426574638}
+  - {fileID: 1549769265573218313}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1984,6 +1986,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radarSignatureObject: {fileID: 6123980220191735839}
+--- !u!114 &8078047741033817534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253054660937043329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049352ec88a038d4b99bca0984f873ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundingBoxPrefab: {fileID: 6602063341869965677}
 --- !u!1 &5436562839418192101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +2010,7 @@ GameObject:
   - component: {fileID: 1448942807061296040}
   - component: {fileID: 2647980141984065495}
   - component: {fileID: 3021480285555752451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserTurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2072,7 +2087,7 @@ GameObject:
   - component: {fileID: 1574123957672826976}
   - component: {fileID: 4528119448390299475}
   - component: {fileID: 5002084206032866315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperSensorArrayMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2149,7 +2164,7 @@ GameObject:
   - component: {fileID: 3500285694260096213}
   - component: {fileID: 2938017308671131379}
   - component: {fileID: 7727130565906006748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Greebles4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2226,7 +2241,7 @@ GameObject:
   - component: {fileID: 1038404329903865404}
   - component: {fileID: 1494675136771881663}
   - component: {fileID: 8656010227032318240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserTurretHullPlates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2301,7 +2316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6993091222101094014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserUpperBaseTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2333,7 +2348,7 @@ GameObject:
   - component: {fileID: 2137955969518091010}
   - component: {fileID: 5385855293286645466}
   - component: {fileID: 2800947377037042428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MidEnginesHullPlates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2410,7 +2425,7 @@ GameObject:
   - component: {fileID: 7853936575080230695}
   - component: {fileID: 6359028848704364201}
   - component: {fileID: 6160052913964556226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserLowerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2489,7 +2504,7 @@ GameObject:
   - component: {fileID: 4964067435409208697}
   - component: {fileID: 4474870237875008716}
   - component: {fileID: 5634166409500022550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MidEnginesInnerSides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2581,7 @@ GameObject:
   - component: {fileID: 3045839397117889625}
   - component: {fileID: 4076286289032908798}
   - component: {fileID: 3923464756256103841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2643,7 +2658,7 @@ GameObject:
   - component: {fileID: 419021279332104062}
   - component: {fileID: 3355226966945819388}
   - component: {fileID: 6851273041149603718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2718,7 +2733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 484589592949299828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualTurboLaserLowerBaseTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2750,7 +2765,7 @@ GameObject:
   - component: {fileID: 3744508395870646660}
   - component: {fileID: 169488929866178600}
   - component: {fileID: 4456651410745609040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MidEngines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2829,7 +2844,7 @@ GameObject:
   - component: {fileID: 4643676224899597075}
   - component: {fileID: 2324668111307684341}
   - component: {fileID: 1477949890305173159}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserBackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2904,7 +2919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2746362790807295198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CR-90
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2977,7 +2992,7 @@ GameObject:
   - component: {fileID: 5109304925469293141}
   - component: {fileID: 6362077308342435971}
   - component: {fileID: 5927297495684922786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperSensorArrayBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3054,7 +3069,7 @@ GameObject:
   - component: {fileID: 1144802165704283319}
   - component: {fileID: 3703521875328185614}
   - component: {fileID: 4857170812676293940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LowerWings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3131,7 +3146,7 @@ GameObject:
   - component: {fileID: 5535178518480310231}
   - component: {fileID: 3514678817637435036}
   - component: {fileID: 4171690316398459880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3208,7 +3223,7 @@ GameObject:
   - component: {fileID: 584951461265518035}
   - component: {fileID: 4993658200080519145}
   - component: {fileID: 2370980903691054933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperLowerEngineHolders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3285,7 +3300,7 @@ GameObject:
   - component: {fileID: 1088915556175979117}
   - component: {fileID: 185743738622757152}
   - component: {fileID: 3158001391503303580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LifeCapsules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3362,7 +3377,7 @@ GameObject:
   - component: {fileID: 7505938057512209034}
   - component: {fileID: 8445801098062262047}
   - component: {fileID: 4949152732427322740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SingleTurboLaserBackRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3428,6 +3443,102 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &447551503815384770
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9132667521072775058}
+    m_Modifications:
+    - target: {fileID: 6748987200497663919, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_Name
+      value: Bounding Box Line Renderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04076507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7064016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.040819682
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70545644
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 67b9f5868bbd0024095d04936b8f2a35, type: 3}
+--- !u!1 &6602063341869965677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6748987200497663919, guid: 67b9f5868bbd0024095d04936b8f2a35,
+    type: 3}
+  m_PrefabInstance: {fileID: 447551503815384770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1549769265573218313 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1420858569075775179, guid: 67b9f5868bbd0024095d04936b8f2a35,
+    type: 3}
+  m_PrefabInstance: {fileID: 447551503815384770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7969604310999422622
 PrefabInstance:
   m_ObjectHideFlags: 0

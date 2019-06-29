@@ -16,4 +16,5 @@ MonoBehaviour:
   shieldPoints: 188
   maxSpeed: 950
   angularVelocity: 10
+  shipSize: 2
   shipFaction: 1
