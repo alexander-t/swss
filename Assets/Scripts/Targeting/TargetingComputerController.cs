@@ -30,19 +30,20 @@ namespace Targeting
         private float currentTargetDistance = 0;
 
         // Not used now
-        private Camera mainCamera;
+        //private Camera mainCamera;
 
         #region Unity lifecycle
         void Awake()
         {
             targetingComputer = TargetingComputer.Instance;
             followingTargetCamera = GetComponent<FollowingTargetCamera>();
+            DontDestroyOnLoad(this);
         }
 
         void Start()
         {
+            StartCoroutine(UpdateDistance());
             UpdateDisplay();
-            StartCoroutine("UpdateDistance");
         }
 
         void Update()
@@ -75,7 +76,8 @@ namespace Targeting
             UpdateDisplay();
         }
 
-        public void OnEnemyDestroyed(string name) {
+        public void OnEnemyDestroyed(string name)
+        {
             targetingComputer.RemoveTargetByName(name);
             UpdateDisplay();
         }
@@ -84,7 +86,8 @@ namespace Targeting
         #region Class methods
         private void UpdateDisplay()
         {
-            if (currentTarget != null) {
+            if (currentTarget != null)
+            {
                 currentTarget.BroadcastMessage("OnTargetted", false);
             }
             var targetable = targetingComputer.GetCurrentTarget();
@@ -97,21 +100,27 @@ namespace Targeting
             {
                 targetNameText.color = Color.green;
             }
-            else {
+            else
+            {
                 targetNameText.color = Color.white;
             }
             targetHullText.text = targetable.HullPoints + "";
             targetShieldText.text = targetable.ShieldPoints + "";
-                        
+
         }
 
         // Coroutine to keep non-flickering update pace and to avoid over execution
-        private IEnumerator UpdateDistance() {
+        IEnumerator UpdateDistance()
+        {
             while (true)
             {
-                currentTargetDistance = Vector3.Distance(transform.position, currentTarget.transform.position);
-                targetDistanceText.text = string.Format("{0:0.0}", currentTargetDistance);
+                if (currentTarget != null)
+                {
+                    currentTargetDistance = Vector3.Distance(transform.position, currentTarget.transform.position);
+                    targetDistanceText.text = string.Format("{0:0.0}", currentTargetDistance);
+                }
                 yield return new WaitForSeconds(0.1f);
+
             }
         }
 
@@ -120,49 +129,49 @@ namespace Targeting
         #region Possibly to be discarded
         // This would go in Awake
         // mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        
-        // The contents of this method are borrowed from here: https://answers.unity.com/questions/726412/2d-target-reticle-for-3d-object.html
-        private Rect CalcualateTargetBoundingBox(GameObject target) {
-            if (!IsTargetVisible(target)) {
-                return Rect.zero;
+        /*    
+            // The contents of this method are borrowed from here: https://answers.unity.com/questions/726412/2d-target-reticle-for-3d-object.html
+            private Rect CalcualateTargetBoundingBox(GameObject target) {
+                if (!IsTargetVisible(target)) {
+                    return Rect.zero;
+                }
+
+                Bounds bounds = target.GetComponentInChildren<Renderer>().bounds;
+
+                // Find bounds (cube) corners
+                Vector3[] Corners3 = new Vector3[8];
+                Corners3[0] = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
+                Corners3[1] = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
+                Corners3[2] = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
+                Corners3[3] = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+                Corners3[4] = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
+                Corners3[5] = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
+                Corners3[6] = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
+                Corners3[7] = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
+
+                // Find furthest screen positions of the corners
+                Vector2 Min = mainCamera.WorldToScreenPoint(Corners3[0]);
+                Vector2 Max = Min;
+                for (int i = 1; i < Corners3.Length; i++)
+                {
+                    Vector2 ScreenPos = mainCamera.WorldToScreenPoint(Corners3[i]);
+                    Min.x = Mathf.Min(Min.x, ScreenPos.x);
+                    Min.y = Mathf.Min(Min.y, ScreenPos.y);
+                    Max.x = Mathf.Max(Max.x, ScreenPos.x);
+                    Max.y = Mathf.Max(Max.y, ScreenPos.y);
+                }
+
+                // Screen space is inverted and starts at the bottom
+                Min.y = Screen.height - Min.y;
+                Max.y = Screen.height - Max.y;
+                float Height = Min.y - Max.y;
+                return new Rect(Min.x, Max.y, Max.x - Min.x, Height);
             }
 
-            Bounds bounds = target.GetComponentInChildren<Renderer>().bounds;
-
-            // Find bounds (cube) corners
-            Vector3[] Corners3 = new Vector3[8];
-            Corners3[0] = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
-            Corners3[1] = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
-            Corners3[2] = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
-            Corners3[3] = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
-            Corners3[4] = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
-            Corners3[5] = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
-            Corners3[6] = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
-            Corners3[7] = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
-
-            // Find furthest screen positions of the corners
-            Vector2 Min = mainCamera.WorldToScreenPoint(Corners3[0]);
-            Vector2 Max = Min;
-            for (int i = 1; i < Corners3.Length; i++)
-            {
-                Vector2 ScreenPos = mainCamera.WorldToScreenPoint(Corners3[i]);
-                Min.x = Mathf.Min(Min.x, ScreenPos.x);
-                Min.y = Mathf.Min(Min.y, ScreenPos.y);
-                Max.x = Mathf.Max(Max.x, ScreenPos.x);
-                Max.y = Mathf.Max(Max.y, ScreenPos.y);
-            }
-
-            // Screen space is inverted and starts at the bottom
-            Min.y = Screen.height - Min.y;
-            Max.y = Screen.height - Max.y;
-            float Height = Min.y - Max.y;
-            return new Rect(Min.x, Max.y, Max.x - Min.x, Height);
-        }
-
-        private bool IsTargetVisible(GameObject target) {
-            Vector3 sp = mainCamera.WorldToViewportPoint(target.transform.position);
-            return sp.z > 0 && sp.x > 0 && sp.x < 1 && sp.y > 0 && sp.y < 1;
-        }
+            private bool IsTargetVisible(GameObject target) {
+                Vector3 sp = mainCamera.WorldToViewportPoint(target.transform.position);
+                return sp.z > 0 && sp.x > 0 && sp.x < 1 && sp.y > 0 && sp.y < 1;
+            }*/
         #endregion
     }
 }
