@@ -25,7 +25,6 @@ public class BoundingBox : MonoBehaviour
         
     void Update()
     {
-        //lineRenderer.transform.LookAt(playerTransform);
         lineRenderer.transform.rotation = playerTransform.rotation;
 
         // Scale the width a little so that too distant targets don't get flickering thin lines.
