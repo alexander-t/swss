@@ -5,13 +5,16 @@ public class ShipData : ScriptableObject
 {
 #pragma warning disable 0649
     [SerializeField]
+    [Tooltip("In RU")]
     private int hullPoints;
-
+    
     [SerializeField]
+    [Tooltip("In SBD")]
     private int shieldPoints;
 
     [SerializeField]
-    private float maxVelocity;
+    [Tooltip("In kmph")]
+    private float maxSpeed;
 
     [SerializeField]
     private int angularVelocity;
@@ -30,9 +33,9 @@ public class ShipData : ScriptableObject
         get => shieldPoints;
     }
 
-    public float MaxVelocity
+    public float MaxSpeed
     {
-        get => maxVelocity;
+        get => maxSpeed;
     }
 
     public float AngularVelocity

@@ -13,7 +13,7 @@ namespace Flying
 
         void Start()
         {
-            BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxVelocity });
+            BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
         }
 
         void Update()
@@ -48,17 +48,17 @@ namespace Flying
             if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
             {
                 ship.AccelerateByDelta(Time.deltaTime);
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxVelocity });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
             }
             else if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
             {
                 ship.DeccelerateByDelta(Time.deltaTime);
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxVelocity });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
             }
             else if (Input.GetKey(KeyCode.Backspace))
             {
                 ship.Halt();
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxVelocity });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
             }
 
             transform.Rotate(ship.Direction * Time.deltaTime);

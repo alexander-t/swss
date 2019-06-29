@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a402e56b79cfd14c88b33742ae62ba4, type: 3}
   m_Name: Tie fighter
   m_EditorClassIdentifier: 
-  hullPoints: 20
+  hullPoints: 15
   shieldPoints: 0
-  maxVelocity: 100
+  maxSpeed: 1200
   angularVelocity: 50
+  shipFaction: 0

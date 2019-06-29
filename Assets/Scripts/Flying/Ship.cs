@@ -7,12 +7,13 @@ namespace Flying
     {
         public ShipData shipData;
 
-        // Bookkeeping 
+        // Mission and targeting computer aren't required, because communications with them happens via messages
         private GameObject mission;
         private GameObject targetingComputer;
         private bool isDestroyed = false;
 
-        // Targettable
+        private int maxHullPoints;
+        private int maxShieldPoints;
         private int hullPoints;
         private int shieldPoints;
 
@@ -42,9 +43,10 @@ namespace Flying
             get => shieldPoints;
         }
 
-        public float MaxVelocity
+        public float MaxSpeed
         {
-            get => shipData.MaxVelocity;
+            // Recalculate here to go from actual kmph to game speed
+            get => shipData.MaxSpeed / 10;
         }
 
         public float AngularVelocity
@@ -65,11 +67,13 @@ namespace Flying
         #endregion
         void Awake()
         {
-            mission = GameObject.Find("Mission");
-            targetingComputer = GameObject.Find("Targeting Computer");
+            mission = GameObject.Find(Constants.Mission);
+            targetingComputer = GameObject.Find(Constants.TargetingComputer);
+        }
 
-            hullPoints = shipData.HullPoints;
-            shieldPoints = shipData.ShieldPoints;
+        void Start() {
+            hullPoints = maxHullPoints = shipData.HullPoints;
+            shieldPoints = maxShieldPoints = shipData.ShieldPoints;
         }
 
         void OnTriggerEnter(Collider other)
@@ -149,12 +153,12 @@ namespace Flying
 
         public void AccelerateByDelta(float deltaTime)
         {
-            velocity = Mathf.Clamp(velocity + Acceleration * deltaTime, 0, MaxVelocity);
+            velocity = Mathf.Clamp(velocity + Acceleration * deltaTime, 0, MaxSpeed);
         }
 
         public void DeccelerateByDelta(float deltaTime)
         {
-            velocity = Mathf.Clamp(velocity - Acceleration * deltaTime, 0, MaxVelocity);
+            velocity = Mathf.Clamp(velocity - Acceleration * deltaTime, 0, MaxSpeed);
         }
 
         #endregion

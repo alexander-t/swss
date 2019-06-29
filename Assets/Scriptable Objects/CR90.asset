@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a402e56b79cfd14c88b33742ae62ba4, type: 3}
-  m_Name: X-wing
+  m_Name: CR90
   m_EditorClassIdentifier: 
-  hullPoints: 20
-  shieldPoints: 50
-  maxSpeed: 1050
-  angularVelocity: 35
+  hullPoints: 40
+  shieldPoints: 188
+  maxSpeed: 950
+  angularVelocity: 10
   shipFaction: 1
