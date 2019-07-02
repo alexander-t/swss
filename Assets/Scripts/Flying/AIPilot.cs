@@ -55,9 +55,17 @@ namespace Flying
                 }
                 MoveTowards(currentWaypoint);
             }
+
+            Fire();
         }
 
-        
+
+        private void Fire() {
+            if (waypointIndex == 2) {
+                BroadcastMessage("OnFire");
+            }
+        }
+
         private void DetermineCurrentWayPoint() {
             if (waypoints.Length > 0)
             {

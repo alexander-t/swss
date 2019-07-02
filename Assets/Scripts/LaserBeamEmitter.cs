@@ -9,6 +9,7 @@ public class LaserBeamEmitter : MonoBehaviour
     public GameObject laserBeamPrefab;
     public GameObject rightGun;
     public GameObject leftGun;
+    [Space(7)]
     public AudioSource audioSource;
     public AudioClip laserSound;
 
@@ -26,36 +27,52 @@ public class LaserBeamEmitter : MonoBehaviour
     void Update()
     {
         Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
-        if (Input.GetKey(KeyCode.X))
+        if (Constants.Player.Equals(name))
         {
-            ToggleFiringMode();
+            // Control only player's beams with keyboard. Do the rest via events.
+            if (Input.GetKey(KeyCode.X))
+            {
+                ToggleFiringMode();
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Fire();
+            }
         }
-        if (Input.GetKey(KeyCode.Space) && Time.time > nextShotTime)
-        {
+    }
+
+    void OnFire() {
+        Fire();
+    }
+        
+    private void Fire() {
+        if (Time.time > nextShotTime) {
             if (firingMode == FiringMode.Single)
             {
-                ShootFromGun(rightGunFiringNext ? rightGun : leftGun);
+                FireGun(rightGunFiringNext ? rightGun : leftGun);
                 rightGunFiringNext = !rightGunFiringNext;
                 nextShotTime = Time.time + Cooldown;
             }
             else if (firingMode == FiringMode.Dual)
             {
-                ShootFromGun(rightGun);
-                ShootFromGun(leftGun);
+                FireGun(rightGun);
+                FireGun(leftGun);
                 nextShotTime = Time.time + Cooldown * 2;
             }
             audioSource.Play();
         }
     }
 
-    private void ToggleFiringMode() {
-        
-        firingMode = firingMode == FiringMode.Single ? FiringMode.Dual : FiringMode.Single;
-    }
-
-    private void ShootFromGun(GameObject gun) {
+    private void FireGun(GameObject gun)
+    {
         Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
         GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
         laserBeam.GetComponent<Beam>().target = gunFocalPoint;
     }
+
+    private void ToggleFiringMode()
+    {
+        firingMode = firingMode == FiringMode.Single ? FiringMode.Dual : FiringMode.Single;
+    }
+
 }

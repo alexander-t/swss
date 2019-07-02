@@ -37,7 +37,6 @@ namespace Targeting
         {
             targetingComputer = TargetingComputer.Instance;
             followingTargetCamera = GetComponent<FollowingTargetCamera>();
-            DontDestroyOnLoad(this);
         }
 
         void Start()
