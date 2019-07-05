@@ -36,9 +36,10 @@ namespace Mission
         #region Events
         public void OnEnemyDestroyed(string name)
         {
-            TargetingComputer.Instance.RemoveTargetByName(name);
-            GameObject.Find("Targeting Computer").SendMessage("UpdateDisplay");
-            SpawnXWing();
+            if (name.StartsWith("Rookie"))
+            {
+                SpawnXWing();
+            }
         }
         #endregion
 
