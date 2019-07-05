@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
 /**
  * Creates a shield by fading in a material quickly and then fading it out more slowly.
@@ -53,7 +54,7 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Constants.LaserBeam))
+        if (other.CompareTag(Constants.Tag_LaserBeam))
         {
             lastHitPosition = other.transform.position;
             Vector3 impactLightDirection = (lastHitPosition - transform.position);

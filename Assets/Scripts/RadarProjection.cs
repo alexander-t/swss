@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
 /**
  * Projects an object towards the player at a constant distance.

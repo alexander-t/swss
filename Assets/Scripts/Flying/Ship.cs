@@ -1,4 +1,5 @@
-﻿using Targeting;
+﻿using Core;
+using Targeting;
 using UnityEngine;
 
 namespace Flying
@@ -74,13 +75,24 @@ namespace Flying
         void Start() {
             hullPoints = maxHullPoints = shipData.HullPoints;
             shieldPoints = maxShieldPoints = shipData.ShieldPoints;
-            targetingComputer.BroadcastMessage("OnNewTarget", this);
+            if (targetingComputer != null)
+            {
+                // Targeting computer may be null in test scenes
+                targetingComputer.BroadcastMessage("OnNewTarget", this);
+            }
         }
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(Constants.LaserBeam) && !isDestroyed)
+            if (other.CompareTag(Constants.Tag_LaserBeam) && !isDestroyed)
             {
+                Beam beam = other.GetComponentInParent<Beam>();
+                
+                // Don't self kill. Sometimes the beam is spawned too close to the emitting craft and would damage it.
+                if (beam.owner == GameObjects.GetParentShip(transform.gameObject)) {
+                    return;
+                }
+
                 Destroy(other.gameObject);
 
                 if (shieldPoints > 0)

@@ -7,8 +7,7 @@ TagManager:
   - LaserBeam
   - Model
   - Enemy
-  - Buoy
-  - Targettable
+  - Ship
   layers:
   - Default
   - TransparentFX

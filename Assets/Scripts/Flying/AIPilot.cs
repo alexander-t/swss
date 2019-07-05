@@ -6,8 +6,13 @@ namespace Flying
     public class AIPilot : MonoBehaviour
     {
         private const float WaypointProximityTolerance = 25;
+        private const float CasualTurnDampening = 0.01f;
+        private const float AttackTurnDampening = 0.025f;
 
         public Transform[] waypoints;
+
+        // Store transforms' vectors, because the transform can belong to something that's destroyed
+        private Vector3[] waypointVectors;
 
         private Ship ship;
 
@@ -15,6 +20,9 @@ namespace Flying
         private int waypointIndex = 0;
 
         private PathFinding pathFinding;
+
+        private GameObject target;
+        private bool firing = false;
 
         void Awake()
         {
@@ -25,7 +33,12 @@ namespace Flying
         {
             if (waypoints.Length > 0)
             {
-                currentWaypoint = waypoints[waypointIndex].position;
+                waypointVectors = new Vector3[waypoints.Length];
+                for (int i = 0; i < waypoints.Length; i++) {
+                    Vector3 original = waypoints[i].position;
+                    waypointVectors[i] = new Vector3(original.x, original.y, original.z);
+                }
+                currentWaypoint = waypointVectors[waypointIndex];
                 transform.LookAt(currentWaypoint);
             }
 
@@ -40,7 +53,8 @@ namespace Flying
 
             if (availableDirections == Direction.None)
             {
-                Debug.Log("STUCK!");
+                Debug.Log("STUCK! Cheating!");
+                transform.Rotate(0, 180, 0);
             }
             else
             {
@@ -56,23 +70,37 @@ namespace Flying
                 MoveTowards(currentWaypoint);
             }
 
+            if (waypointIndex == 2)
+            {
+                GameObject buoy = GameObject.Find("Buoys/B-55");
+                target = (buoy != null) ? buoy.gameObject : null;
+            }
+            else
+            {
+                target = null;
+                firing = false;
+            }
+
             Fire();
         }
 
 
-        private void Fire() {
-            if (waypointIndex == 2) {
+        private void Fire()
+        {
+            if (firing && target != null)
+            {
                 BroadcastMessage("OnFire");
             }
         }
 
-        private void DetermineCurrentWayPoint() {
+        private void DetermineCurrentWayPoint()
+        {
             if (waypoints.Length > 0)
             {
                 if (Vector3.Distance(transform.position, currentWaypoint) <= WaypointProximityTolerance)
                 {
                     waypointIndex = waypointIndex + 1 < waypoints.Length ? waypointIndex + 1 : 0;
-                    currentWaypoint = waypoints[waypointIndex].position;
+                    currentWaypoint = waypointVectors[waypointIndex];
                 }
             }
         }
@@ -81,12 +109,31 @@ namespace Flying
         {
             Vector3 targetDirection = target - transform.position;
             Quaternion finalRotation = Quaternion.LookRotation(targetDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 0.5f);
+            float turnDampening = target == null ? CasualTurnDampening : AttackTurnDampening;
+            transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * ship.AngularVelocity * turnDampening);
         }
 
         private void MoveTowards(Vector3 target)
         {
             transform.position += transform.forward * Time.deltaTime * ship.Velocity;
         }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (target != null)
+            {
+                GameObject targetedWithinKillzone = other.transform.parent.gameObject;
+                if (targetedWithinKillzone == target)
+                {
+                    firing = true;
+                }
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            firing = false;
+        }
+
     }
 }

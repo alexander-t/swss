@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 /*
     Emits laser beams originating from two different lasers with some cooldown. 
  */
@@ -66,8 +67,10 @@ public class LaserBeamEmitter : MonoBehaviour
     private void FireGun(GameObject gun)
     {
         Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
-        GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
-        laserBeam.GetComponent<Beam>().target = gunFocalPoint;
+        GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity, transform) as GameObject;
+        Beam beam = laserBeam.GetComponent<Beam>();
+        beam.target = gunFocalPoint;
+        beam.owner = GameObjects.GetParentShip(transform.gameObject);
     }
 
     private void ToggleFiringMode()
