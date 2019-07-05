@@ -10,10 +10,7 @@ namespace Flying
         private const float AttackTurnDampening = 0.025f;
 
         public Transform[] waypoints;
-
-        // Store transforms' vectors, because the transform can belong to something that's destroyed
-        private Vector3[] waypointVectors;
-
+              
         private Ship ship;
 
         private Vector3 currentWaypoint;
@@ -33,12 +30,7 @@ namespace Flying
         {
             if (waypoints.Length > 0)
             {
-                waypointVectors = new Vector3[waypoints.Length];
-                for (int i = 0; i < waypoints.Length; i++) {
-                    Vector3 original = waypoints[i].position;
-                    waypointVectors[i] = new Vector3(original.x, original.y, original.z);
-                }
-                currentWaypoint = waypointVectors[waypointIndex];
+                currentWaypoint = waypoints[waypointIndex].position;
                 transform.LookAt(currentWaypoint);
             }
 
@@ -100,7 +92,7 @@ namespace Flying
                 if (Vector3.Distance(transform.position, currentWaypoint) <= WaypointProximityTolerance)
                 {
                     waypointIndex = waypointIndex + 1 < waypoints.Length ? waypointIndex + 1 : 0;
-                    currentWaypoint = waypointVectors[waypointIndex];
+                    currentWaypoint = waypoints[waypointIndex].position;
                 }
             }
         }

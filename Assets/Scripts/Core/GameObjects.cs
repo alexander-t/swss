@@ -11,20 +11,21 @@ namespace Core
         }
 
         /*
-         * Return a subcomponent's parent tagged "Ship" or the component itself if it's the parent
+         * Return a subcomponent's parent tagged "Ship" or the component itself if it's the parent.
+         * The player is also considered a parent ship.
          */ 
         public static GameObject GetParentShip(GameObject go)
         {
-            if (go.CompareTag(Constants.Tag_Ship))
+            if (go.CompareTag(Constants.Tag_Ship) || Constants.Player.Equals(Constants.Player))
             {
                 return go;
             }
 
-            GameObject parent = go.transform.parent.gameObject;
+            Transform parent = go.transform.parent;
 
-            if (parent.CompareTag(Constants.Tag_Ship))
+            if (parent != null && parent.gameObject.CompareTag(Constants.Tag_Ship))
             {
-                return parent;
+                return parent.gameObject;
             }
 
             // This might happen if objects are deeply nested, but let's deal with it then.

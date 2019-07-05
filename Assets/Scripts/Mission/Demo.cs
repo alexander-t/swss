@@ -26,10 +26,10 @@ namespace Mission
             AIPilot aiPilot = xWing.GetComponent<AIPilot>();
             aiPilot.waypoints = new Transform[]
             {
-                GameObject.Find("Buoys/A-122").GetComponent<Transform>(),
-                GameObject.Find("Buoys/B-54").GetComponent<Transform>(),
-                GameObject.Find("Buoys/B-55").GetComponent<Transform>(),
-                GameObject.Find("Buoys/A-121").GetComponent<Transform>()
+                GameObject.Find("Waypoints/Waypoint 1").GetComponent<Transform>(),
+                GameObject.Find("Waypoints/Waypoint 2").GetComponent<Transform>(),
+                GameObject.Find("Waypoints/Waypoint 3").GetComponent<Transform>(),
+                GameObject.Find("Waypoints/Waypoint 4").GetComponent<Transform>()
             };
         }
 
