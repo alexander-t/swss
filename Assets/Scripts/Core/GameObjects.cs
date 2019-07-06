@@ -16,7 +16,7 @@ namespace Core
          */ 
         public static GameObject GetParentShip(GameObject go)
         {
-            if (go.CompareTag(Constants.Tag_Ship) || Constants.Player.Equals(Constants.Player))
+            if (go.CompareTag(Constants.Tag_Ship) || Constants.Player.Equals(go.name))
             {
                 return go;
             }

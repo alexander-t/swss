@@ -15,7 +15,7 @@ namespace Flying
 
     public class PathFinding
     {
-        private const float DetectionDistance = 75;
+        private const float DetectionDistance = 50;
         private Transform transform;
 
         public PathFinding(Transform transform) {
