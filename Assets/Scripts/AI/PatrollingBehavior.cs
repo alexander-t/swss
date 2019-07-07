@@ -13,7 +13,7 @@ namespace AI
 
         private Transform[] waypoints;
         private int waypointIndex;
-        private Vector3 currentWaypoint;
+        private Vector3 currentWaypoint = Vector3.zero;
 
         public PatrollingBehavior(GameObject managedShip, Transform[] waypoints)
         {
@@ -42,8 +42,13 @@ namespace AI
             // Do nothing
         }
 
-        public string Describe() {
-            return "Patrolling: going to waypoint #" + waypointIndex  + " " + waypoints[waypointIndex].position;
+        public string Describe()
+        {
+            if (waypoints.Length == 0)
+            {
+                return "Patrolling: no waypoints specified";
+            }
+            return "Patrolling: going to waypoint #" + waypointIndex + " " + waypoints[waypointIndex].position;
         }
 
         public void TargetEnteredKillzone(GameObject potentialTarget)

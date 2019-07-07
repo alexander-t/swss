@@ -9,6 +9,8 @@ namespace Flying
     public class AIPilot : MonoBehaviour
     {
         public Transform[] waypoints;
+        public Transform rightGunTransform;
+        public Transform leftGunTransform;
 
         private Ship ship;
         private Behavior behavior;
@@ -41,7 +43,6 @@ namespace Flying
                 {
                     // Do collision detection; if nothing is blocking, let the behavior decide the movement
                     Vector3 turningDirection = pathFinding.DetermineTurningDirection(availableDirections);
-                    turningDirection = Vector3.zero;
                     if (turningDirection != Vector3.zero)
                     {
                         transform.Rotate(turningDirection * ship.AngularVelocity * Time.deltaTime);
@@ -53,21 +54,25 @@ namespace Flying
                     Move();
                 }
 
-                if (Input.GetKey(KeyCode.P))
+                if (Input.GetKeyUp(KeyCode.P))
                 {
                     GameObject buoy = GameObject.Find("Buoys/B-55");
                     if (buoy != null)
                     {
-                        behavior = new AttackingBehavior(gameObject, buoy);
+                        behavior = new AttackingBehavior(gameObject, rightGunTransform, leftGunTransform, buoy);
                         behavior.Commence();
                     }
                 }
-                else if (Input.GetKey(KeyCode.O))
+                else if (Input.GetKeyUp(KeyCode.O))
                 {
                     behavior = new PatrollingBehavior(gameObject, waypoints);
                     behavior.Commence();
                 }
-                behavior.Attack();
+                else if (Input.GetKeyUp(KeyCode.Minus)) {
+                    Time.timeScale = Mathf.Clamp(Time.timeScale - 0.1f, 0, 1);
+                }
+                
+            behavior.Attack();
             }
             catch (BehaviorNotApplicableException)
             {

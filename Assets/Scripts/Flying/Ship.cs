@@ -58,6 +58,7 @@ namespace Flying
         public float Velocity
         {
             get => velocity;
+            set => velocity = value; // TODO: temporary to test AI
         }
 
         public Vector3 Direction
@@ -112,7 +113,7 @@ namespace Flying
 
                     gameObject.BroadcastMessage("Explode");
 
-                    mission.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
+                    GameObjects.BroadcastMessageIgnoringNullReceiver(mission, "OnEnemyDestroyed", gameObject.name);
                     targetingComputer.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
 
                     Destroy(gameObject, 0.1f);

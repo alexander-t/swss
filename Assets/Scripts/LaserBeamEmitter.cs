@@ -28,6 +28,7 @@ public class LaserBeamEmitter : MonoBehaviour
     void Update()
     {
         Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
+        
         if (Constants.Player.Equals(name))
         {
             // Control only player's beams with keyboard. Do the rest via events.
@@ -39,6 +40,11 @@ public class LaserBeamEmitter : MonoBehaviour
             {
                 Fire();
             }
+        }
+
+        if (Debug.isDebugBuild) {
+         //   Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, rightGun.transform.position, Color.red, 0.1f);
+         //   Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, leftGun.transform.position, Color.red, 0.1f);
         }
     }
 
