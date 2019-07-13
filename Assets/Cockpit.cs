@@ -22,6 +22,9 @@ public class Cockpit : MonoBehaviour
 
     void OnVelocityChange(float[] velocities)
     {
-        textVelocity.text = (int)velocities[0] + "";
+        if (textVelocity != null)
+        {
+            textVelocity.text = (int)velocities[0] + "";
+        }
     }
 }

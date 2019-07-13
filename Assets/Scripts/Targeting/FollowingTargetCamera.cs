@@ -22,6 +22,10 @@ namespace Targeting
 
         void LateUpdate()
         {
+            if (target == null) {
+                return;
+            }
+
             Ship ship = target.GetComponent<Ship>();
             Vector3 offset = ViewingDistanceStandard;
             switch (ship.shipData.Size)

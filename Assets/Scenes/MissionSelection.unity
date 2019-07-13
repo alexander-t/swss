@@ -216,7 +216,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997793881}
-        m_MethodName: OnKillTheRookie
+        m_MethodName: OnDogfight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -561,7 +561,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -7.2456195e+30, z: 5.8e-43, w: -5.0693886e+30}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: NaN, w: 8.4e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1429,7 +1429,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997793881}
-        m_MethodName: OnKillTheRookie
+        m_MethodName: OnAttackAnUndefendedDepot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

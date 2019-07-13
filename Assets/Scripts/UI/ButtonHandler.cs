@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Core;
 
 public class ButtonHandler : MonoBehaviour
 {
-    public void OnKillTheRookie() {
-        Debug.Log("Rookie");
-        SceneManager.LoadScene("Combat");
+    public void OnAttackAnUndefendedDepot() {
+        
+        SceneManager.LoadScene(Constants.Scene_MissionAttackAnUndefendedDepot);
     }
 
     public void OnDogfight()
     {
-        Debug.Log("DogFight");
+        SceneManager.LoadScene("Combat");
     }
 
     public void OnChallengeFrigate()

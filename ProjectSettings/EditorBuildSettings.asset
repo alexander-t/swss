@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: a7c3ecf400c47cc4a9dd564bdf699ed6
+  - enabled: 1
+    path: Assets/Scenes/Mission_AttackAnUndefendedDepot.unity
+    guid: d1b56e91c34dd3043b4567166eea22d7
   m_configObjects: {}

@@ -16,7 +16,7 @@ namespace Core
          */ 
         public static GameObject GetParentShip(GameObject go)
         {
-            if (go.CompareTag(Constants.Tag_Ship) || Constants.Player.Equals(go.name))
+            if (go.CompareTag(Constants.Tag_Ship) || GameObjects.IsPlayer(go.name))
             {
                 return go;
             }
@@ -38,6 +38,10 @@ namespace Core
                 return;
             }
             receiver.BroadcastMessage(methodName, parameter);
+        }
+
+        public static bool IsPlayer(string name) {
+            return name != null && name.StartsWith(Constants.Player);
         }
     }
 }

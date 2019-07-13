@@ -29,7 +29,7 @@ public class LaserBeamEmitter : MonoBehaviour
     {
         Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
         
-        if (Constants.Player.Equals(name))
+        if (GameObjects.IsPlayer(name))
         {
             // Control only player's beams with keyboard. Do the rest via events.
             if (Input.GetKey(KeyCode.X))

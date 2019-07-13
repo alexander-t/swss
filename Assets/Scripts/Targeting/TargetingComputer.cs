@@ -58,7 +58,10 @@ namespace Targeting
 
         public void NextTarget()
         {
-            currentTargetIndex = ++currentTargetIndex % targets.Count;
+            if (targets.Count > 0)
+            {
+                currentTargetIndex = ++currentTargetIndex % targets.Count;
+            }
         }
     }
 }
