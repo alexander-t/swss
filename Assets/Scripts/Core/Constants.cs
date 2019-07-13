@@ -4,6 +4,7 @@
     {
         // Objects present in all combat scenes
         public const string Player = "Player";
+        public const string MainCamera = "Main Camera";
         public const string Mission = "Mission";
         public const string TargetingComputer = "Targeting Computer";
 
