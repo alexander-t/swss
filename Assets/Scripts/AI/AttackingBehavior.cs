@@ -12,7 +12,7 @@ namespace AI
         private const float LongRangeAttackVelocity = 50;
 
         private const float MediumRange = 175;
-        private const float MediumRangeAttackVelocity = 30;
+        private const float MediumRangeAttackVelocity = 25;
 
         private const float CloseRange = 100;
         private const float CloseRangeAttackVelocity = 10;
@@ -132,6 +132,13 @@ namespace AI
             {
                 // Use normal turning
                 TurnTowards(target.transform.position);
+            }
+            else if (target2Hotspot.magnitude <= 25 && target2Hotspot.magnitude > 10)
+            {
+                Debug.Log("x=" + target2Hotspot.x + ", y=" + target2Hotspot.y + ", " + target2Hotspot.magnitude);
+                float t = 0.5f;
+                managedTransform.Rotate(0, target2Hotspot.x > 0 ? t : -t, 0);
+                managedTransform.Rotate(target2Hotspot.y > 0 ? -t : t, 0, 0);
             }
             else
             {

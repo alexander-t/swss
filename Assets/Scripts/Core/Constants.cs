@@ -10,6 +10,8 @@
         public const string Tag_Ship = "Ship";
         public const string Tag_LaserBeam = "LaserBeam";
 
+        public const string Scene_MissionSelection = "MissionSelection";
+
         public const string Shield_ImpactLight = "Impact Light";
     }
 }
