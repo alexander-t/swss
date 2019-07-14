@@ -9,6 +9,7 @@
         public const string TargetingComputer = "Targeting Computer";
 
         public const string Tag_Ship = "Ship";
+        public const string Tag_HUD = "HUD";
         public const string Tag_LaserBeam = "LaserBeam";
 
         public const string Scene_MissionSelection = "MissionSelection";

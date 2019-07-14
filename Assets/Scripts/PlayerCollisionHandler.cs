@@ -11,15 +11,17 @@ public class PlayerCollisionHandler : MonoBehaviour
     private EngineSound engineSound;
 
     private GameObject model;
+    private GameObject hud;
+
     private bool isAlive = true;
 
     void Awake()
     {
         ship = GetComponent<Ship>();
         exploding = GetComponent<Exploding>();
-        engineSound = GetComponent<EngineSound>();                
-
-        model = GameObject.FindGameObjectWithTag("Ship");
+        engineSound = GetComponent<EngineSound>();
+        hud = GameObject.FindGameObjectWithTag(Constants.Tag_HUD);
+        model = GameObject.FindGameObjectWithTag(Constants.Tag_Ship);
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,6 +40,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             ship.Halt();
             engineSound.Mute();
             model.SetActive(false);
+            hud.gameObject.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
             exploding.Explode();
             StartCoroutine(FailMissionAfterExplosion());
