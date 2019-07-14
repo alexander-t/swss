@@ -1,5 +1,4 @@
-﻿using Targeting;
-using Flying;
+﻿using Flying;
 using UnityEngine;
 
 namespace Mission

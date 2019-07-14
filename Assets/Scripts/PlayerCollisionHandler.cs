@@ -1,6 +1,8 @@
 ﻿using Core;
 using Flying;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
@@ -38,6 +40,12 @@ public class PlayerCollisionHandler : MonoBehaviour
             model.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
             exploding.Explode();
+            StartCoroutine(FailMissionAfterExplosion());
         }
+    }
+
+    private IEnumerator FailMissionAfterExplosion() {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(Constants.Scene_MissionFailed);
     }
 }

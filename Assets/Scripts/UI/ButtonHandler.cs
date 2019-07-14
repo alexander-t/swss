@@ -4,6 +4,11 @@ using Core;
 
 public class ButtonHandler : MonoBehaviour
 {
+    void Update()
+    {
+        Cursor.visible = true;
+    }
+
     public void OnAttackAnUndefendedDepot() {
         
         SceneManager.LoadScene(Constants.Scene_MissionAttackAnUndefendedDepot);
@@ -18,4 +23,8 @@ public class ButtonHandler : MonoBehaviour
     {
         Debug.Log("Frigate");
     }
+
+    public void OnSelectMission() {
+        SceneManager.LoadScene(Constants.Scene_MissionSelection );
+    } 
 }
