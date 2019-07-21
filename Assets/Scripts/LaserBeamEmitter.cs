@@ -32,7 +32,7 @@ public class LaserBeamEmitter : MonoBehaviour
         if (GameObjects.IsPlayer(name))
         {
             // Control only player's beams with keyboard. Do the rest via events.
-            if (Input.GetKey(KeyCode.X))
+            if (Input.GetKeyUp(KeyCode.X))
             {
                 ToggleFiringMode();
             }
@@ -72,8 +72,8 @@ public class LaserBeamEmitter : MonoBehaviour
 
     private void FireGun(GameObject gun)
     {
-        Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
-        GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity, transform) as GameObject;
+        Vector3 gunFocalPoint = transform.position + transform.forward * Beam.MaxRange;
+        GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
         Beam beam = laserBeam.GetComponent<Beam>();
         beam.target = gunFocalPoint;
         beam.owner = GameObjects.GetParentShip(transform.gameObject);
