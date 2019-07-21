@@ -3,12 +3,11 @@
 namespace Environment
 {
     /**
-     * Spawns asteroids in an area bounded by a sphere.
+     * Spawns objects in an area bounded by a sphere.
      **/
-    [RequireComponent(typeof(Transform))]
     public class SphereSpawner : MonoBehaviour
     {
-        public GameObject[] asteroidPrefabs;
+        public GameObject[] spawnPrefabs;
         public float radius = 10;
         public int asteroids = 10;
         public float minScale = 1;
@@ -18,13 +17,12 @@ namespace Environment
         {
             for (int i = 0; i < asteroids; i++)
             {
-                Vector3 position = transform.position + Random.insideUnitSphere * radius;
-                float scale = Random.Range(minScale, maxScale);
-                int prefabIndex = Random.Range(0, asteroidPrefabs.Length);
+                Vector3 spawnPosition = transform.position + Random.insideUnitSphere * radius;
+                int prefabIndex = Random.Range(0, spawnPrefabs.Length);
 
-                GameObject asteroid = Instantiate(asteroidPrefabs[prefabIndex], position, Quaternion.identity, this.transform) as GameObject;
-                asteroid.transform.localScale = new Vector3(scale, scale, scale);
-                asteroid.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+                GameObject newObject = Instantiate(spawnPrefabs[prefabIndex], spawnPosition, Quaternion.identity, this.transform) as GameObject;
+                newObject.transform.localScale = Vector3.one * Random.Range(minScale, maxScale);
+                newObject.transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             }
         }
 
