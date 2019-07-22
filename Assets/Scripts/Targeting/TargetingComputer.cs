@@ -48,8 +48,16 @@ namespace Targeting
                     if (currentTargetIndex == targets.Count)
                     {
 
-                        // Cycle if active target is the last one to be removed
-                        currentTargetIndex %= targets.Count;
+                        if (targets.Count > 0)
+                        {
+                            // Cycle if active target is the last one to be removed.
+                            currentTargetIndex %= targets.Count;
+                        }
+                        else
+                        {
+                            // Do nothing if the last target was removed and no other targets remain.
+                            return;
+                        }
                     }
                     break;
                 }

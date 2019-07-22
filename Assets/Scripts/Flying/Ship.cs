@@ -1,4 +1,5 @@
 ﻿using Core;
+using Firing;
 using Targeting;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Flying
         // Mission and targeting computer aren't required, because communications with them happens via messages
         private GameObject mission;
         private GameObject targetingComputer;
-        private bool isDestroyed = false;
+        private bool isAlive = true;
 
         private int maxHullPoints;
         private int maxShieldPoints;
@@ -83,9 +84,9 @@ namespace Flying
             }
         }
 
-        void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(Constants.Tag_LaserBeam) && !isDestroyed)
+            if (other.CompareTag(Constants.Tag_LaserBeam) && isAlive)
             {
                 Beam beam = other.GetComponentInParent<Beam>();
                 
@@ -94,30 +95,35 @@ namespace Flying
                     return;
                 }
 
+                other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
 
                 if (shieldPoints > 0)
                 {
                     BroadcastMessage("OnShieldImpact");
-                    shieldPoints -= 10;
+                    shieldPoints = Mathf.Max(shieldPoints - 10, 0);
                 }
                 else
                 {
-                    hullPoints -= 10;
+                    hullPoints = Mathf.Max(hullPoints - 10, 0);
                 }
 
                 targetingComputer.BroadcastMessage("OnEnemyHit");
                 if (hullPoints <= 0)
                 {
-                    isDestroyed = true;
-
-                    gameObject.BroadcastMessage("Explode");
-
-                    GameObjects.BroadcastMessageIgnoringNullReceiver(mission, "OnEnemyDestroyed", gameObject.name);
-                    targetingComputer.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
-
-                    Destroy(gameObject, 0.1f);
-
+                    if (GameObjects.IsPlayer(name))
+                    {
+                        PlayerCollisionHandler playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
+                        playerCollisionHandler.Die();
+                    }
+                    else
+                    {
+                        isAlive = false;
+                        gameObject.BroadcastMessage("Explode");
+                        GameObjects.BroadcastMessageIgnoringNullReceiver(mission, "OnEnemyDestroyed", gameObject.name);
+                        targetingComputer.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
+                        Destroy(gameObject, 0.1f);
+                    }
                 }
             }
         }

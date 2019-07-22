@@ -12,18 +12,17 @@ public class RadarProjection : MonoBehaviour
 
     private const float DistanceToRadar = 10;
 
-    private GameObject player;
+    private Transform playerTransform;
     private Vector3 direction;
 
-    void Start()
+    void Awake()
     {
-        player = GameObject.Find(Constants.Player);
+        playerTransform = GameObject.Find(Constants.Player).transform;
     }
 
     void Update()
     {
-        direction = transform.position - player.transform.position ;
-        direction.Normalize();
-        radarSignatureObject.transform.position = player.transform.position + direction * DistanceToRadar;
+        direction = (transform.position - playerTransform.position).normalized;
+        radarSignatureObject.transform.position = playerTransform.position + direction * DistanceToRadar;
     }
 }

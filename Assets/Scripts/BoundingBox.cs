@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
 public class BoundingBox : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class BoundingBox : MonoBehaviour
 
     void Awake()
     {
-        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        playerTransform = GameObject.Find(Constants.Player).GetComponent<Transform>();
         lineRenderer = boundingBoxPrefab.GetComponent<LineRenderer>();
 
         lineRenderer.useWorldSpace = false;

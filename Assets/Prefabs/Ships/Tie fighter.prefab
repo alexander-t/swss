@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: starwars-tie-fighter
       objectReference: {fileID: 0}
+    - target: {fileID: -5313371466219880933, guid: ddd9daef476f9b146b9ca651e2b2e165,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ddd9daef476f9b146b9ca651e2b2e165,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103,12 +108,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7359430628665221303, guid: ddd9daef476f9b146b9ca651e2b2e165,
+    - target: {fileID: 7880306045676356819, guid: ddd9daef476f9b146b9ca651e2b2e165,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7880306045676356819, guid: ddd9daef476f9b146b9ca651e2b2e165,
+    - target: {fileID: 7359430628665221303, guid: ddd9daef476f9b146b9ca651e2b2e165,
         type: 3}
       propertyPath: m_Enabled
       value: 0

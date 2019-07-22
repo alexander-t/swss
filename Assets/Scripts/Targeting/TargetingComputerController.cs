@@ -112,6 +112,13 @@ namespace Targeting
                 targetHullText.text = targetable.HullPoints + "";
                 targetShieldText.text = targetable.ShieldPoints + "";
             }
+            else
+            {
+                targetNameText.text = "";
+                targetHullText.text = "";
+                targetShieldText.text = "";
+                targetDistanceText.text = "";
+            }
         }
 
         // Coroutine to keep non-flickering update pace and to avoid over execution
@@ -123,6 +130,10 @@ namespace Targeting
                 {
                     currentTargetDistance = Vector3.Distance(transform.position, currentTarget.transform.position);
                     targetDistanceText.text = string.Format("{0:0.0}", currentTargetDistance);
+                }
+                else
+                {
+                    targetDistanceText.text = "";
                 }
                 yield return new WaitForSeconds(0.1f);
 

@@ -104,6 +104,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'LineRenderer: Selected'
       objectReference: {fileID: 0}
+    - target: {fileID: 8757389263906954280, guid: 2f100fd7acf002b44ab63f0cf41848d7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6406743628376861371, guid: 2f100fd7acf002b44ab63f0cf41848d7,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
 namespace Targeting
 {
@@ -16,7 +17,7 @@ namespace Targeting
 
         private void Awake()
         {
-            playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+            playerTransform = GameObject.Find(Constants.Player).GetComponent<Transform>();
         }
 
         void Start()
