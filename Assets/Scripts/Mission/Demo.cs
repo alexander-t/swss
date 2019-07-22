@@ -12,6 +12,7 @@ namespace Mission
 
         void Start()
         {
+            EventManager.onShipDestroyed += OnDestroyed;
             Cursor.visible = false;
             SpawnXWing();
         }
@@ -33,7 +34,7 @@ namespace Mission
         }
 
         #region Events
-        public void OnEnemyDestroyed(string name)
+        public void OnDestroyed(string name)
         {
             if (name.StartsWith("Rookie"))
             {

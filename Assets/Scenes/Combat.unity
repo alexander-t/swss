@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6bf91a309a8cbd499523ffd81ac0db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefabs:
+  spawnPrefabs:
   - {fileID: 7892737794622045801, guid: dc5adaab76ed8b446a08009a1d5652d0, type: 3}
   - {fileID: 7882970752366690797, guid: 2d6a01e6840783f4d91593253638844a, type: 3}
   radius: 70
@@ -1133,6 +1133,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6671432809267843945, guid: bac0acbb01b7fa8478e1dd1df46ce897,
+        type: 3}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 1477409088}
     - target: {fileID: 5465092962799677318, guid: bac0acbb01b7fa8478e1dd1df46ce897,
         type: 3}
       propertyPath: textVelocity
@@ -1158,10 +1163,5 @@ PrefabInstance:
       propertyPath: targetDistanceText
       value: 
       objectReference: {fileID: 1480867159}
-    - target: {fileID: 6671432809267843945, guid: bac0acbb01b7fa8478e1dd1df46ce897,
-        type: 3}
-      propertyPath: display
-      value: 
-      objectReference: {fileID: 1477409088}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac0acbb01b7fa8478e1dd1df46ce897, type: 3}

@@ -42,6 +42,10 @@ namespace Targeting
 
         void Start()
         {
+            EventManager.onShipDestroyed += OnShipDestroyed;
+            EventManager.onShipHit += OnShipHit;
+            EventManager.onNewShipEntered += OnNewShipEntered;
+
             StartCoroutine(UpdateDistance());
             UpdateDisplay();
         }
@@ -60,8 +64,9 @@ namespace Targeting
         }
         #endregion
 
+
         #region Events
-        public void OnNewTarget(Ship ship)
+        public void OnNewShipEntered(Ship ship)
         {
             /* Discard the player, which is also a ship and it's being registered upon scene startup.
              * Doing this StartsWith like this is a bit crude, but it allows the existence of prefabs starting with "Player - ".
@@ -73,12 +78,12 @@ namespace Targeting
             }
         }
 
-        public void OnEnemyHit()
+        private void OnShipHit(string name)
         {
             UpdateDisplay();
         }
 
-        public void OnEnemyDestroyed(string name)
+        private void OnShipDestroyed(string name)
         {
             targetingComputer.RemoveTargetByName(name);
             UpdateDisplay();

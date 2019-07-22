@@ -9,9 +9,6 @@ namespace Flying
     {
         public ShipData shipData;
 
-        // Mission and targeting computer aren't required, because communications with them happens via messages
-        private GameObject mission;
-        private GameObject targetingComputer;
         private bool isAlive = true;
 
         private int maxHullPoints;
@@ -68,20 +65,13 @@ namespace Flying
         }
 
         #endregion
-        void Awake()
-        {
-            mission = GameObject.Find(Constants.Mission);
-            targetingComputer = GameObject.Find(Constants.TargetingComputer);
-        }
 
-        void Start() {
+        void Start()
+        {
             hullPoints = maxHullPoints = shipData.HullPoints;
             shieldPoints = maxShieldPoints = shipData.ShieldPoints;
-            if (targetingComputer != null)
-            {
-                // Targeting computer may be null in test scenes
-                targetingComputer.BroadcastMessage("OnNewTarget", this);
-            }
+
+            EventManager.RaiseNewShipEntered(this);
         }
 
         public void OnTriggerEnter(Collider other)
@@ -89,9 +79,10 @@ namespace Flying
             if (other.CompareTag(Constants.Tag_LaserBeam) && isAlive)
             {
                 Beam beam = other.GetComponentInParent<Beam>();
-                
+
                 // Don't self kill. Sometimes the beam is spawned too close to the emitting craft and would damage it.
-                if (beam.owner == GameObjects.GetParentShip(transform.gameObject)) {
+                if (beam.owner == GameObjects.GetParentShip(transform.gameObject))
+                {
                     return;
                 }
 
@@ -108,20 +99,18 @@ namespace Flying
                     hullPoints = Mathf.Max(hullPoints - 10, 0);
                 }
 
-                targetingComputer.BroadcastMessage("OnEnemyHit");
+                EventManager.RaiseShipHit(gameObject.name);
                 if (hullPoints <= 0)
                 {
                     if (GameObjects.IsPlayer(name))
                     {
-                        PlayerCollisionHandler playerCollisionHandler = GetComponent<PlayerCollisionHandler>();
-                        playerCollisionHandler.Die();
+                        GetComponent<PlayerCollisionHandler>().Die();
                     }
                     else
                     {
                         isAlive = false;
                         gameObject.BroadcastMessage("Explode");
-                        GameObjects.BroadcastMessageIgnoringNullReceiver(mission, "OnEnemyDestroyed", gameObject.name);
-                        targetingComputer.BroadcastMessage("OnEnemyDestroyed", gameObject.name);
+                        EventManager.RaiseShipDestroyed(gameObject.name);
                         Destroy(gameObject, 0.1f);
                     }
                 }

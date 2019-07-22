@@ -31,15 +31,7 @@ namespace Core
             // This might happen if objects are deeply nested, but let's deal with it then.
             throw new ArgumentException("Couldn't find parent ship of " + go.name);
         }
-
-        public static void BroadcastMessageIgnoringNullReceiver(GameObject receiver, string methodName, object parameter) {
-            if (receiver == null) {
-                Debug.LogWarning("Wanted to BroadcastMessage(\"" + methodName + "\" on null receiver");
-                return;
-            }
-            receiver.BroadcastMessage(methodName, parameter);
-        }
-
+               
         public static bool IsPlayer(string name) {
             return name != null && name.StartsWith(Constants.Player);
         }
