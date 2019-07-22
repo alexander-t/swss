@@ -10,9 +10,13 @@ namespace Mission
         private readonly Vector3 SpawnPoint = new Vector3(100, 0, 100);
         private int rookieIndex = 1;
 
-        void Start()
+        void Awake()
         {
             EventManager.onShipDestroyed += OnDestroyed;
+        }
+
+        void Start()
+        {
             Cursor.visible = false;
             SpawnXWing();
         }

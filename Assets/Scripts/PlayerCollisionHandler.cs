@@ -28,7 +28,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         hud = GameObject.FindGameObjectWithTag(Constants.Tag_HUD);
     }
 
-    void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constants.Tag_LaserBeam))
         {

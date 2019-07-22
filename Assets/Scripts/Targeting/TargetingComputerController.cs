@@ -38,14 +38,14 @@ namespace Targeting
         {
             targetingComputer = TargetingComputer.Instance;
             followingTargetCamera = GetComponent<FollowingTargetCamera>();
+
+            EventManager.onShipDestroyed += OnShipDestroyed;
+            EventManager.onShipHit += OnShipHit;
+            EventManager.onNewShipEntered += OnNewShipEntered;
         }
 
         void Start()
         {
-            EventManager.onShipDestroyed += OnShipDestroyed;
-            EventManager.onShipHit += OnShipHit;
-            EventManager.onNewShipEntered += OnNewShipEntered;
-
             StartCoroutine(UpdateDistance());
             UpdateDisplay();
         }
