@@ -66,7 +66,7 @@ namespace Targeting
 
 
         #region Events
-        public void OnNewShipEntered(Ship ship)
+        private void OnNewShipEntered(Ship ship)
         {
             /* Discard the player, which is also a ship and it's being registered upon scene startup.
              * Doing this StartsWith like this is a bit crude, but it allows the existence of prefabs starting with "Player - ".
@@ -114,8 +114,8 @@ namespace Targeting
                 {
                     targetNameText.color = Color.white;
                 }
-                targetHullText.text = targetable.HullPoints + "";
-                targetShieldText.text = targetable.ShieldPoints + "";
+                targetHullText.text = targetable.HullPoints + "%";
+                targetShieldText.text = targetable.ShieldPoints + "%";
             }
             else
             {

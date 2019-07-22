@@ -34,12 +34,12 @@ namespace Flying
 
         public int HullPoints
         {
-            get => hullPoints;
+            get => (int)(100 * (float)hullPoints / maxHullPoints);
         }
 
         public int ShieldPoints
         {
-            get => shieldPoints;
+            get => maxShieldPoints == 0 ? 0 : (int)(100 * (float)shieldPoints / maxShieldPoints);
         }
 
         public float MaxSpeed
