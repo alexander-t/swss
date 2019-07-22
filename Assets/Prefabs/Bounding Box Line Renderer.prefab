@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6748987200497663919}
-  m_LocalRotation: {x: -0.00060625904, y: -0.066877, z: 0.08118179, w: 0.99445295}
+  m_LocalRotation: {x: 0.47682258, y: -0.7638691, z: 0.32210037, w: -0.29222536}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -75,7 +75,7 @@ LineRenderer:
   - {x: -3, y: -3, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.030012274
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:

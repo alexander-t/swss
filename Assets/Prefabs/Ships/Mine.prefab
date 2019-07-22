@@ -123,7 +123,7 @@ MonoBehaviour:
     type: 3}
   gun: {fileID: 3867891308061582068}
   rateOfFire: 3
-  attackRange: 100
+  attackRange: 150
 --- !u!1 &1655244308119733582
 GameObject:
   m_ObjectHideFlags: 0
