@@ -8,6 +8,7 @@ namespace Flying
     public class Ship : MonoBehaviour, Targettable
     {
         public ShipData shipData;
+        private Inspectable inspectable;
 
         private bool isAlive = true;
 
@@ -42,6 +43,11 @@ namespace Flying
             get => maxShieldPoints == 0 ? 0 : (int)(100 * (float)shieldPoints / maxShieldPoints);
         }
 
+        public string Contents
+        {
+            get => inspectable != null ? inspectable.VisibleContents : "";
+        }
+
         public float MaxSpeed
         {
             // Recalculate here to go from actual kmph to game speed
@@ -65,6 +71,11 @@ namespace Flying
         }
 
         #endregion
+
+        void Awake()
+        {
+            inspectable = GetComponent<Inspectable>();
+        }
 
         void Start()
         {
@@ -104,7 +115,7 @@ namespace Flying
                 {
                     if (GameObjects.IsPlayer(name))
                     {
-                        GetComponent<PlayerCollisionHandler>().Die();
+                        GetComponent<PlayerCollisionHandler>().Die("You were shot down");
                     }
                     else
                     {

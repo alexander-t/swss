@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MissionSelection.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/Briefing.unity
+    guid: b01e12b77515b8e4680084c70eb8b206
+  - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: a7c3ecf400c47cc4a9dd564bdf699ed6
   - enabled: 1

@@ -23,5 +23,9 @@
         ShipFaction ShipFaction {
             get;
         }
+
+        string Contents {
+            get;
+        }
     }
 }

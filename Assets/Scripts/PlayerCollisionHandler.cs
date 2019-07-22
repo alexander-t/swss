@@ -1,6 +1,7 @@
 ﻿using Core;
 using Flying;
 using System.Collections;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,11 +35,17 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             return;
         }
-
-        Die();
+        else if (other.CompareTag(Constants.Tag_Ship))
+        {
+            Die("You crashed into " + other.name);
+        }
+        else
+        {
+            Die("You crashed");
+        }
     }
 
-    public void Die()
+    public void Die(string reason)
     {
         if (isAlive)
         {
@@ -49,6 +56,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             hud.gameObject.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
             exploding.Explode();
+            MissionEndData.losingReason = reason;
             StartCoroutine(FailMissionAfterExplosion());
         }
     }

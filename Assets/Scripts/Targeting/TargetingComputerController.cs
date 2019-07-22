@@ -20,6 +20,9 @@ namespace Targeting
         [Tooltip("UI element that displays the distance to the target")]
         public Text targetDistanceText;
 
+        [Tooltip("UI element that displays the contents of the target")]
+        public Text targetContentsText;
+
         private TargetingComputer targetingComputer;
         private FollowingTargetCamera followingTargetCamera;
 
@@ -30,9 +33,6 @@ namespace Targeting
         private GameObject currentTarget;
         private float currentTargetDistance = 0;
 
-        // Not used now
-        //private Camera mainCamera;
-
         #region Unity lifecycle
         void Awake()
         {
@@ -42,6 +42,7 @@ namespace Targeting
             EventManager.onShipDestroyed += OnShipDestroyed;
             EventManager.onShipHit += OnShipHit;
             EventManager.onNewShipEntered += OnNewShipEntered;
+            EventManager.onShipInspected += OnShipHit; // Just update the display
         }
 
         void Start()
@@ -98,7 +99,7 @@ namespace Targeting
                 currentTarget.BroadcastMessage("OnTargetted", false);
             }
 
-            var targetable = targetingComputer.GetCurrentTarget();
+            Targettable targetable = targetingComputer.GetCurrentTarget();
             if (targetable != null)
             {
                 currentTarget = GameObject.Find(targetable.Name);
@@ -116,6 +117,7 @@ namespace Targeting
                 }
                 targetHullText.text = targetable.HullPoints + "%";
                 targetShieldText.text = targetable.ShieldPoints + "%";
+                targetContentsText.text = targetable.Contents;
             }
             else
             {
@@ -123,6 +125,7 @@ namespace Targeting
                 targetHullText.text = "";
                 targetShieldText.text = "";
                 targetDistanceText.text = "";
+                targetContentsText.text = "";
             }
         }
 
