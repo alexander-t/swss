@@ -23,6 +23,11 @@ namespace Targeting
         [Tooltip("UI element that displays the contents of the target")]
         public Text targetContentsText;
 
+        [Space(7)]
+
+        [Tooltip("Used for playing bleeps")]
+        public AudioSource audioSource;
+
         private TargetingComputer targetingComputer;
         private FollowingTargetCamera followingTargetCamera;
 
@@ -66,6 +71,9 @@ namespace Targeting
                 if (Time.time >= nextAcquisitionTime)
                 {
                     targetingComputer.NextTarget();
+                    if (targetingComputer.GetCurrentTarget() != null) {
+                        audioSource.Play();
+                    }
                     UpdateDisplay();
                     nextAcquisitionTime = Time.time + Cooldown;
                 }
