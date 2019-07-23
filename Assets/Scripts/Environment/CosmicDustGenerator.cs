@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Encironment
+namespace Environment
 {
     /**
      * Generates a number of particle systems and then moves them around so that they always
