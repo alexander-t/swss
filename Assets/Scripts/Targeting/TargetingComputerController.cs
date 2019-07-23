@@ -66,17 +66,22 @@ namespace Targeting
 
         void Update()
         {
-            if (Input.GetKey(KeyCode.T))
+            bool targetUpdated = false;
+            if (Input.GetKeyUp(KeyCode.T))
             {
-                if (Time.time >= nextAcquisitionTime)
-                {
-                    targetingComputer.NextTarget();
-                    if (targetingComputer.GetCurrentTarget() != null) {
-                        audioSource.Play();
-                    }
-                    UpdateDisplay();
-                    nextAcquisitionTime = Time.time + Cooldown;
-                }
+                targetingComputer.NextTarget();
+                targetUpdated = targetingComputer.GetCurrentTarget() != null;
+            }
+            else if (Input.GetKeyUp(KeyCode.Y))
+            {
+                targetingComputer.PreviousTarget();
+                targetUpdated = targetingComputer.GetCurrentTarget() != null;
+            }
+
+            if (targetUpdated)
+            {
+                audioSource.Play();
+                UpdateDisplay();
             }
         }
         #endregion
