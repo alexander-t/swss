@@ -3,11 +3,20 @@ using UnityEngine.SceneManagement;
 using Core;
 
 namespace UI {
+
+    [RequireComponent(typeof(AudioSource))]
     public class ButtonHandler : MonoBehaviour
     {
+        public AudioSource audioSource;
+
         void Update()
         {
             Cursor.visible = true;
+        }
+
+        public void OnPointerEnter()
+        {
+            audioSource.Play();
         }
 
         public void OnSelectMission()
@@ -34,6 +43,5 @@ namespace UI {
         {
             Debug.Log("Frigate");
         }
-       
     }
 }
