@@ -12,13 +12,19 @@ namespace Mission
 
         void Awake()
         {
-            EventManager.onShipDestroyed += OnDestroyed;
+            EventManager.onShipDestroyed += OnShipDestroyed;
         }
+
 
         void Start()
         {
             Cursor.visible = false;
             SpawnXWing();
+        }
+
+        void OnDestroy()
+        {
+            EventManager.onShipDestroyed -= OnShipDestroyed;
         }
 
         private void SpawnXWing()
@@ -38,7 +44,7 @@ namespace Mission
         }
 
         #region Events
-        public void OnDestroyed(string name)
+        private void OnShipDestroyed(string name)
         {
             if (name.StartsWith("Rookie"))
             {

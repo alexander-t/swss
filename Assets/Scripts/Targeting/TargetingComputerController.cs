@@ -36,7 +36,7 @@ namespace Targeting
         #region Unity lifecycle
         void Awake()
         {
-            targetingComputer = TargetingComputer.Instance;
+            targetingComputer = new TargetingComputer();
             followingTargetCamera = GetComponent<FollowingTargetCamera>();
 
             EventManager.onShipDestroyed += OnShipDestroyed;
@@ -49,6 +49,14 @@ namespace Targeting
         {
             StartCoroutine(UpdateDistance());
             UpdateDisplay();
+        }
+
+        void OnDestroy()
+        {
+            EventManager.onShipDestroyed -= OnShipDestroyed;
+            EventManager.onShipHit -= OnShipHit;
+            EventManager.onNewShipEntered -= OnNewShipEntered;
+            EventManager.onShipInspected -= OnShipHit;
         }
 
         void Update()
@@ -74,7 +82,7 @@ namespace Targeting
              */
             if (!GameObjects.IsPlayer(ship.name))
             {
-                TargetingComputer.Instance.AddTarget(ship);
+                targetingComputer.AddTarget(ship);
                 UpdateDisplay();
             }
         }

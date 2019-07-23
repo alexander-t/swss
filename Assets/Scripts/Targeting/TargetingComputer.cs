@@ -5,23 +5,8 @@ namespace Targeting
 {
     public class TargetingComputer 
     {
-        private static TargetingComputer instance;
         private List<Targettable> targets = new List<Targettable>();
         private int currentTargetIndex = 0;
-
-        private TargetingComputer() { }
-
-        public static TargetingComputer Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new TargetingComputer();
-                }
-                return instance;
-            }
-        }
 
         public Targettable GetCurrentTarget()
         {

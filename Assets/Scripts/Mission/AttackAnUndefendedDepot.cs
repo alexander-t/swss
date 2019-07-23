@@ -20,6 +20,12 @@ public class AttackAnUndefendedDepot : MonoBehaviour
         Cursor.visible = false;
     }
 
+    void OnDestroy()
+    {
+        EventManager.onShipInspected -= OnShipInspected;
+        EventManager.onShipDestroyed -= OnShipDestroyed;
+    }
+
     private void OnShipInspected(string name)
     {
         GameObject container = GameObject.Find(name);
