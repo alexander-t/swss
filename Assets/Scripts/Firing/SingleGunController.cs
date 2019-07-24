@@ -6,8 +6,9 @@ namespace Firing
     {
         [Tooltip("If set to null, the Player object will be used.")]
         public GameObject target;
-        public GameObject beamPrefab;
         public GameObject gun;
+        public GameObject beamPrefab;
+        public AudioSource audioSource;
         [Space(10)]
         public float rateOfFire = 3;
         public float attackRange = 100;
@@ -33,6 +34,7 @@ namespace Firing
                     Beam beam = go.GetComponent<Beam>();
                     beam.target = target.transform.position;
                     beam.owner = this.gameObject;
+                    audioSource.Play();
                     nextFireTime = Time.time + rateOfFire;
                 }
             }

@@ -4,6 +4,10 @@ namespace Firing
 {
     public class Beam : MonoBehaviour
     {
+        public Transform start;
+        public Transform end;
+
+        [Space(7)]        
         public Vector3 target;
         public GameObject owner;
 
@@ -11,6 +15,12 @@ namespace Firing
         public static float MaxRange = 250f;
 
         private Vector3 startPosition;
+        private LineRenderer lineRenderer;
+
+        void Awake()
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+        }
 
         void Start()
         {
@@ -25,6 +35,8 @@ namespace Firing
             {
                 Destroy(gameObject);
             }
+            lineRenderer.SetPosition(0, start.position);
+            lineRenderer.SetPosition(1, end.position);
         }
     }
 }
