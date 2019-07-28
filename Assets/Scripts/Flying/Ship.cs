@@ -99,7 +99,6 @@ namespace Flying
 
                 other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
-
                 if (shieldPoints > 0)
                 {
                     BroadcastMessage("OnShieldImpact");

@@ -11,6 +11,7 @@
 
         public const string Scene_MissionSelection = "MissionSelection";
         public const string Scene_MissionFailed = "MissionFailed";
+        public const string Scene_MissionWon = "MissionWon";
         public const string Scene_Briefing = "Briefing";
         public const string Scene_MissionAttackAnUndefendedDepot = "Mission_AttackAnUndefendedDepot";
 
