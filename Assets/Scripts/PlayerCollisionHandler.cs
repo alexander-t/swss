@@ -1,5 +1,6 @@
 ﻿using Core;
 using Flying;
+using System;
 using System.Collections;
 using UI;
 using UnityEngine;
@@ -57,6 +58,8 @@ public class PlayerCollisionHandler : MonoBehaviour
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
             exploding.Explode();
             MissionEndData.losingReason = reason;
+            MissionEndData.missionTime = Time.timeSinceLevelLoad;
+
             StartCoroutine(FailMissionAfterExplosion());
         }
     }
