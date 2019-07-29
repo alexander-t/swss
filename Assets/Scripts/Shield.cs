@@ -54,7 +54,7 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Constants.Tag_LaserBeam))
+        if (GameObjects.IsBeam(other))
         {
             lastHitPosition = other.transform.position;
             Vector3 impactLightDirection = (lastHitPosition - transform.position);

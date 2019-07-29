@@ -35,5 +35,9 @@ namespace Core
         public static bool IsPlayer(string name) {
             return name != null && name.StartsWith(Constants.Player);
         }
+
+        public static bool IsBeam(Collider collider) {
+            return collider.CompareTag(Constants.Tag_LaserBeam);
+        }
     }
 }

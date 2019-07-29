@@ -87,7 +87,7 @@ namespace Flying
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(Constants.Tag_LaserBeam) && isAlive)
+            if (GameObjects.IsBeam(other) && isAlive)
             {
                 Beam beam = other.GetComponentInParent<Beam>();
 

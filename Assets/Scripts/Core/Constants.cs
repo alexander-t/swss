@@ -4,8 +4,10 @@
     {
         // Objects present in all combat scenes
         public const string Player = "Player";
+        public const string BeamPool = "Beam Pool";
 
         public const string Tag_Ship = "Ship";
+        public const string Tag_Target = "Target";
         public const string Tag_HUD = "HUD";
         public const string Tag_LaserBeam = "LaserBeam";
 

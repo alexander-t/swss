@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Ship
   - HUD
+  - Target
   layers:
   - Default
   - TransparentFX

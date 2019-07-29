@@ -32,7 +32,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Constants.Tag_LaserBeam))
+        if (other.CompareTag(Constants.Tag_LaserBeam) || other.CompareTag(Constants.Tag_Target))
         {
             return;
         }
