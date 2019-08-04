@@ -3,41 +3,66 @@ using UnityEngine;
 
 public class Setup : MonoBehaviour
 {
-    private Transform waypoint1;
-    private Transform waypoint2;
+    private Transform[] waypointsA;
+    private Transform[] waypointsB;
     private GameObject target;
+
+    private GameObject xWing1;
+    private AIPilot xWing1Pilot, xWing2Pilot;
+    private GameObject xWing2;
 
     void Awake()
     {
-        waypoint1 = GameObject.Find("Waypoints/Waypoint 1").transform;
-        waypoint2 = GameObject.Find("Waypoints/Waypoint 2").transform;
-        target = GameObject.Find("Buoys/B-55");
+        waypointsA = new Transform[] {
+            GameObject.Find("Waypoints/Waypoint A1").transform,
+            GameObject.Find("Waypoints/Waypoint A2").transform
+        };
+
+        waypointsB = new Transform[] {
+            GameObject.Find("Waypoints/Waypoint B2").transform,
+            GameObject.Find("Waypoints/Waypoint B1").transform
+        };
+        
+        xWing1 = GameObject.Find("X-wing 1");
+        xWing1Pilot = xWing1.GetComponent<AIPilot>();
+        xWing1Pilot.waypoints = waypointsA;
+
+        xWing2 = GameObject.Find("X-wing 2");
+        xWing2Pilot = xWing2.GetComponent<AIPilot>();
+        xWing2Pilot.waypoints = waypointsB;
     }
 
-    void Start()
-    {
-        GetComponent<Ship>().Halt();    
-    }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            GetComponent<Ship>().Halt();
-            transform.position = waypoint1.position;
-            transform.LookAt(target.transform);
+            xWing1Pilot.Attack(xWing2);
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Alpha2))
         {
-            GetComponent<Ship>().Halt();
-            transform.position = waypoint2.position;
-            transform.Rotate(0, 90, 0);
+            xWing2Pilot.Attack(xWing1);
         }
-
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            Time.timeScale = 0;
-        }
-        Debug.DrawLine(transform.position, transform.position + transform.forward * 100, Color.white);
     }
 }
+
+/*
+ *                 if (Input.GetKeyUp(KeyCode.P))
+                {
+                    GameObject buoy = GameObject.Find("Buoys/B-55");
+                    if (buoy != null)
+                    {
+                        behavior = new AttackingBehavior(gameObject, rightGunTransform, leftGunTransform, buoy);
+                        behavior.Commence();
+                    }
+                }
+                else if (Input.GetKeyUp(KeyCode.O))
+                {
+                    behavior = new PatrollingBehavior(gameObject, waypoints);
+                    behavior.Commence();
+                }
+                else if (Input.GetKeyUp(KeyCode.Minus)) {
+                    Time.timeScale = Mathf.Clamp(Time.timeScale - 0.1f, 0, 1);
+                }
+
+ */

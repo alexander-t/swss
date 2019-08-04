@@ -1,26 +1,25 @@
-﻿using Firing;
-using Flying;
+﻿using Flying;
 using UnityEngine;
 
 namespace AI
 {
+    public enum Action
+    {
+        Attacking, Disengaging
+    }
+
     public class AttackingBehavior : Behavior
     {
         private const float TurnDampening = 0.03f;
-        private const float FiringDistanceTreshhold = 5.0f;
 
         private const float LongRange = 250;
-        private const float LongRangeAttackVelocity = 50;
+        private const float LongRangeAttackVelocity = 75;
 
         private const float MediumRange = 175;
-        private const float MediumRangeAttackVelocity = 25;
+        private const float MediumRangeAttackVelocity = 50;
 
         private const float CloseRange = 100;
-        private const float CloseRangeAttackVelocity = 10;
-
-        private const float DeadAheadRange = 50;
-        private const float DeadAheadAttackVelocity = 5;
-
+        private const float CloseRangeAttackVelocity = 40;
 
         private Transform managedTransform;
         private GameObject managedShip;
@@ -28,9 +27,30 @@ namespace AI
         private Transform leftGunTransform;
         private Ship ship;
         private bool targetInKillZone;
-        private bool closeRangeAdjustmentPerformed;
 
         private GameObject target;
+
+        // Used to determine whether to show down and turn or disengage and reingage.
+        private const float RemainingTurnAngle = 20;
+
+        // Disengage if within this distance
+        private const float MinimumAttackDistance = 75;
+
+        // Distances used for disengagement
+        private const float MinimumDisengagementDistance = 100;
+        private const float MaximumDisengagementDistance = 200;
+
+        // Probability that an attacker will disengage in the midst of an ongoing attack. Adds some randomness.
+        private const float ProbabilityToDisengageDuringAttack = 0.1f;
+
+        // Proximity to the "waypoint" when disengaging. Should be big enough to avoid circeling behavior.
+        private const float DistanceToDisengagementWaypoint = 25;
+
+        private Action action = Action.Attacking;
+        private Vector3 reengagementPosition = Vector3.zero;
+        private float nextReengagementTime;
+
+        private float nextStrategyReevaluationTime;
 
         public AttackingBehavior(GameObject managedShip, Transform rightGunTransform, Transform leftGunTransform, GameObject target)
         {
@@ -55,21 +75,68 @@ namespace AI
                 throw new BehaviorNotApplicableException();
             }
 
-            ship.Velocity = DetermineAttackVelocity(target.transform);
+            Vector3 targetPosition = target.transform.position;
 
-            if (Vector3.Distance(target.transform.position, managedTransform.position) < CloseRange)
+            if (action == Action.Attacking)
             {
-                AdjustForCloseRange();
-            }
-            else
-            {
+                reengagementPosition = Vector3.zero;
+
+                ship.Velocity = DetermineAttackVelocity(target.transform);
                 TurnTowards(target.transform.position);
+                if (Vector3.Distance(managedTransform.position, targetPosition) < MinimumAttackDistance
+                    && MustTurnTooFarToFaceTarget(targetPosition))
+                {
+                    action = Action.Disengaging;
+                }
+
+                if (Time.time >= nextStrategyReevaluationTime)
+                {
+                    if (Random.value > 1 - ProbabilityToDisengageDuringAttack)
+                    {
+                        action = Action.Disengaging;
+                    }
+                    nextStrategyReevaluationTime = Time.time + Random.Range(5, 19);
+                }
+
+                if (Debug.isDebugBuild)
+                {
+                    Debug.DrawLine(managedTransform.position, targetPosition, Color.white, 0.01f);
+                    Vector3 preferredAttackPosition = (managedTransform.position - targetPosition).normalized * MinimumAttackDistance + target.transform.position;
+                    Debug.DrawLine(managedTransform.position, preferredAttackPosition, Color.red, 0.01f);
+                }
             }
+            else if (action == Action.Disengaging)
+            {
+                // Get away asap
+                ship.Velocity = LongRangeAttackVelocity; 
+                if (reengagementPosition == Vector3.zero)
+                {
+                    // There's both a reengagement position and a time, whichever happens first wins.
+                    reengagementPosition = managedTransform.forward * Random.Range(MinimumDisengagementDistance, MaximumDisengagementDistance);
+                    nextReengagementTime = Time.time + Random.Range(10, 20);
+                }
+                else
+                {
+                    TurnTowards(reengagementPosition);
+                    if (Vector3.Distance(managedTransform.position, reengagementPosition) <= DistanceToDisengagementWaypoint)
+                    {
+                        action = Action.Attacking;
+                    }
+
+                    if (Time.time >= nextReengagementTime)
+                    {
+                        action = Action.Attacking;
+                    }
+                }
+
+                Debug.DrawLine(managedTransform.position, reengagementPosition, Color.blue, 0.01f);
+            }
+
         }
 
         public void Attack()
         {
-            if (target != null && (targetInKillZone || closeRangeAdjustmentPerformed))
+            if (target != null && TargetIsAlmostDeadAhead(target.transform.position))
             {
                 managedShip.BroadcastMessage("OnFire");
             }
@@ -103,70 +170,21 @@ namespace AI
             managedTransform.rotation = Quaternion.Slerp(managedTransform.rotation, finalRotation, Time.deltaTime * ship.AngularVelocity * TurnDampening);
         }
 
-        /**
-         * At close range, the target will be too close to the attacker and will be "overshot", since the guns' focal point it too far.
-         * This method compensates for it by aiming _one_ particular gun at the target.
-         * While working well enough, the method sometimes interfers with the path finding, which creates variation.
-         */
-        private void AdjustForCloseRange()
+        private bool MustTurnTooFarToFaceTarget(Vector3 targetPosition)
         {
-            Debug.Log("AdjustForCloseRange()");
-            Vector3 gunPosition = DetermineClosestGun(target.transform.position);
-            float gunXOffset = Mathf.Abs(gunPosition.x - managedTransform.position.x);
-            Vector3 center2Target = managedTransform.position - target.transform.position;
-            Vector3 gun2FocalPoint = (managedTransform.position + managedTransform.forward * Beam.MaxRange) - gunPosition;
-            Vector3 hotspot = gunPosition + (gun2FocalPoint.normalized * (center2Target.magnitude + gunXOffset));
-            Vector3 target2Hotspot = target.transform.position - hotspot;
-
-            if (Debug.isDebugBuild) // Save some vector calculations...
-            {
-                // Center of managed ship to target
-                Debug.DrawLine(managedTransform.position, target.transform.position, Color.blue);
-                // Gun to gun focal point (250m ahead), also drawn by LaserBeamEmitter
-                // Debug.DrawLine(managedTransform.position + gunOffset, managedTransform.position + managedTransform.forward.normalized * Beam.MaxRange, Color.red);
-                // Same direction as the line to the gun focal point, but as short as the distance from the ship to the target
-                Debug.DrawLine(gunPosition, hotspot, Color.yellow);
-                Debug.DrawLine(target.transform.position, hotspot, Color.magenta);
-            }
-
-            if (target2Hotspot.magnitude > 25)
-            {
-                // Use normal turning
-                TurnTowards(target.transform.position);
-            }
-            else if (target2Hotspot.magnitude <= 25 && target2Hotspot.magnitude > 10)
-            {
-                Debug.Log("x=" + target2Hotspot.x + ", y=" + target2Hotspot.y + ", " + target2Hotspot.magnitude);
-                float t = 0.5f;
-                managedTransform.Rotate(0, target2Hotspot.x > 0 ? t : -t, 0);
-                managedTransform.Rotate(target2Hotspot.y > 0 ? -t : t, 0, 0);
-            }
-            else
-            {
-                Debug.Log("x=" + target2Hotspot.x + ", y=" + target2Hotspot.y + ", " + target2Hotspot.magnitude);
-                float t = 0.25f;
-                managedTransform.Rotate(0, target2Hotspot.x > 0 ? t : -t, 0);
-                managedTransform.Rotate(target2Hotspot.y > 0 ? -t : t, 0, 0);
-            }
-
-            closeRangeAdjustmentPerformed = target2Hotspot.magnitude <= FiringDistanceTreshhold;
+            Vector3 targetDirection = targetPosition - managedTransform.position;
+            return Vector3.Angle(targetDirection, managedTransform.forward) > RemainingTurnAngle;
         }
 
-        private Vector3 DetermineClosestGun(Vector3 targetPosition)
+        private bool TargetIsAlmostDeadAhead(Vector3 targetPosition)
         {
-            float distanceToLeftGun = Vector3.Distance(leftGunTransform.position, targetPosition);
-            float distanceToRightGun = Vector3.Distance(rightGunTransform.position, targetPosition);
-            return distanceToLeftGun <= distanceToRightGun ? leftGunTransform.position : rightGunTransform.position;
+            return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.5;
         }
 
         private float DetermineAttackVelocity(Transform targetTransform)
         {
             float distanceToTarget = Vector3.Distance(managedTransform.position, targetTransform.position);
-            if (distanceToTarget <= DeadAheadRange)
-            {
-                return DeadAheadAttackVelocity;
-            }
-            if (distanceToTarget > DeadAheadRange && distanceToTarget <= CloseRange)
+            if (distanceToTarget <= CloseRange)
             {
                 return CloseRangeAttackVelocity;
             }
@@ -181,3 +199,34 @@ namespace AI
         }
     }
 }
+
+
+/*
+private GameObject GetRandomEnemy()
+{
+    if (enemies.Length > 0)
+    {
+        return enemies[Random.Range(0, enemies.Length)];
+    }
+    return null;
+}
+
+private GameObject GetClosestEnemy()
+{
+    Vector3 position = transform.position;
+    float minDistance = float.MaxValue;
+    GameObject closetEnemy = null;
+
+    foreach (GameObject enemy in enemies)
+    {
+        float distance = (enemy.transform.position - position).sqrMagnitude;
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            closetEnemy = enemy;
+        }
+    }
+    return closetEnemy;
+}
+*/
+

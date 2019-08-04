@@ -25,9 +25,13 @@ namespace AI
         public void Commence()
         {
             waypointIndex = 0;
-            if (waypoints.Length > 0)
+            if (waypoints?.Length > 0)
             {
                 currentWaypoint = waypoints[waypointIndex].position;
+            }
+            else
+            {
+                ship.Halt();
             }
         }
 
@@ -44,11 +48,11 @@ namespace AI
 
         public string Describe()
         {
-            if (waypoints.Length == 0)
+            if (waypoints == null || waypoints.Length == 0)
             {
-                return "Patrolling: no waypoints specified";
+                return ship.Name + ": Patrolling -> no waypoints specified";
             }
-            return "Patrolling: going to waypoint #" + waypointIndex + " " + waypoints[waypointIndex].position;
+            return ship.Name + ": Patrolling -> going to waypoint #" + waypointIndex + " " + waypoints[waypointIndex].position;
         }
 
         public void TargetEnteredKillzone(GameObject potentialTarget)
@@ -63,7 +67,7 @@ namespace AI
 
         private void DetermineCurrentWayPoint()
         {
-            if (waypoints.Length > 0)
+            if (waypoints?.Length > 0)
             {
                 if (Vector3.Distance(managedTransform.position, currentWaypoint) <= WaypointProximityTolerance)
                 {
