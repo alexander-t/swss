@@ -1,4 +1,5 @@
-﻿using Flying;
+﻿using Core;
+using Flying;
 using UnityEngine;
 
 namespace Mission
@@ -6,20 +7,34 @@ namespace Mission
     public class Demo : MonoBehaviour
     {
         public GameObject[] enemyShips;
-
+        
         private readonly Vector3 SpawnPoint = new Vector3(100, 0, 100);
         private int rookieIndex = 1;
 
+        private GameObject player;
+        private GameObject xWing;
+
         void Awake()
         {
+            player = GameObject.Find(Constants.Player);
+            
             EventManager.onShipDestroyed += OnShipDestroyed;
         }
-
 
         void Start()
         {
             Cursor.visible = false;
             SpawnXWing();
+        }
+
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.P))
+            {
+                AIPilot aiPilot = xWing.GetComponent<AIPilot>();
+                aiPilot.Attack(player);
+
+            }
         }
 
         void OnDestroy()
@@ -31,7 +46,7 @@ namespace Mission
         {
             var xWingPrefab = enemyShips[0];
 
-            GameObject xWing = Instantiate(xWingPrefab, SpawnPoint, Quaternion.identity);
+            xWing = Instantiate(xWingPrefab, SpawnPoint, Quaternion.identity);
             xWing.name = "Rookie " + rookieIndex++;
             AIPilot aiPilot = xWing.GetComponent<AIPilot>();
             aiPilot.waypoints = new Transform[]

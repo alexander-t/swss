@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 199618363}
   m_Layer: 0
-  m_Name: 'Waypoint B2 '
+  m_Name: Waypoint B2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709055279}
   m_Layer: 0
-  m_Name: 'Waypoint B1 '
+  m_Name: Waypoint B1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

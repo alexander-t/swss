@@ -45,24 +45,3 @@ public class Setup : MonoBehaviour
         }
     }
 }
-
-/*
- *                 if (Input.GetKeyUp(KeyCode.P))
-                {
-                    GameObject buoy = GameObject.Find("Buoys/B-55");
-                    if (buoy != null)
-                    {
-                        behavior = new AttackingBehavior(gameObject, rightGunTransform, leftGunTransform, buoy);
-                        behavior.Commence();
-                    }
-                }
-                else if (Input.GetKeyUp(KeyCode.O))
-                {
-                    behavior = new PatrollingBehavior(gameObject, waypoints);
-                    behavior.Commence();
-                }
-                else if (Input.GetKeyUp(KeyCode.Minus)) {
-                    Time.timeScale = Mathf.Clamp(Time.timeScale - 0.1f, 0, 1);
-                }
-
- */
