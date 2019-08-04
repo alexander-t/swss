@@ -10,11 +10,13 @@ namespace Firing
         public GameObject greenLaserBeamPrefab;
         public GameObject orangeLaserBeamPrefab;
 
-        public void FireAt(GameObject owner, Transform gun, Transform target)
+        public void FireAt(GameObject owner, Transform gun, Vector3 target, LaserColor laserColor = LaserColor.Green)
         {
-            GameObject go = Instantiate(orangeLaserBeamPrefab, gun.position, gun.rotation) as GameObject;
+            GameObject go = (laserColor == LaserColor.Green)
+                ? Instantiate(greenLaserBeamPrefab, gun.position, gun.rotation) as GameObject
+                : Instantiate(greenLaserBeamPrefab, gun.position, gun.rotation) as GameObject;
             Beam beam = go.GetComponent<Beam>();
-            beam.target = target.position;
+            beam.target = target;
             beam.owner = owner;
         }
     }

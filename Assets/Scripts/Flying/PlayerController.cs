@@ -13,28 +13,15 @@ namespace Flying
 
         void Start()
         {
-            BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
+            BroadcastMessage("OnVelocityChange", new float[] { ship.Speed, ship.MaxSpeed });
         }
 
         void Update()
         {
             ship.BeginManeuver();
-            if (Input.GetKey(KeyCode.W))
-            {
-                ship.PitchDown();
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                ship.PitchUp();
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                ship.TurnLeft();
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                ship.TurnRight();
-            }
+            ship.Pitch(Input.GetAxis("Vertical"));
+            ship.Turn(Input.GetAxis("Horizontal"));
+
             if (Input.GetKey(KeyCode.E))
             {
                 ship.RollRight();
@@ -48,21 +35,21 @@ namespace Flying
             if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
             {
                 ship.AccelerateByDelta(Time.deltaTime);
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Speed, ship.MaxSpeed });
             }
             else if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
             {
                 ship.DeccelerateByDelta(Time.deltaTime);
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Speed, ship.MaxSpeed });
             }
             else if (Input.GetKey(KeyCode.Backspace))
             {
                 ship.Halt();
-                BroadcastMessage("OnVelocityChange", new float[] { ship.Velocity, ship.MaxSpeed });
+                BroadcastMessage("OnVelocityChange", new float[] { ship.Speed, ship.MaxSpeed });
             }
 
             transform.Rotate(ship.Direction * Time.deltaTime);
-            transform.Translate(0, 0, ship.Velocity * Time.deltaTime);
+            transform.Translate(0, 0, ship.Speed * Time.deltaTime);
         }
     }
 }

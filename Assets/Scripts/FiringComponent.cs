@@ -2,6 +2,9 @@
 using Firing;
 using UnityEngine;
 
+/**
+ * A ship component that can fire.
+ */ 
 public class FiringComponent : MonoBehaviour
 {
     private GameObject target;
@@ -26,7 +29,7 @@ public class FiringComponent : MonoBehaviour
             muzzle.transform.LookAt(target.transform.position);
             if (Time.time >= nextFireTime)
             {
-                beamPool.FireAt(gameObject, muzzle.transform, target.transform);
+                beamPool.FireAt(gameObject, muzzle.transform, target.transform.position, LaserColor.Orange);
                 audioSource.Play();
                 nextFireTime = Time.time + rateOfFire;
             }

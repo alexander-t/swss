@@ -31,7 +31,7 @@ namespace Firing
                 transform.LookAt(target.transform.position);
                 if (Time.time >= nextFireTime)
                 {
-                    beamPool.FireAt(gameObject, gun.transform, target.transform);
+                    beamPool.FireAt(gameObject, gun.transform, target.transform.position, LaserColor.Orange);
                     audioSource.Play();
                     nextFireTime = Time.time + rateOfFire;
                 }

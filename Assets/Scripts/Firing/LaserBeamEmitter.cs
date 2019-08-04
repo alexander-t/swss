@@ -19,19 +19,19 @@ namespace Firing
 
         private const float Cooldown = 0.2f;
 
+        private BeamPool beamPool;
         private bool rightGunFiringNext = true;
         private FiringMode firingMode = FiringMode.Single;
         private float nextShotTime;
 
         void Awake()
         {
+            beamPool = GameObject.Find(Constants.BeamPool).GetComponent<BeamPool>();
             audioSource.clip = laserSound;
         }
 
         void Update()
         {
-            Vector3 gunFocalPoint = transform.position + transform.forward.normalized * Beam.MaxRange;
-
             if (GameObjects.IsPlayer(name))
             {
                 // Control only player's beams with keyboard. Do the rest via events.
@@ -39,7 +39,7 @@ namespace Firing
                 {
                     ToggleFiringMode();
                 }
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetAxis("Fire1") != 0)
                 {
                     Fire();
                 }
@@ -47,8 +47,8 @@ namespace Firing
 
             if (Debug.isDebugBuild)
             {
-                //   Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, rightGun.transform.position, Color.red, 0.1f);
-                //   Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, leftGun.transform.position, Color.red, 0.1f);
+                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, rightGun.transform.position, Color.red, 0.1f);
+                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, leftGun.transform.position, Color.red, 0.1f);
             }
         }
 
@@ -80,10 +80,11 @@ namespace Firing
         private void FireGun(GameObject gun)
         {
             Vector3 gunFocalPoint = transform.position + transform.forward * Beam.MaxRange;
-            GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
+            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint);
+            /*GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
             Beam beam = laserBeam.GetComponent<Beam>();
             beam.target = gunFocalPoint;
-            beam.owner = GameObjects.GetParentShip(transform.gameObject);
+            beam.owner = GameObjects.GetParentShip(transform.gameObject);*/
         }
 
         private void ToggleFiringMode()

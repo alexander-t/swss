@@ -106,7 +106,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &94233240829924185
 MonoBehaviour:
@@ -122,8 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   gun: {fileID: 3867891308061582068}
-  beamPrefab: {fileID: 138964441097542464, guid: 31734700efa2dd146944c37ff5c5cc42,
-    type: 3}
   audioSource: {fileID: 2459078077102387944}
   rateOfFire: 3
   attackRange: 150

@@ -65,7 +65,7 @@ namespace AI
 
         public void Commence()
         {
-            ship.Velocity = DetermineAttackVelocity(target.transform);
+            ship.Speed = DetermineAttackSpeed(target.transform);
         }
 
         public void Turn()
@@ -81,7 +81,7 @@ namespace AI
             {
                 reengagementPosition = Vector3.zero;
 
-                ship.Velocity = DetermineAttackVelocity(target.transform);
+                ship.Speed = DetermineAttackSpeed(target.transform);
                 TurnTowards(target.transform.position);
                 if (Vector3.Distance(managedTransform.position, targetPosition) < MinimumAttackDistance
                     && MustTurnTooFarToFaceTarget(targetPosition))
@@ -108,7 +108,7 @@ namespace AI
             else if (action == Action.Disengaging)
             {
                 // Get away asap
-                ship.Velocity = LongRangeAttackVelocity; 
+                ship.Speed = LongRangeAttackVelocity; 
                 if (reengagementPosition == Vector3.zero)
                 {
                     // There's both a reengagement position and a time, whichever happens first wins.
@@ -181,7 +181,7 @@ namespace AI
             return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.5;
         }
 
-        private float DetermineAttackVelocity(Transform targetTransform)
+        private float DetermineAttackSpeed(Transform targetTransform)
         {
             float distanceToTarget = Vector3.Distance(managedTransform.position, targetTransform.position);
             if (distanceToTarget <= CloseRange)

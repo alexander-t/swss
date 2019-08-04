@@ -70,7 +70,7 @@ namespace Flying
 
         private void Move()
         {
-            transform.position += transform.forward * Time.deltaTime * ship.Velocity;
+            transform.position += transform.forward * Time.deltaTime * ship.Speed;
         }
 
         void OnTriggerEnter(Collider other)

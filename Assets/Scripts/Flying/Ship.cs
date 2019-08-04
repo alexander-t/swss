@@ -20,7 +20,7 @@ namespace Flying
         // Movement
         private const float Acceleration = 20;
         private Vector3 direction = Vector3.zero;
-        private float velocity = 20;
+        private float speed = 20;
 
         #region Properties
         public string Name
@@ -59,10 +59,10 @@ namespace Flying
             get => shipData.AngularVelocity;
         }
 
-        public float Velocity
+        public float Speed
         {
-            get => velocity;
-            set => velocity = value; // TODO: temporary to test AI
+            get => speed;
+            set => speed = value; // TODO: temporary to test AI
         }
 
         public Vector3 Direction
@@ -133,28 +133,16 @@ namespace Flying
             direction = Vector3.zero;
         }
 
-        public void PitchDown()
+        public void Pitch(float intensity)
         {
-            direction.x = AngularVelocity;
+            direction.x = intensity * AngularVelocity;
         }
 
-        public void PitchUp()
-        {
-            direction.x -= AngularVelocity;
+        public void Turn(float intensity) {
+            direction.y = intensity * AngularVelocity;
+            direction.z -= intensity * AngularVelocity;
         }
-
-        public void TurnLeft()
-        {
-            direction.y -= AngularVelocity;
-            direction.z += AngularVelocity;
-        }
-
-        public void TurnRight()
-        {
-            direction.y += AngularVelocity;
-            direction.z -= AngularVelocity;
-        }
-
+             
         public void RollRight()
         {
             direction.z -= AngularVelocity;
@@ -167,17 +155,17 @@ namespace Flying
 
         public void Halt()
         {
-            velocity = 0;
+            speed = 0;
         }
 
         public void AccelerateByDelta(float deltaTime)
         {
-            velocity = Mathf.Clamp(velocity + Acceleration * deltaTime, 0, MaxSpeed);
+            speed = Mathf.Clamp(speed + Acceleration * deltaTime, 0, MaxSpeed);
         }
 
         public void DeccelerateByDelta(float deltaTime)
         {
-            velocity = Mathf.Clamp(velocity - Acceleration * deltaTime, 0, MaxSpeed);
+            speed = Mathf.Clamp(speed - Acceleration * deltaTime, 0, MaxSpeed);
         }
 
         #endregion
