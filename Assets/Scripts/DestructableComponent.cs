@@ -1,4 +1,5 @@
 ﻿using Core;
+using Firing;
 using UnityEngine;
 
 /**
@@ -19,8 +20,8 @@ public class DestructableComponent : MonoBehaviour
     {
         if (GameObjects.IsBeam(other))
         {
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
+            Beam beam = other.GetComponentInParent<Beam>();
+            beam.Destroy();
 
             hullPoints = Mathf.Max(hullPoints - 10, 0);
 

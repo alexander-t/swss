@@ -1,4 +1,5 @@
 ﻿using Core;
+using Flying;
 using UnityEngine;
 
 namespace Firing
@@ -19,6 +20,7 @@ namespace Firing
 
         private const float Cooldown = 0.2f;
 
+        private Ship ship;
         private BeamPool beamPool;
         private bool rightGunFiringNext = true;
         private FiringMode firingMode = FiringMode.Single;
@@ -26,6 +28,7 @@ namespace Firing
 
         void Awake()
         {
+            ship = GetComponent<Ship>();
             beamPool = GameObject.Find(Constants.BeamPool).GetComponent<BeamPool>();
             audioSource.clip = laserSound;
         }
@@ -80,17 +83,13 @@ namespace Firing
         private void FireGun(GameObject gun)
         {
             Vector3 gunFocalPoint = transform.position + transform.forward * Beam.MaxRange;
-            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint);
-            /*GameObject laserBeam = Instantiate(laserBeamPrefab, gun.transform.position, Quaternion.identity) as GameObject;
-            Beam beam = laserBeam.GetComponent<Beam>();
-            beam.target = gunFocalPoint;
-            beam.owner = GameObjects.GetParentShip(transform.gameObject);*/
+            LaserColor beamColor = (ship.ShipFaction == ShipFaction.Empire) ? LaserColor.Green : LaserColor.Orange;
+            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint, beamColor);
         }
 
         private void ToggleFiringMode()
         {
             firingMode = firingMode == FiringMode.Single ? FiringMode.Dual : FiringMode.Single;
         }
-
     }
 }

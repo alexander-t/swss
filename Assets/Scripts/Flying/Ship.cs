@@ -92,13 +92,13 @@ namespace Flying
                 Beam beam = other.GetComponentInParent<Beam>();
 
                 // Don't self kill. Sometimes the beam is spawned too close to the emitting craft and would damage it.
-                if (beam.owner == GameObjects.GetParentShip(transform.gameObject))
+                if (beam.Owner == GameObjects.GetParentShip(transform.gameObject))
                 {
                     return;
                 }
 
-                other.gameObject.SetActive(false);
-                Destroy(other.gameObject);
+                beam.Destroy();
+
                 if (shieldPoints > 0)
                 {
                     BroadcastMessage("OnShieldImpact");
