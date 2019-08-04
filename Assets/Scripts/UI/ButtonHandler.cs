@@ -34,14 +34,15 @@ namespace UI {
             SceneManager.LoadScene(Constants.Scene_Briefing);
         }
 
-        public void OnDogfight()
+        public void OnWipeOutDeltaSquadron()
         {
-            SceneManager.LoadScene("Combat");
+            MissionSelectData.missionScene = Constants.Scene_MissionWipeOutDeltaSquadron;
+            SceneManager.LoadScene(Constants.Scene_MissionWipeOutDeltaSquadron);
         }
 
         public void OnChallengeFrigate()
         {
-            Debug.Log("Frigate");
+            SceneManager.LoadScene("Combat");
         }
     }
 }

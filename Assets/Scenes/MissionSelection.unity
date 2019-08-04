@@ -218,7 +218,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 997793881}
-        m_MethodName: OnDogfight
+        m_MethodName: OnWipeOutDeltaSquadron
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
