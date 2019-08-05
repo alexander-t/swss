@@ -56,7 +56,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             model.SetActive(false);
             hud.gameObject.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
-            exploding.Explode();
+            exploding.Explode(name);
             MissionEndData.losingReason = reason;
             MissionEndData.missionTime = Time.timeSinceLevelLoad;
 

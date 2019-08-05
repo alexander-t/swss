@@ -119,7 +119,6 @@ namespace Flying
                     else
                     {
                         isAlive = false;
-                        gameObject.BroadcastMessage("Explode");
                         EventManager.RaiseShipDestroyed(gameObject.name);
                         Destroy(gameObject, 0.1f);
                     }

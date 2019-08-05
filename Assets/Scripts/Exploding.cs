@@ -7,10 +7,23 @@ public class Exploding : MonoBehaviour
     private ParticleSystem explosionPrefab;
 #pragma warning restore 0649
 
-
-    public void Explode()
+    void Awake()
     {
-        ParticleSystem explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(explosion.gameObject, explosionPrefab.main.duration);
+        EventManager.onShipDestroyed += Explode;    
+    }
+
+    void OnDestroy()
+    {
+        EventManager.onShipDestroyed -= Explode;
+    }
+
+
+    public void Explode(string name)
+    {
+        if (gameObject.name == name)
+        {
+            ParticleSystem explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion.gameObject, explosionPrefab.main.duration);
+        }
     }
 }
