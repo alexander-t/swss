@@ -4,12 +4,7 @@ namespace Flying
 {
     public class PlayerController : MonoBehaviour
     {
-        private Ship ship;
-
-        void Awake()
-        {
-            ship = GetComponent<Ship>();
-        }
+        public Ship ship;
 
         void Start()
         {

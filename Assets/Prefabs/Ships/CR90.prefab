@@ -1463,7 +1463,7 @@ GameObject:
   - component: {fileID: 8176777356762975143}
   m_Layer: 0
   m_Name: FiringComponent
-  m_TagString: Untagged
+  m_TagString: ThreatArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3750,7 +3750,7 @@ GameObject:
   - component: {fileID: 2152585053852108857}
   m_Layer: 0
   m_Name: FiringComponent
-  m_TagString: Untagged
+  m_TagString: ThreatArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

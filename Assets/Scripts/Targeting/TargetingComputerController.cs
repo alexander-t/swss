@@ -90,10 +90,7 @@ namespace Targeting
         #region Events
         private void OnNewShipEntered(Ship ship)
         {
-            /* Discard the player, which is also a ship and it's being registered upon scene startup.
-             * Doing this StartsWith like this is a bit crude, but it allows the existence of prefabs starting with "Player - ".
-             */
-            if (!GameObjects.IsPlayer(ship.name))
+            if (!GameObjects.IsPlayer(ship))
             {
                 targetingComputer.AddTarget(ship);
                 UpdateDisplay();

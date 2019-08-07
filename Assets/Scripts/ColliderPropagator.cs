@@ -8,20 +8,14 @@ using UnityEngine;
 public class ColliderPropagator : MonoBehaviour
 {
     private Ship ship;
-    private PlayerCollisionHandler playerCollisionHandler;
 
     void Awake()
     {
         ship = GetComponentInParent<Ship>();
-        playerCollisionHandler = GetComponentInParent<PlayerCollisionHandler>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         ship.OnTriggerEnter(other);
-        if (playerCollisionHandler != null)
-        {
-            playerCollisionHandler.OnTriggerEnter(other);
-        }
     }
 }

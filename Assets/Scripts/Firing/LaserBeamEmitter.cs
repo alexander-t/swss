@@ -35,7 +35,7 @@ namespace Firing
 
         void Update()
         {
-            if (GameObjects.IsPlayer(name))
+            if (GameObjects.IsPlayer(transform.root.name))
             {
                 // Control only player's beams with keyboard. Do the rest via events.
                 if (Input.GetKeyUp(KeyCode.X))

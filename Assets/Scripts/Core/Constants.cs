@@ -7,9 +7,11 @@
         public const string BeamPool = "Beam Pool";
 
         public const string Tag_Ship = "Ship";
-        public const string Tag_Target = "Target";
+        public const string Tag_Asteroid = "Asteroid";
         public const string Tag_HUD = "HUD";
         public const string Tag_LaserBeam = "LaserBeam";
+        public const string Tag_ThreatArea = "ThreatArea";
+        public const string Tag_ShieldSpehere = "ShieldSphere";
 
         public const string Scene_MissionSelection = "MissionSelection";
         public const string Scene_MissionFailed = "MissionFailed";

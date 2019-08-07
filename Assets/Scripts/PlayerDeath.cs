@@ -1,15 +1,14 @@
 ﻿using Core;
 using Flying;
-using System;
 using System.Collections;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /**
- * Handles collisions with objects and death.
+ * Handles the player's death.
  */
-public class PlayerCollisionHandler : MonoBehaviour
+public class PlayerDeath : MonoBehaviour
 {
     [Tooltip("Model that will be hidden during explosion")]
     public GameObject model;
@@ -17,33 +16,16 @@ public class PlayerCollisionHandler : MonoBehaviour
     private Ship ship;
     private Exploding exploding;
     private EngineSound engineSound;
-
     private GameObject hud;
 
     private bool isAlive = true;
 
     void Awake()
     {
-        ship = GetComponent<Ship>();
+        ship = GetComponentInChildren<Ship>();
         exploding = GetComponent<Exploding>();
         engineSound = GetComponent<EngineSound>();
         hud = GameObject.FindGameObjectWithTag(Constants.Tag_HUD);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(Constants.Tag_LaserBeam) || other.CompareTag(Constants.Tag_Target))
-        {
-            return;
-        }
-        else if (other.CompareTag(Constants.Tag_Ship))
-        {
-            Die("You crashed into " + other.name);
-        }
-        else
-        {
-            Die("You crashed");
-        }
     }
 
     public void Die(string reason)

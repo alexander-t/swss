@@ -29,7 +29,8 @@ public class FiringComponent : MonoBehaviour
             muzzle.transform.LookAt(target.transform.position);
             if (Time.time >= nextFireTime)
             {
-                beamPool.FireAt(gameObject, muzzle.transform, target.transform.position, LaserColor.Orange);
+                GameObject owningShip = GameObjects.GetParentShip(gameObject);
+                beamPool.FireAt(owningShip, muzzle.transform, target.transform.position, LaserColor.Orange);
                 audioSource.Play();
                 nextFireTime = Time.time + rateOfFire;
             }

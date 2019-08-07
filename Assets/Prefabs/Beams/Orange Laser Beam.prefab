@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3801441429895407752}
   m_Layer: 0
   m_Name: Orange Laser Beam
-  m_TagString: Untagged
+  m_TagString: LaserBeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e77533aabe73d4c9cc9de45319b00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {x: 0, y: 0, z: 0}
-  owner: {fileID: 0}
+  start: {fileID: 0}
+  end: {fileID: 0}
 --- !u!1 &603186238015569507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,7 +4810,6 @@ GameObject:
   - component: {fileID: 8333476120427639715}
   - component: {fileID: 4296792456188556716}
   - component: {fileID: 8680410854099771432}
-  - component: {fileID: 7363642390009413570}
   m_Layer: 0
   m_Name: Soft rear
   m_TagString: Untagged
@@ -4877,19 +4876,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7363642390009413570
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391646502716442518}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7932602438424664314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4997,10 +4983,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!1 &9049724584398545462
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,7 +4998,6 @@ GameObject:
   - component: {fileID: 8416016439096884748}
   - component: {fileID: 4738333717025426229}
   - component: {fileID: 576045043459071175}
-  - component: {fileID: 8071691705495687873}
   m_Layer: 0
   m_Name: Soft front
   m_TagString: Untagged
@@ -5079,16 +5064,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8071691705495687873
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049724584398545462}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

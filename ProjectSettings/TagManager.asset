@@ -9,7 +9,9 @@ TagManager:
   - Enemy
   - Ship
   - HUD
-  - Target
+  - Asteroid
+  - ThreatArea
+  - ShieldSphere
   layers:
   - Default
   - TransparentFX

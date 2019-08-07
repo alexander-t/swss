@@ -87,7 +87,17 @@ namespace Flying
 
         public void OnTriggerEnter(Collider other)
         {
-            if (GameObjects.IsBeam(other) && isAlive)
+            if (!isAlive)
+            {
+                return;
+            }
+
+            if (GameObjects.IsThreatArea(other) || GameObjects.IsShieldSphere(other))
+            {
+                // Ignore firing components' threat areas and shield spheres.
+                return;
+            }
+            else if (GameObjects.IsBeam(other))
             {
                 Beam beam = other.GetComponentInParent<Beam>();
 
@@ -97,6 +107,7 @@ namespace Flying
                     return;
                 }
 
+                string beamOwner = beam.Owner.name;
                 beam.Destroy();
 
                 if (shieldPoints > 0)
@@ -112,18 +123,49 @@ namespace Flying
                 EventManager.RaiseShipHit(gameObject.name);
                 if (hullPoints <= 0)
                 {
-                    if (GameObjects.IsPlayer(name))
+                    isAlive = false;
+                    if (GameObjects.IsPlayer(this))
                     {
-                        GetComponent<PlayerCollisionHandler>().Die("You were shot down");
+                        KillPlayer("You were shot down by " + beamOwner);
                     }
                     else
                     {
-                        isAlive = false;
                         EventManager.RaiseShipDestroyed(gameObject.name);
                         Destroy(gameObject, 0.1f);
                     }
                 }
             }
+            else if (GameObjects.IsAsteroid(other))
+            {
+                if (GameObjects.IsPlayer(this))
+                {
+                    isAlive = false;
+                    KillPlayer("You crashed into an asteroid");
+                }
+            }
+            else 
+            {
+                if (IsSelf(other))
+                {
+                    // Ignore collisions that occur between the ship's kinematic collider and its triggers
+                    return;
+                }
+
+                if (GameObjects.IsPlayer(this))
+                {
+                    isAlive = false;
+                    KillPlayer("You crashed");
+                }
+            }
+        }
+
+        private bool IsSelf(Collider other)
+        {
+            return this == GameObjects.GetParentShip(other.gameObject)?.GetComponent<Ship>();
+        }
+
+        private void KillPlayer(string reason) {
+            GetComponentInParent<PlayerDeath>().Die(reason);
         }
 
         #region Movement control
@@ -137,11 +179,12 @@ namespace Flying
             direction.x = intensity * AngularVelocity;
         }
 
-        public void Turn(float intensity) {
+        public void Turn(float intensity)
+        {
             direction.y = intensity * AngularVelocity;
             direction.z -= intensity * AngularVelocity;
         }
-             
+
         public void RollRight()
         {
             direction.z -= AngularVelocity;

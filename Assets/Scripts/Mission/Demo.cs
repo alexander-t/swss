@@ -8,7 +8,7 @@ namespace Mission
     {
         public GameObject[] enemyShips;
         
-        private readonly Vector3 SpawnPoint = new Vector3(100, 0, 100);
+        private readonly Vector3 SpawnPoint = new Vector3(100, 10, 100);
         private int rookieIndex = 1;
 
         private GameObject player;
