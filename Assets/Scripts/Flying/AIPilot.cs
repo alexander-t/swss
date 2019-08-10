@@ -11,8 +11,11 @@ namespace Flying
         public Transform[] waypoints;
         public Transform rightGunTransform;
         public Transform leftGunTransform;
+        public Personality personality = Personality.Neutral;
 
         private Ship ship;
+        private GameObject player;
+
         private Behavior behavior;
 
         private PathFinding pathFinding;
@@ -20,12 +23,20 @@ namespace Flying
         void Awake()
         {
             ship = GetComponent<Ship>();
+            player = GameObject.Find(Constants.Player);
         }
 
         void Start()
         {
             pathFinding = new PathFinding(transform);
-            behavior = new PatrollingBehavior(gameObject, waypoints);
+            if (personality == Personality.Aggressive)
+            {
+                behavior = new AttackingBehavior(gameObject, rightGunTransform, leftGunTransform, player);
+            }
+            else
+            {
+                behavior = new PatrollingBehavior(gameObject, waypoints);
+            }
             behavior.Commence();
         }
 
@@ -63,7 +74,8 @@ namespace Flying
             Debug.Log(behavior.Describe());
         }
 
-        public void Attack(GameObject target) {
+        public void Attack(GameObject target)
+        {
             behavior = new AttackingBehavior(gameObject, rightGunTransform, leftGunTransform, target);
             behavior.Commence();
         }

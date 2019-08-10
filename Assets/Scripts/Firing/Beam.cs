@@ -5,11 +5,17 @@ namespace Firing
 {
     public class Beam : MonoBehaviour
     {
-        public Transform start;
-        public Transform end;
+#pragma warning disable 0649
+        [SerializeField]
+        private Transform start;
+
+        [SerializeField]
+        private Transform end;
+#pragma warning restore 0649
 
         private const float Velocity = 500f;
-        public static float MaxRange = 250f;
+        public static float MaxRange = 500f;
+        public static float BaseDamage = 10;
 
         private Vector3 startPosition;
         private LineRenderer lineRenderer;
@@ -17,6 +23,13 @@ namespace Firing
 
 
         public GameObject Owner { get; private set; }
+
+        /*
+         * Used to compute damage. At long range, the beam's intensity diminishes
+         */
+        public float Intensity {
+            get => Mathf.Lerp(1.0f, 0.25f, Vector3.Distance(transform.position, startPosition));
+        }
 
         void Awake()
         {
@@ -49,6 +62,12 @@ namespace Firing
         public void Destroy()
         {
             beamPool.Reclaim(this);
+        }
+
+
+        public static bool IsTargetInKillRange(Vector3 attackerPosition, Vector3 targetPosition)
+        {
+            return Vector3.Distance(attackerPosition, targetPosition) <= Beam.MaxRange;
         }
     }
 }

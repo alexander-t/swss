@@ -42,12 +42,12 @@ namespace Core
 
         public static bool IsPlayer(Ship ship)
         {
-            return IsPlayer(ship.gameObject.transform.parent?.name);
+            return IsPlayer(ship.gameObject.transform.root.name);
         }
 
         public static bool IsPlayer(GameObject go)
         {
-            return IsPlayer(go.transform.parent?.name);
+            return IsPlayer(go.transform.root.name);
         }
 
         public static bool IsBeam(Collider collider)

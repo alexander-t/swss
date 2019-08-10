@@ -7,15 +7,19 @@ namespace Flying
 {
     public class Ship : MonoBehaviour, Targettable
     {
+#pragma warning disable 0649
+        [SerializeField]
         public ShipData shipData;
+#pragma warning restore 0649
+
         private Inspectable inspectable;
 
         private bool isAlive = true;
 
         private int maxHullPoints;
         private int maxShieldPoints;
-        private int hullPoints;
-        private int shieldPoints;
+        private float hullPoints;
+        private float shieldPoints;
 
         // Movement
         private const float Acceleration = 20;
@@ -108,16 +112,17 @@ namespace Flying
                 }
 
                 string beamOwner = beam.Owner.name;
+                float beamDamage = Beam.BaseDamage * beam.Intensity;
                 beam.Destroy();
 
                 if (shieldPoints > 0)
                 {
                     BroadcastMessage("OnShieldImpact");
-                    shieldPoints = Mathf.Max(shieldPoints - 10, 0);
+                    shieldPoints = Mathf.Max(shieldPoints - beamDamage , 0);
                 }
                 else
                 {
-                    hullPoints = Mathf.Max(hullPoints - 10, 0);
+                    hullPoints = Mathf.Max(hullPoints - beamDamage, 0);
                 }
 
                 EventManager.RaiseShipHit(gameObject.name);

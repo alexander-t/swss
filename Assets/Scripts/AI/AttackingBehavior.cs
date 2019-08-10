@@ -1,4 +1,5 @@
-﻿using Flying;
+﻿using Firing;
+using Flying;
 using UnityEngine;
 
 namespace AI
@@ -37,8 +38,8 @@ namespace AI
         private const float MinimumAttackDistance = 75;
 
         // Distances used for disengagement
-        private const float MinimumDisengagementDistance = 100;
-        private const float MaximumDisengagementDistance = 200;
+        private const float MinimumDisengagementDistance = 125;
+        private const float MaximumDisengagementDistance = 250;
 
         // Probability that an attacker will disengage in the midst of an ongoing attack. Adds some randomness.
         private const float ProbabilityToDisengageDuringAttack = 0.1f;
@@ -136,7 +137,9 @@ namespace AI
 
         public void Attack()
         {
-            if (target != null && TargetIsAlmostDeadAhead(target.transform.position))
+            if (target != null 
+                && IsTargetAlmostDeadAhead(target.transform.position) 
+                && Beam.IsTargetInKillRange(managedTransform.position, target.transform.position))
             {
                 managedShip.BroadcastMessage("OnFire");
             }
@@ -176,11 +179,18 @@ namespace AI
             return Vector3.Angle(targetDirection, managedTransform.forward) > RemainingTurnAngle;
         }
 
-        private bool TargetIsAlmostDeadAhead(Vector3 targetPosition)
+        private bool IsTargetAlmostDeadAhead(Vector3 targetPosition)
         {
-            return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.5;
+            float distanceToTarget = Vector3.Distance(managedTransform.position, targetPosition);
+            if (distanceToTarget > Beam.MaxRange / 2)
+            {
+                return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.25;
+            }
+            else {
+                return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.5;
+            }
         }
-
+               
         private float DetermineAttackSpeed(Transform targetTransform)
         {
             float distanceToTarget = Vector3.Distance(managedTransform.position, targetTransform.position);
