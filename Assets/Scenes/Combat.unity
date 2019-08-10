@@ -132,10 +132,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: CR-90
       objectReference: {fileID: 0}
+    - target: {fileID: 5253054660937043329, guid: b9e13a2fcb89e4c47829cc232bd4cd5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9132667521072775058, guid: b9e13a2fcb89e4c47829cc232bd4cd5c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 410
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9132667521072775058, guid: b9e13a2fcb89e4c47829cc232bd4cd5c,
         type: 3}

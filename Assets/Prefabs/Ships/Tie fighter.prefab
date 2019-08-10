@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 4866890197681196444}
   - component: {fileID: 8693612768281461009}
   - component: {fileID: 1129126057935180178}
+  - component: {fileID: 1201428951055205033}
   m_Layer: 0
   m_Name: Tie fighter
   m_TagString: Ship
@@ -455,6 +456,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1201428951055205033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258490723358243304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b30d401e5125d5499a7418b42e940f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 4737832809915063974, guid: 84dc00e23245ca041bb6ea5eaf396667,
+    type: 3}
 --- !u!1 &8812602684335560662
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,12 +604,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7880306045676356819, guid: ddd9daef476f9b146b9ca651e2b2e165,
+    - target: {fileID: 7359430628665221303, guid: ddd9daef476f9b146b9ca651e2b2e165,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7359430628665221303, guid: ddd9daef476f9b146b9ca651e2b2e165,
+    - target: {fileID: 7880306045676356819, guid: ddd9daef476f9b146b9ca651e2b2e165,
         type: 3}
       propertyPath: m_Enabled
       value: 0

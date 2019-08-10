@@ -23,7 +23,7 @@ public class PlayerDeath : MonoBehaviour
     void Awake()
     {
         ship = GetComponentInChildren<Ship>();
-        exploding = GetComponent<Exploding>();
+        exploding = GetComponentInChildren<Exploding>();
         engineSound = GetComponent<EngineSound>();
         hud = GameObject.FindGameObjectWithTag(Constants.Tag_HUD);
     }
@@ -38,7 +38,7 @@ public class PlayerDeath : MonoBehaviour
             model.SetActive(false);
             hud.gameObject.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
-            exploding.Explode(name);
+            exploding.Explode(ship.name);
             MissionEndData.losingReason = reason;
             MissionEndData.missionTime = Time.timeSinceLevelLoad;
 
