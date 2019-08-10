@@ -128,6 +128,9 @@ namespace Targeting
                 if (targetable.ShipFaction == ShipFaction.Alliance)
                 {
                     targetNameText.color = Color.green;
+                } else if (targetable.ShipFaction == ShipFaction.Empire)
+                {
+                    targetNameText.color = Color.red;
                 }
                 else
                 {

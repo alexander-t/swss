@@ -470,6 +470,12 @@ PrefabInstance:
       objectReference: {fileID: 195645674}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d029e28e6327c42830909dfd7f4f71, type: 3}
+--- !u!4 &609074214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4313191745108282670, guid: 830f9685070fff843a6d2305a33fc23b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1390177357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &617867924
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +694,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39a609b78448dc24aab2e12dcd8983af, type: 3}
+--- !u!1001 &1390177357
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8258490723358243304, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_Name
+      value: Tie fighter Alpha 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932861733424339676, guid: 830f9685070fff843a6d2305a33fc23b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 830f9685070fff843a6d2305a33fc23b, type: 3}
 --- !u!1 &1676400335
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +896,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 387089586}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1901699425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8258490723358243304, guid: 830f9685070fff843a6d2305a33fc23b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1390177357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1901699426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901699425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef51d6769adcd344b7bfb541d246222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  rightGunTransform: {fileID: 2090260872}
+  leftGunTransform: {fileID: 609074214}
+  personality: 1
 --- !u!4 &1931844168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3197631300122940172, guid: a4d029e28e6327c42830909dfd7f4f71,
@@ -949,3 +1046,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac0acbb01b7fa8478e1dd1df46ce897, type: 3}
+--- !u!4 &2090260872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6664570631762888664, guid: 830f9685070fff843a6d2305a33fc23b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1390177357}
+  m_PrefabAsset: {fileID: 0}
