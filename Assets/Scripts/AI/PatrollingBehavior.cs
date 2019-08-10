@@ -6,7 +6,6 @@ namespace AI
     public class PatrollingBehavior : Behavior
     {
         private const float WaypointProximityTolerance = 25;
-        private const float TurnDampening = 0.01f;
 
         private Transform managedTransform;
         private Ship ship;
@@ -79,6 +78,7 @@ namespace AI
 
         private void TurnTowards(Vector3 target)
         {
+            const float TurnDampening = 0.01f;
             Vector3 targetDirection = target - managedTransform.position;
             Quaternion finalRotation = Quaternion.LookRotation(targetDirection);
             managedTransform.rotation = Quaternion.Slerp(managedTransform.rotation, finalRotation, Time.deltaTime * ship.AngularVelocity * TurnDampening);

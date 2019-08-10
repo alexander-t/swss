@@ -31,6 +31,7 @@ namespace UI {
 
         public void OnAttackAnUndefendedDepot() {
             MissionSelectData.missionScene = Constants.Scene_MissionAttackAnUndefendedDepot;
+            MissionSelectData.briefingImages = Resources.LoadAll<Sprite>("Briefings/Mission_AttackAnUndefendedDepot");
             SceneManager.LoadScene(Constants.Scene_Briefing);
         }
 

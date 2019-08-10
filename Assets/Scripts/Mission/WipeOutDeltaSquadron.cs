@@ -1,18 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WipeOutDeltaSquadron : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject xWingDelta1;
+    private GameObject xWingDelta2;
+    private GameObject xWingDelta3;
+
+    void Awake()
     {
-        
+        xWingDelta1 = GameObject.Find("X-wing Delta 1");
+        xWingDelta1 = GameObject.Find("X-wing Delta 2");
+        xWingDelta3 = GameObject.Find("X-wing Delta 3");
+
+        EventManager.onShipDestroyed += OnShipDestroyed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        Cursor.visible = false;
+    }
+
+    private void OnShipDestroyed(string name)
+    {
+        Debug.Log(name);
     }
 }

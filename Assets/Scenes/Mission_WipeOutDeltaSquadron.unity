@@ -914,9 +914,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef51d6769adcd344b7bfb541d246222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {fileID: 1676400336}
   rightGunTransform: {fileID: 2090260872}
   leftGunTransform: {fileID: 609074214}
+  defaultBehavior: 0
   personality: 1
 --- !u!4 &1931844168 stripped
 Transform:

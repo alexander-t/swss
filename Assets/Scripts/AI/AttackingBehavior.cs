@@ -73,7 +73,7 @@ namespace AI
         {
             if (target == null)
             {
-                throw new BehaviorNotApplicableException();
+                throw new BehaviorNotApplicableException(BehaviorChangeReason.TargetDestroyed);
             }
 
             Vector3 targetPosition = target.transform.position;

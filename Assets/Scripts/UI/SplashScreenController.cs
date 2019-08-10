@@ -5,7 +5,14 @@ using Core;
 
 public class SplashScreenController : MonoBehaviour
 {
+    public Texture2D cursorTexture;
+
     private bool loadNextScene;
+
+    void Start()
+    {
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+    }
 
     void Update()
     {
