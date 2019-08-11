@@ -28,7 +28,7 @@ namespace AI
         public void Turn()
         {
             // TODO: Unparemeterized magic number to be fixed later
-            List<GameObject> potentialTargets = targetingComputer.GetTargetsWithinDistance(1500); 
+            List<GameObject> potentialTargets = targetingComputer.GetTargetsWithinDistance(3000); 
             if (potentialTargets.Count > 0)
             {
                 throw new BehaviorNotApplicableException(BehaviorChangeReason.TargetAcquired, potentialTargets[Random.Range(0, potentialTargets.Count)]);

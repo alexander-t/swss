@@ -23,6 +23,13 @@ namespace AI
         {
             ship = GetComponent<Ship>();
             player = GameObject.Find(Constants.Player);
+
+            EventManager.onShipDestroyed += OnShipDestroyed;
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.onShipDestroyed -= OnShipDestroyed;
         }
 
         void Start()
@@ -66,6 +73,11 @@ namespace AI
                 s += enemyName + "(" + battlefield[enemyName].Distance + ")";
             }
             Debug.Log(s);*/
+        }
+
+
+        private void OnShipDestroyed(string name) {
+            battlefield.Remove(name);
         }
 
         IEnumerator UpdateEnemyDistanceMap()

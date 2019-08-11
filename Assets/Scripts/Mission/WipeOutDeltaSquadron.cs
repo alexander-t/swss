@@ -1,17 +1,15 @@
-﻿using UnityEngine;
+﻿using Core;
+using System.Collections.Generic;
+using UI;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WipeOutDeltaSquadron : MonoBehaviour
 {
-    private GameObject xWingDelta1;
-    private GameObject xWingDelta2;
-    private GameObject xWingDelta3;
+    private List<string> shipsToKill = new List<string> { "X-wing Delta 1", "X-wing Delta 2", "X-wing Delta 3" };
 
     void Awake()
     {
-        xWingDelta1 = GameObject.Find("X-wing Delta 1");
-        xWingDelta1 = GameObject.Find("X-wing Delta 2");
-        xWingDelta3 = GameObject.Find("X-wing Delta 3");
-
         EventManager.onShipDestroyed += OnShipDestroyed;
     }
 
@@ -22,6 +20,11 @@ public class WipeOutDeltaSquadron : MonoBehaviour
 
     private void OnShipDestroyed(string name)
     {
-        Debug.Log(name);
+        shipsToKill.Remove(name);
+        if (shipsToKill.Count == 0)
+        {
+            MissionEndData.missionTime = Time.timeSinceLevelLoad;
+            SceneManager.LoadScene(Constants.Scene_MissionWon);
+        }
     }
 }

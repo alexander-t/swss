@@ -66,6 +66,7 @@ namespace AI
 
         public void Commence()
         {
+            // Prevent a race condition
             if (target == null)
             {
                 throw new BehaviorNotApplicableException(BehaviorChangeReason.NoTarget);

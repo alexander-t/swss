@@ -38,7 +38,8 @@ namespace UI {
         public void OnWipeOutDeltaSquadron()
         {
             MissionSelectData.missionScene = Constants.Scene_MissionWipeOutDeltaSquadron;
-            SceneManager.LoadScene(Constants.Scene_MissionWipeOutDeltaSquadron);
+            MissionSelectData.briefingImages = Resources.LoadAll<Sprite>("Briefings/Mission_WipeOutDeltaSquadron");
+            SceneManager.LoadScene(Constants.Scene_Briefing);
         }
 
         public void OnChallengeFrigate()
