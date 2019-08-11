@@ -66,6 +66,10 @@ namespace AI
 
         public void Commence()
         {
+            if (target == null)
+            {
+                throw new BehaviorNotApplicableException(BehaviorChangeReason.NoTarget);
+            }
             ship.Speed = DetermineAttackSpeed(target.transform);
         }
 
@@ -73,7 +77,7 @@ namespace AI
         {
             if (target == null)
             {
-                throw new BehaviorNotApplicableException(BehaviorChangeReason.TargetDestroyed);
+                throw new BehaviorNotApplicableException(BehaviorChangeReason.NoTarget);
             }
 
             Vector3 targetPosition = target.transform.position;

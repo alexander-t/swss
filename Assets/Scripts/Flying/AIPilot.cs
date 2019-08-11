@@ -17,6 +17,7 @@ namespace Flying
         public Personality personality = Personality.Neutral;
 
         private Ship ship;
+        private AITargetingComputer targetingComputer;
         private GameObject player;
         private List<GameObject> enemies = new List<GameObject>();
 
@@ -26,12 +27,13 @@ namespace Flying
         void Awake()
         {
             ship = GetComponent<Ship>();
+            targetingComputer = GetComponent<AITargetingComputer>();
+
             player = GameObject.Find(Constants.Player);
         }
 
         void Start()
         {
-            StartCoroutine(UpdateEnemyDistanceMap());
             pathFinding = new PathFinding(transform);
             behavior = DetermineInitialBehavior();
             behavior.Commence();
@@ -63,10 +65,17 @@ namespace Flying
                 }
                 behavior.Attack();
             }
-            catch (BehaviorNotApplicableException)
+            catch (BehaviorNotApplicableException e)
             {
-                behavior = DetermineInitialBehavior();
-                behavior.Commence();
+                if (e.Reason == BehaviorChangeReason.TargetAcquired)
+                {
+                    Attack(e.Target);
+                }
+                else
+                {
+                    behavior = DetermineInitialBehavior();
+                    behavior.Commence();
+                }
             }
             Debug.Log(behavior.Describe());
         }
@@ -81,31 +90,7 @@ namespace Flying
         {
             transform.position += transform.forward * Time.deltaTime * ship.Speed;
         }
-
-        private ShipFaction GetEnemyFaction()
-        {
-            if (ship.ShipFaction == ShipFaction.Neutral)
-            {
-                throw new InvalidOperationException("Can't determine enemy faction for neutral ship " + ship.name);
-            }
-            return ship.ShipFaction == ShipFaction.Alliance ? ShipFaction.Empire : ShipFaction.Alliance;
-        }
-
-        private List<GameObject> GetEnemies()
-        {
-            List<GameObject> enemies = new List<GameObject>();
-            ShipFaction enemyFaction = GetEnemyFaction();
-
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag(Constants.Tag_Ship))
-            {
-                if (go.GetComponent<Ship>().ShipFaction == enemyFaction)
-                {
-                    enemies.Add(go);
-                }
-            }
-            return enemies;
-        }
-
+                             
         private Behavior DetermineInitialBehavior()
         {
             if (personality == Personality.Aggressive)
@@ -117,7 +102,7 @@ namespace Flying
             {
                 if (defaultBehavior == BehaviorName.Scanning)
                 {
-                    return new ScanningBehavior(gameObject);
+                    return new ScanningBehavior(gameObject, targetingComputer);
                 }
                 else
                 {
@@ -125,20 +110,7 @@ namespace Flying
                 }
             }
         }
-
-        IEnumerator UpdateEnemyDistanceMap()
-        {
-            while (true)
-            {
-                string s = "";
-                foreach (GameObject e in GetEnemies()) {
-                    s += e.name + "(" + Vector3.Distance(transform.position, e.transform.position) + ") ";
-                }
-                Debug.Log(name + " > " + s);
-                yield return new WaitForSeconds(0.2f);
-            }
-        }
-
+       
         #region Triggers
         void OnTriggerEnter(Collider other)
         {

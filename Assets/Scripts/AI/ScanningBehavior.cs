@@ -1,4 +1,5 @@
 ﻿using Flying;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI
@@ -8,29 +9,33 @@ namespace AI
         private Vector3 destination;
 
         private Transform managedTransform;
+        private AITargetingComputer targetingComputer;
         private Ship ship;
 
-        public ScanningBehavior(GameObject managedShip)
+        public ScanningBehavior(GameObject managedShip, AITargetingComputer targetingComputer)
         {
             managedTransform = managedShip.transform;
+            this.targetingComputer = targetingComputer;
             ship = managedShip.GetComponent<Ship>();
         }
 
         public void Commence()
         {
             ship.Speed = 50;
-            destination = managedTransform.forward * 1000;
+            destination = managedTransform.forward * 1500;
         }
 
         public void Turn()
         {
-            if (false)
+            // TODO: Unparemeterized magic number to be fixed later
+            List<GameObject> potentialTargets = targetingComputer.GetTargetsWithinDistance(1500); 
+            if (potentialTargets.Count > 0)
             {
-                throw new BehaviorNotApplicableException(BehaviorChangeReason.TargetAcquired);
+                throw new BehaviorNotApplicableException(BehaviorChangeReason.TargetAcquired, potentialTargets[Random.Range(0, potentialTargets.Count)]);
             }
 
             if (Vector3.Distance(managedTransform.position, destination) < 25) {
-                destination = managedTransform.forward * -1000;
+                destination = managedTransform.forward * -1500;
             }
             TurnTowards(destination);
         }

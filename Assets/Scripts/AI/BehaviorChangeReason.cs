@@ -1,4 +1,4 @@
 ﻿public enum BehaviorChangeReason 
 {
-    UnderAttack, TargetDestroyed, TargetAcquired
+    UnderAttack, NoTarget, TargetAcquired
 }

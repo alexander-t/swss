@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace AI
 {
@@ -8,10 +9,14 @@ namespace AI
     public class BehaviorNotApplicableException : Exception
     {
         public BehaviorChangeReason Reason { get; private set; }
+        public GameObject Target { get; private set; }
 
-        public BehaviorNotApplicableException(BehaviorChangeReason reason)
+        public BehaviorNotApplicableException(BehaviorChangeReason reason) : this(reason, null) { }
+
+        public BehaviorNotApplicableException(BehaviorChangeReason reason, GameObject target)
         {
             Reason = reason;
+            Target = target;
         }
     }
 }
