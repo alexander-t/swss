@@ -42,9 +42,10 @@ namespace UI {
             SceneManager.LoadScene(Constants.Scene_Briefing);
         }
 
-        public void OnChallengeFrigate()
+        public void OnMercyKillDefiance()
         {
-            SceneManager.LoadScene("Combat");
+            MissionSelectData.missionScene = Constants.Scene_MissionMercyKillDefiance;
+            SceneManager.LoadScene(Constants.Scene_MissionMercyKillDefiance);
         }
     }
 }

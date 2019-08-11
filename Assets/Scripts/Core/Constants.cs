@@ -19,6 +19,7 @@
         public const string Scene_Briefing = "Briefing";
         public const string Scene_MissionAttackAnUndefendedDepot = "Mission_AttackAnUndefendedDepot";
         public const string Scene_MissionWipeOutDeltaSquadron = "Mission_WipeOutDeltaSquadron";
+        public const string Scene_MissionMercyKillDefiance = "Mission_MercyKillDefiance";
 
         public const string Shield_ImpactLight = "Impact Light";
     }

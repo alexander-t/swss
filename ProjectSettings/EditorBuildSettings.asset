@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Mission_WipeOutDeltaSquadron.unity
     guid: e7868d89609ff0d4a8a086146bd143a2
   - enabled: 1
+    path: Assets/Scenes/Mission_MercyKillDefiance.unity
+    guid: 2455044c1fbb05c4fa0fc5d6a39c3665
+  - enabled: 1
     path: Assets/Scenes/MissionFailed.unity
     guid: 0f65d244460099743a9cae1897f71165
   - enabled: 1
