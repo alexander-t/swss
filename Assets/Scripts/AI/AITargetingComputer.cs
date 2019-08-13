@@ -10,7 +10,7 @@ namespace AI
 {
     /*
      * This class will be merged with the regular TargetingComputer sometime. 
-     * For this reason, it uses the naïve impplementations.
+     * For this reason, it uses the naïve implementations.
      */
     public class AITargetingComputer : MonoBehaviour
     {

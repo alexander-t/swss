@@ -33,7 +33,11 @@ namespace Firing
             }
         }
 
-        public void FireAt(GameObject owner, Transform gun, Vector3 target, LaserColor laserColor = LaserColor.Green)
+        public void FireAt(GameObject owner, Transform gun, Vector3 target, LaserColor laserColor) {
+            FireAt(owner, gun, target, 1.0f, laserColor);
+        }
+
+        public void FireAt(GameObject owner, Transform gun, Vector3 target, float initialIntensity = 1.0f, LaserColor laserColor = LaserColor.Green)
         {
             GameObject go = null;
             if (laserColor == LaserColor.Green)
@@ -51,7 +55,7 @@ namespace Firing
             }
             
             Beam beam = go.GetComponent<Beam>();
-            beam.ShootAt(owner, target, gun.position, gun.rotation);
+            beam.ShootAt(owner, target, initialIntensity, gun.position, gun.rotation);
             go.SetActive(true);
         }
 

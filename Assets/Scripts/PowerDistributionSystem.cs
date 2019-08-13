@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Power distribution system: depending on how power is distributed engines and lasers will be stronger or weaker.
+ */
 public class PowerDistributionSystem : MonoBehaviour
 {
 #pragma warning disable 0649
@@ -17,8 +20,8 @@ public class PowerDistributionSystem : MonoBehaviour
     private int enginePower = 1;
     private int laserPower = 1;
 
-    public float EnginePower { get => GetMultiplier(enginePower); }
-    public float LaserPower { get => GetMultiplier(laserPower); }
+    public float EnginePower { get => GetEngineMultiplier(enginePower); }
+    public float LaserPower { get => GetLaserMultiplier(laserPower); }
 
     void Update()
     {
@@ -41,7 +44,7 @@ public class PowerDistributionSystem : MonoBehaviour
         }
     }
 
-    private float GetMultiplier(int v)
+    private float GetEngineMultiplier(int v)
     {
         switch (v)
         {
@@ -53,6 +56,20 @@ public class PowerDistributionSystem : MonoBehaviour
                 return 0.75f;
         }
     }
+
+    private float GetLaserMultiplier(int v)
+    {
+        switch (v)
+        {
+            case 0:
+                return 0.5f;
+            case 2:
+                return 1.5f;
+            default:
+                return 1;
+        }
+    }
+
 }
 
 

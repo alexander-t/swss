@@ -18,6 +18,7 @@ namespace Firing
         public static float BaseDamage = 10;
 
         private Vector3 startPosition;
+        private float initialIntensity;
         private LineRenderer lineRenderer;
         private BeamPool beamPool;
 
@@ -28,7 +29,7 @@ namespace Firing
          * Used to compute damage. At long range, the beam's intensity diminishes
          */
         public float Intensity {
-            get => Mathf.Lerp(1.0f, 0.25f, Vector3.Distance(transform.position, startPosition));
+            get => Mathf.Lerp(initialIntensity, 0.25f, Vector3.Distance(transform.position, startPosition));
         }
 
         void Awake()
@@ -51,9 +52,10 @@ namespace Firing
         }
 
 
-        public void ShootAt(GameObject owner, Vector3 target, Vector3 startPosition, Quaternion rotation)
+        public void ShootAt(GameObject owner, Vector3 target, float initialIntensity, Vector3 startPosition, Quaternion rotation)
         {
             Owner = owner;
+            this.initialIntensity = initialIntensity;
             transform.position = this.startPosition = startPosition;
             transform.rotation = rotation;
             transform.LookAt(target);

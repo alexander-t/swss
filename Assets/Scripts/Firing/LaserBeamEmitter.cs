@@ -11,17 +11,25 @@ namespace Firing
     {
         private enum FiringMode { Single, Dual };
 
-        public GameObject laserBeamPrefab;
-        public GameObject rightGun;
-        public GameObject leftGun;
+#pragma warning disable 0649
+        [SerializeField]
+        private GameObject laserBeamPrefab;
+        [SerializeField]
+        private GameObject rightGun;
+        [SerializeField]
+        private GameObject leftGun;
         [Space(7)]
-        public AudioSource audioSource;
-        public AudioClip laserSound;
+        [SerializeField]
+        private AudioSource audioSource;
+        [SerializeField]
+        private AudioClip laserSound;
+#pragma warning restore 0649
 
         private const float Cooldown = 0.2f;
 
         private Ship ship;
         private BeamPool beamPool;
+        private PowerDistributionSystem powerDistributionSystem;
         private bool rightGunFiringNext = true;
         private FiringMode firingMode = FiringMode.Single;
         private float nextShotTime;
@@ -29,6 +37,7 @@ namespace Firing
         void Awake()
         {
             ship = GetComponent<Ship>();
+            powerDistributionSystem = GetComponentInParent<PowerDistributionSystem>();
             beamPool = GameObject.Find(Constants.BeamPool).GetComponent<BeamPool>();
             audioSource.clip = laserSound;
         }
@@ -84,7 +93,8 @@ namespace Firing
         {
             Vector3 gunFocalPoint = transform.position + transform.forward * Beam.MaxRange;
             LaserColor beamColor = (ship.ShipFaction == ShipFaction.Empire) ? LaserColor.Green : LaserColor.Orange;
-            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint, beamColor);
+            float initalIntensity = powerDistributionSystem == null ? 1 : powerDistributionSystem.LaserPower;
+            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint, initalIntensity, beamColor);
         }
 
         private void ToggleFiringMode()
