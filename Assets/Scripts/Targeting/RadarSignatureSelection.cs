@@ -17,7 +17,7 @@ namespace Targeting
 
         private void Awake()
         {
-            playerTransform = GameObject.Find(Constants.Player).GetComponent<Transform>();
+            playerTransform = GameObject.Find(Constants.Player).transform;
         }
 
         void Start()

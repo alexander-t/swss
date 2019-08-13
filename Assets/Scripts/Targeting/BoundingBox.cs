@@ -10,10 +10,11 @@ namespace Targeting
 
         private LineRenderer lineRenderer;
         private Transform playerTransform;
+        private float redrawTime;
 
         void Awake()
         {
-            playerTransform = GameObject.Find(Constants.Player).GetComponent<Transform>();
+            playerTransform = GameObject.Find(Constants.Player).transform;
             lineRenderer = boundingBoxPrefab.GetComponent<LineRenderer>();
 
             lineRenderer.useWorldSpace = false;
@@ -29,9 +30,13 @@ namespace Targeting
         void Update()
         {
             lineRenderer.transform.rotation = playerTransform.rotation;
-
-            // Scale the width a little so that too distant targets don't get flickering thin lines.
-            lineRenderer.widthMultiplier = Mathf.Lerp(0.05f, 0.25f, Vector3.Distance(playerTransform.position, transform.position) / 100);
+            if (Time.time >= redrawTime)
+            {
+                float distanceCoefficient = Mathf.Clamp(Vector3.Distance(playerTransform.position, lineRenderer.transform.position), 0, 1000) / 1000;
+                lineRenderer.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 15, distanceCoefficient);
+                lineRenderer.widthMultiplier = Mathf.Lerp(0.1f, 2.5f, distanceCoefficient);
+                redrawTime = Time.time + 0.15f;
+            }
         }
 
         public void OnTargetted(bool active)
