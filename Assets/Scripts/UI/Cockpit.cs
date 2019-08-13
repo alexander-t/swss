@@ -7,35 +7,47 @@ namespace UI
 {
     public class Cockpit : MonoBehaviour
     {
-        public TextMeshProUGUI textSpeed;
-        public Image speedIndicator;
-        public Color low;
-        public Color high;
+#pragma warning disable 0649
+        [SerializeField]
+        private TextMeshProUGUI textSpeed;
+        [SerializeField]
+        private Image speedIndicator;
+        [SerializeField]
+        private Color low;
+        [SerializeField]
+        private Color high;
         [Space(7)]
-        public Image healthIndicatorImage;
-        public Sprite maxHealthSprite;
-        public Sprite criticalHealthSprite;
+        [SerializeField]
+        private Image healthIndicatorImage;
+        [SerializeField]
+        private Sprite maxHealthSprite;
+        [SerializeField]
+        private Sprite criticalHealthSprite;
+#pragma warning restore 0649
 
         void Start()
         {
+            healthIndicatorImage.sprite = maxHealthSprite;
+
             EventManager.onShipHit += OnShipHit;
-            healthIndicatorImage.sprite = maxHealthSprite;    
+            EventManager.onPlayerSpeedChanged += OnPlayerSpeedChanged;
         }
 
         void OnDestroy()
         {
-            EventManager.onShipHit -= OnShipHit;    
+            EventManager.onShipHit -= OnShipHit;
+            EventManager.onPlayerSpeedChanged -= OnPlayerSpeedChanged;
         }
 
-        void OnVelocityChange(float[] velocities)
+        void OnPlayerSpeedChanged(float speed, float maxSpeed)
         {
             if (textSpeed != null)
             {
-                textSpeed.text = (int)velocities[0] + "";
+                textSpeed.text = (int)speed + "";
             }
 
-            speedIndicator.transform.localScale = new Vector3(velocities[0] / velocities[1], 1, 1);
-            speedIndicator.color = Color.Lerp(low, high, velocities[0] / velocities[1]);
+            speedIndicator.transform.localScale = new Vector3(speed / maxSpeed, 1, 1);
+            speedIndicator.color = Color.Lerp(low, high, speed /maxSpeed);
         }
 
         void OnShipHit(string name)

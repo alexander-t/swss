@@ -7,12 +7,10 @@ namespace Flying
 {
     public class Ship : MonoBehaviour, Targettable
     {
-#pragma warning disable 0649
-        [SerializeField]
         public ShipData shipData;
-#pragma warning restore 0649
 
         private Inspectable inspectable;
+        private PowerDistributionSystem powerDistributionSystem;
 
         private bool isAlive = true;
 
@@ -39,12 +37,12 @@ namespace Flying
 
         public int HullPoints
         {
-            get => (int)(100 * (float)hullPoints / maxHullPoints);
+            get => (int)(100 * hullPoints / maxHullPoints);
         }
 
         public int ShieldPoints
         {
-            get => maxShieldPoints == 0 ? 0 : (int)(100 * (float)shieldPoints / maxShieldPoints);
+            get => maxShieldPoints == 0 ? 0 : (int)(100f * shieldPoints / maxShieldPoints);
         }
 
         public string Contents
@@ -56,6 +54,10 @@ namespace Flying
         {
             // Recalculate here to go from actual kmph to game speed
             get => shipData.MaxSpeed / 10;
+        }
+
+        public float MaxSpeedAdjustedForPowerdistribution {
+            get => powerDistributionSystem == null ? MaxSpeed : MaxSpeed * powerDistributionSystem.EnginePower;
         }
 
         public float AngularVelocity
@@ -76,9 +78,11 @@ namespace Flying
 
         #endregion
 
+        #region Unity lifecycle
         void Awake()
         {
             inspectable = GetComponent<Inspectable>();
+            powerDistributionSystem = GetComponentInParent<PowerDistributionSystem>();
         }
 
         void Start()
@@ -87,6 +91,14 @@ namespace Flying
             shieldPoints = maxShieldPoints = shipData.ShieldPoints;
 
             EventManager.RaiseNewShipEntered(this);
+        }
+
+        void Update() {
+            // A change in the power distribution may make this happen, so adjust immediately.
+            if (Speed > MaxSpeedAdjustedForPowerdistribution) {
+                Speed = MaxSpeedAdjustedForPowerdistribution;
+                EventManager.RaisePlayerSpeedChanged(Speed, MaxSpeed);
+            }
         }
 
         public void OnTriggerEnter(Collider other)
@@ -163,6 +175,7 @@ namespace Flying
                 }
             }
         }
+        #endregion
 
         private bool IsSelf(Collider other)
         {
@@ -207,12 +220,12 @@ namespace Flying
 
         public void AccelerateByDelta(float deltaTime)
         {
-            speed = Mathf.Clamp(speed + Acceleration * deltaTime, 0, MaxSpeed);
+            speed = Mathf.Clamp(speed + Acceleration * deltaTime, 0, MaxSpeedAdjustedForPowerdistribution);
         }
 
         public void DeccelerateByDelta(float deltaTime)
         {
-            speed = Mathf.Clamp(speed - Acceleration * deltaTime, 0, MaxSpeed);
+            speed = Mathf.Clamp(speed - Acceleration * deltaTime, 0, MaxSpeedAdjustedForPowerdistribution);
         }
 
         #endregion
