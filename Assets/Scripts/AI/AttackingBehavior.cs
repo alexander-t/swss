@@ -27,7 +27,6 @@ namespace AI
         private Transform rightGunTransform;
         private Transform leftGunTransform;
         private Ship ship;
-        private bool targetInKillZone;
 
         private GameObject target;
 
@@ -153,22 +152,6 @@ namespace AI
         public string Describe()
         {
             return "Attacking " + target;
-        }
-
-        public void TargetEnteredKillzone(GameObject potentialTarget)
-        {
-            if (potentialTarget == target)
-            {
-                targetInKillZone = true;
-            }
-        }
-
-        public void TargetLeftKillzone(GameObject potentialTarget)
-        {
-            if (potentialTarget == target)
-            {
-                targetInKillZone = false;
-            }
         }
 
         private void TurnTowards(Vector3 target)

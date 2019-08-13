@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hullPoints: 15
   shieldPoints: 0
-  maxSpeed: 1200
+  maxSpeed: 1000
   angularVelocity: 50
   shipSize: 1
   shipFaction: 0

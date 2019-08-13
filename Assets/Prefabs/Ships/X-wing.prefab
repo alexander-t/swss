@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 9102199934166252881}
   - component: {fileID: 3864080354214584322}
   - component: {fileID: 961008710609062452}
-  - component: {fileID: 8754407236608648082}
   m_Layer: 8
   m_Name: X-wing
   m_TagString: Ship
@@ -190,6 +189,8 @@ MonoBehaviour:
   waypoints: []
   rightGunTransform: {fileID: 3014889357901960774}
   leftGunTransform: {fileID: 2747990193750059496}
+  defaultBehavior: 1
+  personality: 1
 --- !u!114 &4594614316372621759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,19 +358,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &8754407236608648082
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197631300122940169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 200}
-  m_Center: {x: 0, y: 0, z: 175}
 --- !u!1 &3715494888925092298
 GameObject:
   m_ObjectHideFlags: 0

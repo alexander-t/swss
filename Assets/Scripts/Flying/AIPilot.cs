@@ -110,38 +110,5 @@ namespace Flying
                 }
             }
         }
-       
-        #region Triggers
-        void OnTriggerEnter(Collider other)
-        {
-            try
-            {
-                // Behavior may be null because of a race condition during initialization and the trigger :(
-                if (behavior != null)
-                {
-                    behavior.TargetEnteredKillzone(GameObjects.GetParentShip(other.gameObject));
-                }
-            }
-            catch (ArgumentException)
-            {
-                // Quite ok. Not everything is a ship
-            }
-        }
-
-        void OnTriggerExit(Collider other)
-        {
-            try
-            {
-                if (behavior != null)
-                {
-                    behavior.TargetLeftKillzone(GameObjects.GetParentShip(other.gameObject));
-                }
-            }
-            catch (ArgumentException)
-            {
-                // Quite ok. Not everything is a ship
-            }
-        }
-        #endregion
     }
 }

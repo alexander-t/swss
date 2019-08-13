@@ -8,7 +8,5 @@ namespace AI
         void Turn();
         void Attack();
         string Describe();
-        void TargetEnteredKillzone(GameObject potentialTarget);
-        void TargetLeftKillzone(GameObject potentialTarget);
     }
 }
