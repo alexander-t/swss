@@ -10,7 +10,7 @@ namespace Firing
         public AudioSource audioSource;
         [Space(10)]
         public float rateOfFire = 3;
-        public float attackRange = 100;
+        public float attackRange = 500;
 
         private BeamPool beamPool;
         private float nextFireTime;

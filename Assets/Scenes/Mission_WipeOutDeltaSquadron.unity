@@ -468,6 +468,11 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 195645674}
+    - target: {fileID: 3040903302175862348, guid: a4d029e28e6327c42830909dfd7f4f71,
+        type: 3}
+      propertyPath: revengeTenacity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d029e28e6327c42830909dfd7f4f71, type: 3}
 --- !u!4 &609074214 stripped
@@ -920,6 +925,7 @@ MonoBehaviour:
   leftGunTransform: {fileID: 609074214}
   defaultBehavior: 0
   personality: 1
+  revengeTenacity: 1
 --- !u!114 &1901699433
 MonoBehaviour:
   m_ObjectHideFlags: 0

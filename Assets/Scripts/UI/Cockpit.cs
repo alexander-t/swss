@@ -25,6 +25,13 @@ namespace UI
         private Sprite criticalHealthSprite;
 #pragma warning restore 0649
 
+        private string shipName;
+
+        void Awake()
+        {
+            shipName = GameObjects.RequirePlayerShip(gameObject).name;
+        }
+
         void Start()
         {
             healthIndicatorImage.sprite = maxHealthSprite;
@@ -50,10 +57,10 @@ namespace UI
             speedIndicator.color = Color.Lerp(low, high, speed /maxSpeed);
         }
 
-        void OnShipHit(string name)
+        private void OnShipHit(string attacked, string attacker)
         {
             // Quite an over simplification: since the tie fighter only can take one hit we can swap image here
-            if (GameObjects.IsPlayer(name))
+            if (attacked == shipName)
             {
                 healthIndicatorImage.sprite = criticalHealthSprite;
             }

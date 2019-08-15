@@ -44,7 +44,7 @@ namespace Firing
 
         void Update()
         {
-            if (GameObjects.IsPlayer(transform.root.name))
+            if (GameObjects.IsPlayer(gameObject))
             {
                 // Control only player's beams with keyboard. Do the rest via events.
                 if (Input.GetKeyUp(KeyCode.X))
@@ -59,8 +59,8 @@ namespace Firing
 
             if (Debug.isDebugBuild)
             {
-                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, rightGun.transform.position, Color.red, 0.1f);
-                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.MaxRange, leftGun.transform.position, Color.red, 0.1f);
+                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.DefaultMaxRange, rightGun.transform.position, Color.red, 0.1f);
+                Debug.DrawLine(transform.position + transform.forward.normalized * Beam.DefaultMaxRange, leftGun.transform.position, Color.red, 0.1f);
             }
         }
 
@@ -91,10 +91,10 @@ namespace Firing
 
         private void FireGun(GameObject gun)
         {
-            Vector3 gunFocalPoint = transform.position + transform.forward * Beam.MaxRange;
+            Vector3 gunFocalPoint = transform.position + transform.forward * Beam.DefaultMaxRange;
             LaserColor beamColor = (ship.ShipFaction == ShipFaction.Empire) ? LaserColor.Green : LaserColor.Orange;
             float initalIntensity = powerDistributionSystem == null ? 1 : powerDistributionSystem.LaserPower;
-            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint, initalIntensity, beamColor);
+            beamPool.FireAt(GameObjects.GetParentShip(transform.gameObject), gun.transform, gunFocalPoint, initalIntensity, Beam.DefaultMaxRange, beamColor);
         }
 
         private void ToggleFiringMode()

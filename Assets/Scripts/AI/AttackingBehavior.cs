@@ -170,7 +170,7 @@ namespace AI
         private bool IsTargetAlmostDeadAhead(Vector3 targetPosition)
         {
             float distanceToTarget = Vector3.Distance(managedTransform.position, targetPosition);
-            if (distanceToTarget > Beam.MaxRange / 2)
+            if (distanceToTarget > Beam.DefaultMaxRange / 2)
             {
                 return Vector3.Distance((targetPosition - managedTransform.position).normalized, managedTransform.forward) <= 0.25;
             }

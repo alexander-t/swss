@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3197631300122940172}
   - component: {fileID: 3040903302175862348}
+  - component: {fileID: 740973525271124923}
   - component: {fileID: 4594614316372621759}
   - component: {fileID: 284500514314364781}
   - component: {fileID: 5101276476569801745}
@@ -191,6 +192,19 @@ MonoBehaviour:
   leftGunTransform: {fileID: 2747990193750059496}
   defaultBehavior: 1
   personality: 1
+  revengeTenacity: 1
+--- !u!114 &740973525271124923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197631300122940169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf23bcb7708b74a4ca501b5ebcfda7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4594614316372621759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,9 +297,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 1000
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -318,7 +332,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

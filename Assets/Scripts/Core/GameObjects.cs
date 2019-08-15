@@ -1,5 +1,6 @@
 ﻿using Flying;
 using System;
+using UI;
 using UnityEngine;
 
 
@@ -35,7 +36,16 @@ namespace Core
             throw new ArgumentException("Couldn't find parent ship of " + go.name);
         }
 
-        public static bool IsPlayer(string name)
+        public static Ship RequirePlayerShip(GameObject go)
+        {
+            PlayerController playerController = go.transform.root.GetComponent<PlayerController>();
+            if (playerController == null) {
+                throw new InvalidOperationException(go.name + " doesn't seem to belong to a player");
+            }
+            return playerController.ship;
+        }
+
+        private static bool IsPlayer(string name)
         {
             return name != null && name.StartsWith(Constants.Player);
         }

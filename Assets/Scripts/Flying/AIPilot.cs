@@ -1,8 +1,5 @@
 ﻿using AI;
 using Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Flying
@@ -15,11 +12,12 @@ namespace Flying
         public Transform leftGunTransform;
         public BehaviorName defaultBehavior = BehaviorName.Patrolling;
         public Personality personality = Personality.Neutral;
+        public RevengeTenacity revengeTenacity = RevengeTenacity.Flaky;
 
         private Ship ship;
         private AITargetingComputer targetingComputer;
         private GameObject player;
-        private List<GameObject> enemies = new List<GameObject>();
+        private GameObject enemyToRetaliateAgainst; // An attacker who's fired a beam at this AI pilot
 
         private PathFinding pathFinding;
         private Behavior behavior;
@@ -35,8 +33,15 @@ namespace Flying
         void Start()
         {
             pathFinding = new PathFinding(transform);
-            behavior = DetermineInitialBehavior();
+            behavior = DetermineDefaultBehavior();
             behavior.Commence();
+
+            EventManager.onShipHit += OnShipHit;
+        }
+
+        void OnDestroy()
+        {
+            EventManager.onShipHit -= OnShipHit;
         }
 
         void Update()
@@ -73,8 +78,11 @@ namespace Flying
                 }
                 else
                 {
-                    behavior = DetermineInitialBehavior();
+                    behavior = DetermineDefaultBehavior();
                     behavior.Commence();
+                    
+                    // Forget whoever fired at this ship
+                    enemyToRetaliateAgainst = null;
                 }
             }
             Debug.Log(behavior.Describe());
@@ -91,7 +99,7 @@ namespace Flying
             transform.position += transform.forward * Time.deltaTime * ship.Speed;
         }
                              
-        private Behavior DetermineInitialBehavior()
+        private Behavior DetermineDefaultBehavior()
         {
             if (personality == Personality.Aggressive)
             {
@@ -107,6 +115,28 @@ namespace Flying
                 else
                 {
                     return new PatrollingBehavior(gameObject, waypoints);
+                }
+            }
+        }
+
+        private void OnShipHit(string attacked, string attackerName)
+        {
+            if (name == attacked)
+            {
+                GameObject attacker = targetingComputer.GetTargetByName(attackerName);
+                if (attacker != null) {
+                    if (enemyToRetaliateAgainst == null)
+                    {
+                        enemyToRetaliateAgainst = attacker;
+                        Attack(enemyToRetaliateAgainst);
+                    }
+                    else
+                    {
+                        if (attacker != enemyToRetaliateAgainst && revengeTenacity == RevengeTenacity.Flaky) {
+                            enemyToRetaliateAgainst = attacker;
+                            Attack(enemyToRetaliateAgainst);
+                        }
+                    }
                 }
             }
         }

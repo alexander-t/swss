@@ -42,6 +42,10 @@ namespace AI
             return battlefield.Where(kv => kv.Value.Distance <= distance).Select(kv => kv.Value.GameObject).ToList();
         }
 
+        public GameObject GetTargetByName(string name) {
+            return battlefield[name].GameObject;
+        }
+
         private ShipFaction GetEnemyFaction()
         {
             if (ship.ShipFaction == ShipFaction.Neutral)

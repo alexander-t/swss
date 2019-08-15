@@ -56,7 +56,8 @@ namespace Flying
             get => shipData.MaxSpeed / 10;
         }
 
-        public float MaxSpeedAdjustedForPowerdistribution {
+        public float MaxSpeedAdjustedForPowerdistribution
+        {
             get => powerDistributionSystem == null ? MaxSpeed : MaxSpeed * powerDistributionSystem.EnginePower;
         }
 
@@ -93,11 +94,16 @@ namespace Flying
             EventManager.RaiseNewShipEntered(this);
         }
 
-        void Update() {
-            // A change in the power distribution may make this happen, so adjust immediately.
-            if (Speed > MaxSpeedAdjustedForPowerdistribution) {
-                Speed = MaxSpeedAdjustedForPowerdistribution;
-                EventManager.RaisePlayerSpeedChanged(Speed, MaxSpeed);
+        void Update()
+        {
+            if (GameObjects.IsPlayer(this))
+            {
+                // A change in the power distribution may make this happen, so adjust immediately.
+                if (Speed > MaxSpeedAdjustedForPowerdistribution)
+                {
+                    Speed = MaxSpeedAdjustedForPowerdistribution;
+                    EventManager.RaisePlayerSpeedChanged(Speed, MaxSpeed);
+                }
             }
         }
 
@@ -126,18 +132,18 @@ namespace Flying
                 string beamOwner = beam.Owner.name;
                 float beamDamage = Beam.BaseDamage * beam.Intensity;
                 beam.Destroy();
-
+                
                 if (shieldPoints > 0)
                 {
                     BroadcastMessage("OnShieldImpact");
-                    shieldPoints = Mathf.Max(shieldPoints - beamDamage , 0);
+                    shieldPoints = Mathf.Max(shieldPoints - beamDamage, 0);
                 }
                 else
                 {
                     hullPoints = Mathf.Max(hullPoints - beamDamage, 0);
                 }
 
-                EventManager.RaiseShipHit(gameObject.name);
+                EventManager.RaiseShipHit(gameObject.name, beamOwner);
                 if (hullPoints <= 0)
                 {
                     isAlive = false;
@@ -160,7 +166,7 @@ namespace Flying
                     KillPlayer("You crashed into an asteroid");
                 }
             }
-            else 
+            else
             {
                 if (IsSelf(other))
                 {
@@ -182,7 +188,8 @@ namespace Flying
             return this == GameObjects.GetParentShip(other.gameObject)?.GetComponent<Ship>();
         }
 
-        private void KillPlayer(string reason) {
+        private void KillPlayer(string reason)
+        {
             GetComponentInParent<PlayerDeath>().Die(reason);
         }
 

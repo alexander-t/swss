@@ -47,7 +47,7 @@ namespace Targeting
             EventManager.onShipDestroyed += OnShipDestroyed;
             EventManager.onShipHit += OnShipHit;
             EventManager.onNewShipEntered += OnNewShipEntered;
-            EventManager.onShipInspected += OnShipHit; // Just update the display
+            EventManager.onShipInspected += OnShipInspected; 
         }
 
         void Start()
@@ -61,7 +61,7 @@ namespace Targeting
             EventManager.onShipDestroyed -= OnShipDestroyed;
             EventManager.onShipHit -= OnShipHit;
             EventManager.onNewShipEntered -= OnNewShipEntered;
-            EventManager.onShipInspected -= OnShipHit;
+            EventManager.onShipInspected -= OnShipInspected;
         }
 
         void Update()
@@ -97,7 +97,7 @@ namespace Targeting
             }
         }
 
-        private void OnShipHit(string name)
+        private void OnShipHit(string attacked, string attacker)
         {
             UpdateDisplay();
         }
@@ -105,6 +105,10 @@ namespace Targeting
         private void OnShipDestroyed(string name)
         {
             targetingComputer.RemoveTargetByName(name);
+            UpdateDisplay();
+        }
+
+        private void OnShipInspected(string name) {
             UpdateDisplay();
         }
         #endregion

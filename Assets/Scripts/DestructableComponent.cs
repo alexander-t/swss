@@ -13,8 +13,8 @@ public class DestructableComponent : MonoBehaviour
 
     [Tooltip("Part of the model that can be made inactive if destroyed.")]
     public GameObject visualComponent;
-    [Tooltip("Component that holds the fire control and must be made inactive if this component is destroyed.")]
-    public GameObject firingComponent;
+    [Tooltip("Components that hold the fire control and must be made inactive if this component is destroyed.")]
+    public GameObject[] firingComponents;
     [Tooltip("Prefab to use for explosion.")]
     public ParticleSystem explosionPrefab;
     [Tooltip("Used to tweak the exact point of the explosion.")]
@@ -24,9 +24,26 @@ public class DestructableComponent : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (GameObjects.IsBeam(other) && isAlive)
+        if (!isAlive)
+        {
+            return;
+        }
+
+        if (GameObjects.IsThreatArea(other) || GameObjects.IsShieldSphere(other))
+        {
+            // Ignore firing components' threat areas and shield spheres.
+            return;
+        }
+        else if (GameObjects.IsBeam(other))
         {
             Beam beam = other.GetComponentInParent<Beam>();
+
+            // Don't self kill. In case of destructable components, two guns mounted on the same base can actually hit the firing ship
+            if (beam.Owner == GameObjects.GetParentShip(transform.gameObject))
+            {
+                return;
+            }
+
             beam.Destroy();
 
             hullPoints = Mathf.Max(hullPoints - 10, 0);
@@ -40,9 +57,12 @@ public class DestructableComponent : MonoBehaviour
                     Explode();
                 }
 
-                if (firingComponent != null)
+                if (firingComponents != null)
                 {
-                    firingComponent.SetActive(false);
+                    foreach (GameObject firingComponent in firingComponents)
+                    {
+                        firingComponent.SetActive(false);
+                    }
                 }
             }
         }

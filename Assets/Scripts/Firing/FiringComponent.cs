@@ -13,7 +13,7 @@ namespace Firing
         public AudioSource audioSource;
         [Space(10)]
         public float rateOfFire = 5;
-        public float attackRange = 250;
+        public float maxRange = 500;
 
         private BeamPool beamPool;
         private float nextFireTime;
@@ -28,10 +28,10 @@ namespace Firing
             if (target != null)
             {
                 muzzle.transform.LookAt(target.transform.position);
-                if (Time.time >= nextFireTime && Beam.IsTargetInKillRange(muzzle.transform.position, target.transform.position))
+                if (Time.time >= nextFireTime && IsTargetWithinKillRange(muzzle.transform.position, target.transform.position))
                 {
                     GameObject owningShip = GameObjects.GetParentShip(gameObject);
-                    beamPool.FireAt(owningShip, muzzle.transform, target.transform.position, LaserColor.Orange);
+                    beamPool.FireAt(owningShip, muzzle.transform, target.transform.position, Beam.DefaultIntensity, maxRange, LaserColor.Orange);
                     audioSource.Play();
 
                     // Add a random delay so that two adjacent guns don't fire at the same time
@@ -40,6 +40,11 @@ namespace Firing
                 }
                 Debug.DrawLine(muzzle.transform.position, target.transform.position, Color.red, 0.1f);
             }
+        }
+
+        private bool IsTargetWithinKillRange(Vector3 attackerPosition, Vector3 targetPosition)
+        {
+            return Vector3.Distance(attackerPosition, targetPosition) <= maxRange;
         }
 
         void OnTriggerEnter(Collider other)
