@@ -5,15 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class AttackAnUndefendedDepot : MonoBehaviour
 {
-    private string[] unimportantContents = { "Food supplies", "Tools", "Machine parts" };
+    private string[] unimportantContents = { "Food supplies", "Tools", "Machine parts", "Droids", "Fuel" };
     private const string CriticalContents = "Weapons";
-    private int containersToDestroy = 3;
+    private int containersToDestroy = 6;
 
     void Awake()
     {
-        EventManager.onShipInspected += OnShipInspected;
-        EventManager.onShipDestroyed += OnShipDestroyed;
         SeedContainerGroupWithWeapons("Chi");
+        SeedContainerGroupWithWeapons("Phi");
+        SeedContainerGroupWithWeapons("Psi");
+        SeedContainerGroupWithWeapons("Upsilon");
+
+        EventManager.onShipDestroyed += OnShipDestroyed;
     }
 
     void Start()
@@ -23,14 +26,7 @@ public class AttackAnUndefendedDepot : MonoBehaviour
 
     void OnDestroy()
     {
-        EventManager.onShipInspected -= OnShipInspected;
         EventManager.onShipDestroyed -= OnShipDestroyed;
-    }
-
-    private void OnShipInspected(string name)
-    {
-        GameObject container = GameObject.Find(name);
-        string containerContents = container.GetComponent<Inspectable>().contents;
     }
 
     private void OnShipDestroyed(string name)
@@ -47,7 +43,8 @@ public class AttackAnUndefendedDepot : MonoBehaviour
             }
             else
             {
-                if (--containersToDestroy == 0) {
+                if (--containersToDestroy == 0)
+                {
                     MissionEndData.missionTime = Time.timeSinceLevelLoad;
                     SceneManager.LoadScene(Constants.Scene_MissionWon);
                 }
