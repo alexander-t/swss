@@ -49,6 +49,16 @@ namespace Targeting
             }
         }
 
+        public void SelectTargetByName(string name) {
+
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (targets.ElementAt(i).Name == name) {
+                    currentTargetIndex = i;
+                }
+            }
+        }
+
         public void NextTarget()
         {
             if (targets.Count > 0)

@@ -1,5 +1,6 @@
 ﻿using Core;
 using Flying;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,7 @@ namespace Targeting
             EventManager.onShipDestroyed += OnShipDestroyed;
             EventManager.onShipHit += OnShipHit;
             EventManager.onNewShipEntered += OnNewShipEntered;
-            EventManager.onShipInspected += OnShipInspected; 
+            EventManager.onShipInspected += OnShipInspected;
         }
 
         void Start()
@@ -76,6 +77,10 @@ namespace Targeting
             {
                 targetingComputer.PreviousTarget();
                 targetUpdated = targetingComputer.GetCurrentTarget() != null;
+            }
+            else if (Input.GetKeyUp(KeyCode.Mouse2))
+            {
+                targetUpdated = TargetShipInReticle();
             }
 
             if (targetUpdated)
@@ -108,12 +113,37 @@ namespace Targeting
             UpdateDisplay();
         }
 
-        private void OnShipInspected(string name) {
+        private void OnShipInspected(string name)
+        {
             UpdateDisplay();
         }
         #endregion
 
         #region Class methods
+
+        private bool TargetShipInReticle()
+        {
+            const float TargetingDistance = 1000;
+            bool targetUpdated = false;
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, TargetingDistance))
+            {
+                try
+                {
+                    GameObject shipInReticle = GameObjects.GetParentShip(hit.transform.gameObject);
+                    Targettable previousTarget = targetingComputer.GetCurrentTarget();
+                    targetingComputer.SelectTargetByName(shipInReticle.name);
+                    targetUpdated = previousTarget != targetingComputer.GetCurrentTarget(); ;
+                }
+                catch (ArgumentException)
+                {
+                    // Perfectly valid: the ray may have hit something that's not a ship
+                }
+            }
+            return targetUpdated;
+        }
+
         private void UpdateDisplay()
         {
             if (currentTarget != null)
@@ -132,7 +162,8 @@ namespace Targeting
                 if (targetable.ShipFaction == ShipFaction.Alliance)
                 {
                     targetNameText.color = Color.green;
-                } else if (targetable.ShipFaction == ShipFaction.Empire)
+                }
+                else if (targetable.ShipFaction == ShipFaction.Empire)
                 {
                     targetNameText.color = Color.red;
                 }
