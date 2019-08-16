@@ -53,5 +53,9 @@ namespace UI {
             MissionSelectData.briefingImages = Resources.LoadAll<Sprite>("Briefings/Demo");
             SceneManager.LoadScene(Constants.Scene_Briefing);
         }
+
+        public void OnKeyBindings() {
+            SceneManager.LoadScene("KeyBindings");
+        }
     }
 }

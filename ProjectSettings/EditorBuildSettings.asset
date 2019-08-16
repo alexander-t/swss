@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo.unity
     guid: a7c3ecf400c47cc4a9dd564bdf699ed6
   - enabled: 1
+    path: Assets/Scenes/KeyBindings.unity
+    guid: 07fc5033592221846b7ee021e0247868
+  - enabled: 1
     path: Assets/Scenes/Mission_AttackAnUndefendedDepot.unity
     guid: d1b56e91c34dd3043b4567166eea22d7
   - enabled: 1
