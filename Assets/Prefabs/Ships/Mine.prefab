@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  gun: {fileID: 3867891308061582068}
+  gunMuzzle: {fileID: 3867891308061582068}
   audioSource: {fileID: 2459078077102387944}
   rateOfFire: 3
   attackRange: 500

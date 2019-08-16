@@ -43,7 +43,8 @@ namespace AI
         }
 
         public GameObject GetTargetByName(string name) {
-            return battlefield[name].GameObject;
+            Enemy enemy;
+            return battlefield.TryGetValue(name, out enemy) ? enemy.GameObject : null;
         }
 
         private ShipFaction GetEnemyFaction()
