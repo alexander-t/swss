@@ -28,6 +28,8 @@ namespace Flying
             targetingComputer = GetComponent<AITargetingComputer>();
 
             player = GameObject.Find(Constants.Player);
+
+            EventManager.onShipHit += OnShipHit;
         }
 
         void Start()
@@ -36,7 +38,6 @@ namespace Flying
             behavior = DetermineDefaultBehavior();
             behavior.Commence();
 
-            EventManager.onShipHit += OnShipHit;
         }
 
         void OnDestroy()

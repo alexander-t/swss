@@ -30,14 +30,14 @@ namespace UI
         void Awake()
         {
             shipName = GameObjects.RequirePlayerShip(gameObject).name;
+
+            EventManager.onShipHit += OnShipHit;
+            EventManager.onPlayerSpeedChanged += OnPlayerSpeedChanged;
         }
 
         void Start()
         {
             healthIndicatorImage.sprite = maxHealthSprite;
-
-            EventManager.onShipHit += OnShipHit;
-            EventManager.onPlayerSpeedChanged += OnPlayerSpeedChanged;
         }
 
         void OnDestroy()

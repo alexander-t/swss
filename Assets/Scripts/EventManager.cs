@@ -1,5 +1,4 @@
-﻿using System;
-using Flying;
+﻿using Flying;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
