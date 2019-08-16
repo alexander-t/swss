@@ -45,7 +45,8 @@ namespace UI {
         public void OnMercyKillDefiance()
         {
             MissionSelectData.missionScene = Constants.Scene_MissionMercyKillDefiance;
-            SceneManager.LoadScene(Constants.Scene_MissionMercyKillDefiance);
+            MissionSelectData.briefingImages = Resources.LoadAll<Sprite>("Briefings/" + Constants.Scene_MissionMercyKillDefiance);
+            SceneManager.LoadScene(Constants.Scene_Briefing);
         }
 
         public void OnDemoMission() {
