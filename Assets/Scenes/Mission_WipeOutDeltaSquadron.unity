@@ -255,6 +255,16 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 195645674}
+    - target: {fileID: 3040903302175862348, guid: a4d029e28e6327c42830909dfd7f4f71,
+        type: 3}
+      propertyPath: defaultBehavior
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040903302175862348, guid: a4d029e28e6327c42830909dfd7f4f71,
+        type: 3}
+      propertyPath: revengeTenacity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d029e28e6327c42830909dfd7f4f71, type: 3}
 --- !u!1 &195645673
@@ -471,6 +481,11 @@ PrefabInstance:
     - target: {fileID: 3040903302175862348, guid: a4d029e28e6327c42830909dfd7f4f71,
         type: 3}
       propertyPath: revengeTenacity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040903302175862348, guid: a4d029e28e6327c42830909dfd7f4f71,
+        type: 3}
+      propertyPath: defaultBehavior
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
