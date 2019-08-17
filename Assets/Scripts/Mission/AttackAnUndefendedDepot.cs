@@ -7,7 +7,7 @@ public class AttackAnUndefendedDepot : MonoBehaviour
 {
     private string[] unimportantContents = { "Food supplies", "Tools", "Machine parts", "Droids", "Fuel" };
     private const string CriticalContents = "Weapons";
-    private int containersToDestroy = 6;
+    private int containersToDestroy = 12;
 
     void Awake()
     {
@@ -45,8 +45,7 @@ public class AttackAnUndefendedDepot : MonoBehaviour
             {
                 if (--containersToDestroy == 0)
                 {
-                    MissionEndData.missionTime = Time.timeSinceLevelLoad;
-                    SceneManager.LoadScene(Constants.Scene_MissionWon);
+                    GameObject.Find(Constants.Player).GetComponent<PlayerMissionEnd>().WinMission();
                 }
             }
         }

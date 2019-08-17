@@ -5,14 +5,23 @@
  */
 public class EngineSound : MonoBehaviour
 {
-    public AudioSource engineAudioSource;
+#pragma warning disable 0649
+    [SerializeField]
+    private AudioSource engineAudioSource;
+#pragma warning restore 0649
 
-    void OnVelocityChange(float[] velocities)
+    void Awake()
     {
-        engineAudioSource.pitch = Mathf.Lerp(0.6f, 1, velocities[0] / (velocities[1] + 0.1f));
+        EventManager.onPlayerSpeedChanged += OnPlayerSpeedChanged;
     }
 
-    public void Mute() {
+    public void Mute()
+    {
         engineAudioSource.mute = true;
+    }
+
+    private void OnPlayerSpeedChanged(float speed, float maxSpeed)
+    {
+        engineAudioSource.pitch = Mathf.Lerp(0.6f, 1, speed / maxSpeed);
     }
 }

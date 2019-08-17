@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /**
- * Handles the player's death.
+ * Handles the player's death and mission victory.
  */
-public class PlayerDeath : MonoBehaviour
+public class PlayerMissionEnd : MonoBehaviour
 {
     [Tooltip("Model that will be hidden during explosion")]
     public GameObject model;
@@ -42,13 +42,18 @@ public class PlayerDeath : MonoBehaviour
             MissionEndData.losingReason = reason;
             MissionEndData.missionTime = Time.timeSinceLevelLoad;
 
-            StartCoroutine(FailMissionAfterExplosion());
+            StartCoroutine(LoadSceneAfterDelay(Constants.Scene_MissionFailed));
         }
     }
 
-    private IEnumerator FailMissionAfterExplosion()
+    public void WinMission() {
+        MissionEndData.missionTime = Time.timeSinceLevelLoad;
+        StartCoroutine(LoadSceneAfterDelay(Constants.Scene_MissionWon));
+    }
+
+    private IEnumerator LoadSceneAfterDelay(string scene)
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(Constants.Scene_MissionFailed);
+        SceneManager.LoadScene(scene);
     }
 }

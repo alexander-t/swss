@@ -26,6 +26,18 @@ namespace Flying
                 ship.RollLeft();
             }
 
+            float scrollWheelAxis = Input.GetAxis("Mouse ScrollWheel");
+            if (scrollWheelAxis > 0)
+            {
+                ship.AccelerateByDelta(Time.deltaTime * 3);
+                EventManager.RaisePlayerSpeedChanged(ship.Speed, ship.MaxSpeed);
+            }
+            else if (scrollWheelAxis < 0)
+            {
+                ship.DeccelerateByDelta(Time.deltaTime * 3);
+                EventManager.RaisePlayerSpeedChanged(ship.Speed, ship.MaxSpeed);
+            }
+
             // Stupid work-around for Swedish keyboard layout
             if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
             {

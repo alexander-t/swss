@@ -1,7 +1,5 @@
 ﻿using Core;
-using UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MercyKillDefiance : MonoBehaviour
 {
@@ -19,8 +17,7 @@ public class MercyKillDefiance : MonoBehaviour
     {
         if (name == "Defiance")
         {
-            MissionEndData.missionTime = Time.timeSinceLevelLoad;
-            SceneManager.LoadScene(Constants.Scene_MissionWon);
+            GameObject.Find(Constants.Player).GetComponent<PlayerMissionEnd>().WinMission();
         }
     }
 }

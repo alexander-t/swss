@@ -23,8 +23,7 @@ public class WipeOutDeltaSquadron : MonoBehaviour
         shipsToKill.Remove(name);
         if (shipsToKill.Count == 0)
         {
-            MissionEndData.missionTime = Time.timeSinceLevelLoad;
-            SceneManager.LoadScene(Constants.Scene_MissionWon);
-        }
+            GameObject.Find(Constants.Player).GetComponent<PlayerMissionEnd>().WinMission();
+        } 
     }
 }

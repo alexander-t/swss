@@ -190,7 +190,7 @@ namespace Flying
 
         private void KillPlayer(string reason)
         {
-            GetComponentInParent<PlayerDeath>().Die(reason);
+            GetComponentInParent<PlayerMissionEnd>().Die(reason);
         }
 
         #region Movement control
