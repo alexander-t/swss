@@ -9,8 +9,12 @@ public class AttackAnUndefendedDepot : MonoBehaviour
     private const string CriticalContents = "Weapons";
     private int containersToDestroy = 12;
 
+    private PlayerMissionEnd playerMissionEnd;
+
     void Awake()
     {
+        playerMissionEnd = GameObject.Find(Constants.Player).GetComponent<PlayerMissionEnd>();
+
         SeedContainerGroupWithWeapons("Chi");
         SeedContainerGroupWithWeapons("Phi");
         SeedContainerGroupWithWeapons("Psi");
@@ -37,15 +41,13 @@ public class AttackAnUndefendedDepot : MonoBehaviour
             string containerContents = inspectableShip.GetComponent<Inspectable>().contents;
             if (CriticalContents == containerContents)
             {
-                MissionEndData.losingReason = "You destroyed a container with weapons";
-                MissionEndData.missionTime = Time.timeSinceLevelLoad;
-                SceneManager.LoadScene(Constants.Scene_MissionFailed);
+                playerMissionEnd.FailMission("You destroyed a container with weapons");
             }
             else
             {
                 if (--containersToDestroy == 0)
                 {
-                    GameObject.Find(Constants.Player).GetComponent<PlayerMissionEnd>().WinMission();
+                    playerMissionEnd.WinMission();
                 }
             }
         }

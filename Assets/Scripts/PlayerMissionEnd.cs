@@ -1,12 +1,13 @@
 ﻿using Core;
 using Flying;
+using System;
 using System.Collections;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /**
- * Handles the player's death and mission victory.
+ * Handles the player's death and mission victory or loss.
  */
 public class PlayerMissionEnd : MonoBehaviour
 {
@@ -49,6 +50,13 @@ public class PlayerMissionEnd : MonoBehaviour
     public void WinMission() {
         MissionEndData.missionTime = Time.timeSinceLevelLoad;
         StartCoroutine(LoadSceneAfterDelay(Constants.Scene_MissionWon));
+    }
+
+    public void FailMission(string reason)
+    {
+        MissionEndData.missionTime = Time.timeSinceLevelLoad;
+        MissionEndData.losingReason = reason;
+        StartCoroutine(LoadSceneAfterDelay(Constants.Scene_MissionFailed));
     }
 
     private IEnumerator LoadSceneAfterDelay(string scene)
