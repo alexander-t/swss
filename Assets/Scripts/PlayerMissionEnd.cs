@@ -40,10 +40,7 @@ public class PlayerMissionEnd : MonoBehaviour
             hud.gameObject.SetActive(false);
             Camera.main.transform.Translate(new Vector3(0, 0, -20));
             exploding.Explode(ship.name);
-            MissionEndData.losingReason = reason;
-            MissionEndData.missionTime = Time.timeSinceLevelLoad;
-
-            StartCoroutine(LoadSceneAfterDelay(Constants.Scene_MissionFailed));
+            FailMission(reason);
         }
     }
 
@@ -61,7 +58,7 @@ public class PlayerMissionEnd : MonoBehaviour
 
     private IEnumerator LoadSceneAfterDelay(string scene)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSecondsRealtime(3);
         SceneManager.LoadScene(scene);
     }
 }

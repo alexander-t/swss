@@ -33,8 +33,8 @@ namespace Targeting
             if (Time.time >= redrawTime)
             {
                 float distanceCoefficient = Mathf.Clamp(Vector3.Distance(playerTransform.position, lineRenderer.transform.position), 0, 1000) / 1000;
-                lineRenderer.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 15, distanceCoefficient);
-                lineRenderer.widthMultiplier = Mathf.Lerp(0.1f, 2.5f, distanceCoefficient);
+                lineRenderer.transform.localScale = Vector3.one * Mathf.Lerp(0.75f, 12.5f, distanceCoefficient);
+                lineRenderer.widthMultiplier = Mathf.Lerp(0.1f, 2f, distanceCoefficient);
                 redrawTime = Time.time + 0.15f;
             }
         }
