@@ -8,9 +8,12 @@ namespace Flying
     public class Ship : MonoBehaviour, Targettable
     {
         public ShipData shipData;
+#pragma warning disable 0649
+        [SerializeField]
+        private PowerDistributionSystem powerDistributionSystem;
+#pragma warning restore 0649
 
         private Inspectable inspectable;
-        private PowerDistributionSystem powerDistributionSystem;
 
         private bool isAlive = true;
 
@@ -83,7 +86,6 @@ namespace Flying
         void Awake()
         {
             inspectable = GetComponent<Inspectable>();
-            powerDistributionSystem = GetComponentInParent<PowerDistributionSystem>();
         }
 
         void Start()

@@ -23,13 +23,14 @@ namespace Firing
         private AudioSource audioSource;
         [SerializeField]
         private AudioClip laserSound;
+        [SerializeField]
+        private PowerDistributionSystem powerDistributionSystem;
 #pragma warning restore 0649
 
         private const float Cooldown = 0.2f;
 
         private Ship ship;
         private BeamPool beamPool;
-        private PowerDistributionSystem powerDistributionSystem;
         private bool rightGunFiringNext = true;
         private FiringMode firingMode = FiringMode.Single;
         private float nextShotTime;
@@ -37,7 +38,6 @@ namespace Firing
         void Awake()
         {
             ship = GetComponent<Ship>();
-            powerDistributionSystem = GetComponentInParent<PowerDistributionSystem>();
             beamPool = GameObject.Find(Constants.BeamPool).GetComponent<BeamPool>();
             audioSource.clip = laserSound;
         }

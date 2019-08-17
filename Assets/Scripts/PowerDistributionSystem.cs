@@ -15,6 +15,9 @@ public class PowerDistributionSystem : MonoBehaviour
     private Sprite neutralDistributionSprite;
     [SerializeField]
     private Sprite maxEngineSprite;
+    [Space(7)]
+    [SerializeField]
+    private AudioSource audioSource;
 #pragma warning restore 0649
 
     private int enginePower = 1;
@@ -29,7 +32,9 @@ public class PowerDistributionSystem : MonoBehaviour
         {
             laserPower = (laserPower + 1) % 3;
             enginePower = 2 - laserPower;
+            audioSource.Play();
         }
+
         if (enginePower == 1 && laserPower == 1)
         {
             display.sprite = neutralDistributionSprite;

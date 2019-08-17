@@ -22,6 +22,9 @@ public class EngineSound : MonoBehaviour
 
     private void OnPlayerSpeedChanged(float speed, float maxSpeed)
     {
-        engineAudioSource.pitch = Mathf.Lerp(0.6f, 1, speed / maxSpeed);
+        // This is a work-around for a probably Unity bug. When loading a scene for the second time, the audio source is null for a while.
+        if (engineAudioSource != null) {
+            engineAudioSource.pitch = Mathf.Lerp(0.6f, 1, speed / maxSpeed);
+        }
     }
 }

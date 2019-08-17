@@ -5,6 +5,7 @@
         // Objects present in all combat scenes
         public const string Player = "Player";
         public const string BeamPool = "Beam Pool";
+        public const string PowerDistributionSystem = "Power Distribution System";
 
         public const string Tag_Ship = "Ship";
         public const string Tag_Asteroid = "Asteroid";
